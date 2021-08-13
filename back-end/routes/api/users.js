@@ -6,7 +6,7 @@ const { Op } = require('sequelize');
 
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, UserMessage } = require('../../db/models');
+const { User, UserMessage, UserReview } = require('../../db/models');
 
 const router = express.Router();
 
@@ -32,8 +32,17 @@ const validateSignup = [
 
 // Sign up
 router.post('/', validateSignup, asyncHandler( async (req, res) => {
-  const { email, password, username } = req.body;
-  const user = await User.signup({ email, username, password });
+  const { email, password, username, birthday, profilePicture, description } = req.body;
+
+  const user = await User.signup({
+    username,
+    email,
+    password,
+    birthday,
+    profilePicture,
+    description,
+    online: true
+  });
 
   await setTokenCookie(res, user);
 
@@ -42,26 +51,55 @@ router.post('/', validateSignup, asyncHandler( async (req, res) => {
 
 // Serve user profile
 router.get('/:userId', asyncHandler( async (req, res) => {
-  const id = req.params.userId;
+  const userId = req.params.userId;
 
-  const user = await User.findByPk(id);
+  const user = await User.findByPk(userId);
 
   return res.json({ user })
 }))
 
 // Serve user messages
 router.get('/:userId/messages', asyncHandler( async (req, res) => {
-  const id = req.params.userId;
+  const userId = req.params.userId;
 
   const messages = await UserMessage.findAll({
     where: {
-      userOneId: id
+      userOneId: userId
     }
   })
-  
+
   return res.json({ messages })
 }))
 
+// Send a message
+router.post('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
+  const userTwoId = req.params.userId;
+  const { id, message } = req.body;
+
+  const newMessage = await UserMessage.create({
+    message,
+    read: false,
+    userOneId: userId,
+    userTwoId
+  })
+
+  return res.json({ newMessage })
+}))
+
+// Post a new user review
+router.post('/:userId/review', requireAuth, asyncHandler( async (req, res) => {
+  const userId = req.params.userId;
+  const { reviewerId, rating, review } = req.body;
+
+  const userReview = await UserReview.create({
+    rating,
+    review,
+    reviewerId,
+    userId
+  })
+
+  return res.json({ userReview })
+}))
 
 
 module.exports = router;

@@ -78,6 +78,7 @@ module.exports = (sequelize, DataTypes) => {
 
   User.login = async function ({ credential, password }) {
     const { Op } = require('sequelize');
+
     const user = await User.scope('loginUser').findOne({
       where: {
         [Op.or]: {
@@ -86,14 +87,16 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     });
+
     if (user && user.validatePassword(password)) {
       await user.update({ online: true })
       return await User.scope('currentUser').findByPk(user.id);
     }
   };
 
-  User.signup = async function ({ username, email, password }) {
+  User.signup = async function ({ username, email, password, birthday, profilePicture, description, online }) {
     const hashedPassword = bcrypt.hashSync(password);
+
     const user = await User.create({
       username,
       email,
@@ -103,6 +106,7 @@ module.exports = (sequelize, DataTypes) => {
       description,
       online,
     });
+
     return await User.scope('currentUser').findByPk(user.id);
   };
 

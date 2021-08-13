@@ -5,31 +5,12 @@ const { check } = require('express-validator');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
-const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors, validateSignup } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User, UserMessage, UserReview } = require('../../db/models');
 
 const router = express.Router();
 
-const validateSignup = [
-  check('email')
-    .exists({ checkFalsy: true })
-    .isEmail()
-    .withMessage('Please provide a valid email.'),
-  check('username')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 4 })
-    .withMessage('Please provide a username with at least 4 characters.'),
-  check('username')
-    .not()
-    .isEmail()
-    .withMessage('Username cannot be an email.'),
-  check('password')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 6 })
-    .withMessage('Password must be 6 characters or more.'),
-  handleValidationErrors,
-];
 
 // Sign up
 router.post('/', validateSignup, asyncHandler( async (req, res) => {
@@ -128,7 +109,52 @@ router.put('/:userId', requireAuth, asyncHandler( async (req, res) => {
 
 // Edit a user review
 router.put('/:userId/reviews/:reviewId', requireAuth, asyncHandler( async (req, res) => {
+  const userId = req.params.userId;
+  const reviewerId = req.user.id;
+  const { rating, review } = req.body;
 
+  const userReview = await UserReview.findOne({
+    where: {
+      userId,
+      reviewerId
+    }
+  })
+
+  const update = await userReview.update({
+    rating,
+    review,
+    reviewerId,
+    userId
+  })
+
+  return res.json({ update })
+}))
+
+// Delete user account/profile
+router.delete('/:userId', requireAuth, asyncHandler( async (req, res) => {
+  const id = req.user.id;
+
+  const profile = await User.findOne({ where: { id }});
+
+  await profile.destroy();
+
+  return res.json({ message: 'success' })
+}))
+
+router.delete('/:userId/reviews/:reviewId', requireAuth, asyncHandler( async (req, res) => {
+  const userId = req.params.userId;
+  const reviewerId = req.user.id;
+
+  const userReview = await UserReview.findOne({
+    where: {
+      userId,
+      reviewerId
+    }
+  })
+
+  await userReview.destroy();
+
+  return res.json({ message: 'success' })
 }))
 
 

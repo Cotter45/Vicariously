@@ -19,4 +19,6 @@ The back end of this app is a Postgres Database, using express and sequelize to 
 ![Database Screenshot](./info/Database.png)
 
 
-###
+### how to set up locally
+
+### technologies used

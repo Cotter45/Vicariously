@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     Post.belongsToMany(models.Category, columnMapping)
     Post.hasMany(models.Image, { foreignKey: 'postId' })
     Post.hasMany(models.Booking, { foreignKey: 'postId' })
+    Post.hasMany(models.PostReview, { foreignKey: 'postId' })
   };
   return Post;
 };

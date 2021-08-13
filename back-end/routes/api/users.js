@@ -3,6 +3,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { Op } = require('sequelize');
+const bcrypt = require('bcryptjs');
 
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
@@ -59,12 +60,12 @@ router.get('/:userId', asyncHandler( async (req, res) => {
 }))
 
 // Serve user messages
-router.get('/:userId/messages', asyncHandler( async (req, res) => {
-  const userId = req.params.userId;
+router.get('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
+  const userOneId = req.user.id;
 
   const messages = await UserMessage.findAll({
     where: {
-      userOneId: userId
+      userOneId
     }
   })
 
@@ -74,12 +75,13 @@ router.get('/:userId/messages', asyncHandler( async (req, res) => {
 // Send a message
 router.post('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
   const userTwoId = req.params.userId;
-  const { id, message } = req.body;
+  const userOneId = req.user.id;
+  const { message } = req.body;
 
   const newMessage = await UserMessage.create({
     message,
     read: false,
-    userOneId: userId,
+    userOneId,
     userTwoId
   })
 
@@ -89,7 +91,8 @@ router.post('/:userId/messages', requireAuth, asyncHandler( async (req, res) => 
 // Post a new user review
 router.post('/:userId/review', requireAuth, asyncHandler( async (req, res) => {
   const userId = req.params.userId;
-  const { reviewerId, rating, review } = req.body;
+  const reviewerId = req.user.id;
+  const { rating, review } = req.body;
 
   const userReview = await UserReview.create({
     rating,
@@ -99,6 +102,33 @@ router.post('/:userId/review', requireAuth, asyncHandler( async (req, res) => {
   })
 
   return res.json({ userReview })
+}))
+
+// Edit a profile
+router.put('/:userId', requireAuth, asyncHandler( async (req, res) => {
+  const userId = req.user.id;
+  const { username, email, password, birthday, profilePicture, description } = req.body;
+
+  const hashedPassword = bcrypt.hashSync(password);
+
+  const user = await User.findByPk(userId);
+
+  const update = await user.update({
+    username,
+    email,
+    hashedPassword,
+    birthday,
+    profilePicture,
+    description,
+    online: true
+  });
+
+  return res.json({ update })
+}))
+
+// Edit a user review
+router.put('/:userId/reviews/:reviewId', requireAuth, asyncHandler( async (req, res) => {
+
 }))
 
 

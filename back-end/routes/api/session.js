@@ -46,11 +46,12 @@ router.post('/', validateLogin, asyncHandler(async (req, res, next) => {
 );
 
 // Log out
-router.delete('/', (_req, res) => {
-      res.clearCookie('token');
-      return res.json({ message: 'success' });
-    }
-);
+router.delete('/', asyncHandler( async (_req, res) => {
+    const id = req.cookies.token.id;
+    
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
+}));
 
 // Restore session user
 router.get('/', restoreUser, (req, res) => {

@@ -56,16 +56,16 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.UserInterest, { foreignKey: 'userId' })
     User.hasMany(models.Post, { foreignKey: 'hostId' })
     User.hasMany(models.Booking, { foreignKey: 'guestId' })
-    User.belongsTo(models.UserReview, { foreignKey: 'reviewerId' })
-    User.belongsTo(models.UserReview, { foreignKey: 'userId' })
+    User.hasMany(models.UserReview, { foreignKey: 'reviewerId' })
+    User.hasMany(models.UserReview, { foreignKey: 'userId' })
     User.hasMany(models.PostReview, { foreignKey: 'reviewerId' })
     User.hasMany(models.UserMessage, { foreignKey: 'userOneId' })
     User.hasMany(models.UserMessage, { foreignKey: 'userTwoId' })
   };
 
   User.prototype.toSafeObject = function() {
-    const { id, username, email } = this;
-    return { id, username, email };
+    const { id, username, email, online } = this;
+    return { id, username, email, online };
   };
 
   User.prototype.validatePassword = function (password) {
@@ -87,6 +87,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
     if (user && user.validatePassword(password)) {
+      await user.update({ online: true })
       return await User.scope('currentUser').findByPk(user.id);
     }
   };

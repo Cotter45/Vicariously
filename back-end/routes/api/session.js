@@ -46,9 +46,17 @@ router.post('/', validateLogin, asyncHandler(async (req, res, next) => {
 );
 
 // Log out
-router.delete('/', asyncHandler( async (_req, res) => {
-    const id = req.cookies.token.id;
-    
+router.delete('/', asyncHandler( async (req, res) => {
+    const { credential } = req.body;
+
+    const user = await User.findOne({
+      where: {
+        username: credential
+      }
+    });
+
+    await user.update({ online: false });
+
     res.clearCookie('token');
     return res.json({ message: 'success' });
 }));

@@ -59,6 +59,8 @@ module.exports = (sequelize, DataTypes) => {
     User.belongsTo(models.UserReview, { foreignKey: 'reviewerId' })
     User.belongsTo(models.UserReview, { foreignKey: 'userId' })
     User.hasMany(models.PostReview, { foreignKey: 'reviewerId' })
+    User.hasMany(models.UserMessage, { foreignKey: 'userOneId' })
+    User.hasMany(models.UserMessage, { foreignKey: 'userTwoId' })
   };
 
   User.prototype.toSafeObject = function() {

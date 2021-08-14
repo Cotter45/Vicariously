@@ -66,7 +66,43 @@ const validateSignup = [
   handleValidationErrors,
 ];
 
+// validate a new posting
+const validatePost = [
+  check('address')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide an address.')
+    .isLength({ min: 5, max: 100 })
+    .withMessage('Please provide a valid address.'),
+  check('city')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a city')
+    .isLength({ min: 2, max: 100 })
+    .withMessage('Please provide a valid city.'),
+  check('state')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a state.')
+    .isLength({ min: 2, max: 100 })
+    .withMessage('Please provide a valid state.'),
+  check('country')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a country.')
+    .isLength({ min: 2, max: 100 })
+    .withMessage('Please provide a valid country.'),
+  check('description')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a description.')
+    .isLength({ min: 5 })
+    .withMessage('Please provide a valid description.'),
+  check('imageUrl')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide an image URL.')
+    .isURL()
+    .withMessage('Please provide a valid image URL.'),
+  handleValidationErrors,
+];
+
 module.exports = {
   handleValidationErrors,
-  validateSignup
+  validateSignup,
+  validatePost,
 };

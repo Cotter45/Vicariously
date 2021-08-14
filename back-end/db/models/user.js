@@ -53,14 +53,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   User.associate = function(models) {
-    User.hasMany(models.UserInterest, { foreignKey: 'userId' })
-    User.hasMany(models.Post, { foreignKey: 'hostId' })
-    User.hasMany(models.Booking, { foreignKey: 'guestId' })
-    User.hasMany(models.UserReview, { foreignKey: 'reviewerId' })
-    User.hasMany(models.UserReview, { foreignKey: 'userId' })
-    User.hasMany(models.PostReview, { foreignKey: 'reviewerId' })
-    User.hasMany(models.UserMessage, { foreignKey: 'userOneId' })
-    User.hasMany(models.UserMessage, { foreignKey: 'userTwoId' })
+    User.hasMany(models.UserInterest, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true })
+    User.hasMany(models.Post, { foreignKey: 'hostId', onDelete: 'CASCADE', hooks: true })
+    User.hasMany(models.Booking, { foreignKey: 'guestId', onDelete: 'CASCADE', hooks: true })
+    User.hasMany(models.UserReview, { foreignKey: 'reviewerId', onDelete: 'CASCADE', hooks: true })
+    User.hasMany(models.UserReview, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true })
+    User.hasMany(models.PostReview, { foreignKey: 'reviewerId', onDelete: 'CASCADE', hooks: true })
+    User.hasMany(models.UserMessage, { foreignKey: 'userOneId', onDelete: 'CASCADE', hooks: true })
+    User.hasMany(models.UserMessage, { foreignKey: 'userTwoId', onDelete: 'CASCADE', hooks: true })
   };
 
   User.prototype.toSafeObject = function() {

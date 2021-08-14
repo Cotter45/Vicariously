@@ -269,6 +269,69 @@ router.put('/:postId/:bookingId', requireAuth, asyncHandler( async (req, res) =>
     return res.json({ message: 'success' })
 }))
 
+// Route to delete a posting if owner of posting
+router.delete('/:postId', requireAuth, asyncHandler( async (req, res) => {
+    const id = req.params.postId;
+    const hostId = req.user.id;
+
+    const post = await Post.findOne({
+        where: {
+            id,
+            hostId
+        }
+    })
+
+    if (post.hostId === hostId) {
+        await post.destroy();
+    }
+
+    return res.json({ message: 'success' })
+}))
+
+// Route to delete a review if owner of review
+router.delete('/:postId/reviews/:reviewId', requireAuth, asyncHandler( async (req, res) => {
+    const id = req.params.reviewId;
+    const postId = req.params.postId;
+    const reviewerId = req.user.id;
+
+    const review = await PostReview.findOne({
+        where: {
+            id,
+            postId
+        }
+    })
+
+    if (review.reviewerId === reviewerId) {
+        await review.destroy();
+    }
+
+    return res.json({ message: 'success' })
+}))
+
+// Route to delete a booking if you're the host or guest
+router.delete('/:postId/bookings/:bookingId', requireAuth, asyncHandler( async (req, res) => {
+    const id = req.params.bookingId;
+
+    const booking = await Booking.findOne({
+        where: {
+            id
+        },
+        include: Post
+    });
+
+    const newMessage = await UserMessage.create({
+        message: `${req.user.username} has cancelled this reservation.`,
+        read: false,
+        userOneId: booking.Post.hostId,
+        userTwoId: booking.guestId
+    })
+
+    await booking.destroy()
+
+    return res.json({ message: 'success' })
+}))
+
+
 
 
 module.exports = router;

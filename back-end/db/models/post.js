@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Post.associate = function(models) {
     Post.belongsTo(models.User, { foreignKey: 'hostId' })
-    Post.hasMany(models.PostRule, { foreignKey: 'postId' })
+    Post.hasMany(models.PostRule, { foreignKey: 'postId', onDelete: 'CASCADE', hooks: true })
 
     const columnMapping = {
       through: 'PostCategory',
@@ -21,9 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     Post.belongsToMany(models.Category, columnMapping)
-    Post.hasMany(models.Image, { foreignKey: 'postId' })
-    Post.hasMany(models.Booking, { foreignKey: 'postId' })
-    Post.hasMany(models.PostReview, { foreignKey: 'postId' })
+    Post.hasMany(models.Image, { foreignKey: 'postId', onDelete: 'CASCADE', hooks: true })
+    Post.hasMany(models.Booking, { foreignKey: 'postId', onDelete: 'CASCADE', hooks: true })
+    Post.hasMany(models.PostReview, { foreignKey: 'postId', onDelete: 'CASCADE', hooks: true })
   };
   return Post;
 };

@@ -39,13 +39,13 @@ const setTokenCookie = (res, user) => {
 
       try {
         const { id } = jwtPayload.data;
-        req.user = await User.scope('currentUser').findByPk(id);
+        req.body.user = await User.scope('currentUser').findByPk(id);
       } catch (e) {
         res.clearCookie('token');
         return next();
       }
 
-      if (!req.user) res.clearCookie('token');
+      if (!req.body.user) res.clearCookie('token');
 
       return next();
     });
@@ -55,7 +55,7 @@ const setTokenCookie = (res, user) => {
 const requireAuth = [
     restoreUser,
     function (req, res, next) {
-      if (req.user) return next();
+      if (req.body.user) return next();
 
       const err = new Error('Unauthorized');
       err.title = 'Unauthorized';

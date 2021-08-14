@@ -24,7 +24,7 @@ router.get('/', asyncHandler( async (req, res) => {
 
 // Route to create new post
 router.post('/', validatePost, requireAuth, asyncHandler( async (req, res) => {
-    const hostId = req.user.id;
+    const hostId = req.body.user.id;
     const { address, city, state, country, lat, lng, description, imageUrl } = req.body;
 
     const newPost = await Post.create({
@@ -104,7 +104,7 @@ router.get('/:postId', asyncHandler( async (req, res) => {
 // Route to book a posting
 router.post('/:postId/bookings', requireAuth, asyncHandler( async (req, res) => {
     const postId = req.params.postId;
-    const guestId = req.user.id;
+    const guestId = req.body.user.id;
     const { startDate, endDate } = req.body;
 
     const post = await Post.findOne({
@@ -123,9 +123,9 @@ router.post('/:postId/bookings', requireAuth, asyncHandler( async (req, res) => 
     })
 
     const newMessage = await UserMessage.create({
-        message: `${req.user.username} would like to visit you!`,
+        message: `${req.body.user.username} would like to visit you!`,
         read: false,
-        userOneId: req.user.id,
+        userOneId: req.body.user.id,
         userTwoId: post.User.id
     })
 
@@ -148,7 +148,7 @@ router.get('/:postId/bookings', requireAuth, asyncHandler( async (req, res) => {
 // Route to confirm a booking
 router.post('/bookings/:bookingId/confirm', requireAuth, asyncHandler( async (req, res) => {
     const bookingId = req.params.bookingId;
-    const userOneId = req.user.id;
+    const userOneId = req.body.user.id;
 
     const booking = await Booking.findOne({
         where: {
@@ -173,7 +173,7 @@ router.post('/bookings/:bookingId/confirm', requireAuth, asyncHandler( async (re
 
 // Route to add a review to a posting
 router.post('/:postId/review', requireAuth, asyncHandler( async (req, res) => {
-    const reviewerId = req.user.id;
+    const reviewerId = req.body.user.id;
     const postId = req.params.postId;
     const { rating, review } = req.body;
 
@@ -191,7 +191,7 @@ router.post('/:postId/review', requireAuth, asyncHandler( async (req, res) => {
 router.put('/:postId', requireAuth, asyncHandler( async (req, res) => {
     const postId = req.params.postId;
     const { address, city, state, country, lat, lng, description } = req.body;
-    const hostId = req.user.id;
+    const hostId = req.body.user.id;
 
     const post = await Post.findOne({
         where: {
@@ -217,7 +217,7 @@ router.put('/:postId', requireAuth, asyncHandler( async (req, res) => {
 router.put('/:postId/reviews/:reviewId', requireAuth, asyncHandler( async (req, res) => {
     const id = req.params.reviewId;
     const postId = req.params.postId;
-    const reviewerId = req.user.id;
+    const reviewerId = req.body.user.id;
     const { rating, review } = req.body;
 
     const postReview = await PostReview.findOne({
@@ -240,7 +240,7 @@ router.put('/:postId/reviews/:reviewId', requireAuth, asyncHandler( async (req, 
 // Route to update a booking if guest / change dates
 router.put('/:postId/:bookingId', requireAuth, asyncHandler( async (req, res) => {
     const id = req.params.bookingId;
-    const guestId = req.user.id;
+    const guestId = req.body.user.id;
     const { startDate, endDate } = req.body;
 
     const booking = await Booking.findOne({
@@ -249,7 +249,7 @@ router.put('/:postId/:bookingId', requireAuth, asyncHandler( async (req, res) =>
         },
         include: [ Post, User ]
     });
-    console.log(req.user.username)
+    console.log(req.body.user.username)
 
     if (booking.guestId === guestId) {
         await booking.update({
@@ -260,7 +260,7 @@ router.put('/:postId/:bookingId', requireAuth, asyncHandler( async (req, res) =>
     }
 
     const newMessage = await UserMessage.create({
-        message: `${req.user.username} would like to change their reservation`,
+        message: `${req.body.user.username} would like to change their reservation`,
         read: false,
         userOneId: guestId,
         userTwoId: booking.User.id
@@ -272,7 +272,7 @@ router.put('/:postId/:bookingId', requireAuth, asyncHandler( async (req, res) =>
 // Route to delete a posting if owner of posting
 router.delete('/:postId', requireAuth, asyncHandler( async (req, res) => {
     const id = req.params.postId;
-    const hostId = req.user.id;
+    const hostId = req.body.user.id;
 
     const post = await Post.findOne({
         where: {
@@ -292,7 +292,7 @@ router.delete('/:postId', requireAuth, asyncHandler( async (req, res) => {
 router.delete('/:postId/reviews/:reviewId', requireAuth, asyncHandler( async (req, res) => {
     const id = req.params.reviewId;
     const postId = req.params.postId;
-    const reviewerId = req.user.id;
+    const reviewerId = req.body.user.id;
 
     const review = await PostReview.findOne({
         where: {
@@ -320,7 +320,7 @@ router.delete('/:postId/bookings/:bookingId', requireAuth, asyncHandler( async (
     });
 
     const newMessage = await UserMessage.create({
-        message: `${req.user.username} has cancelled this reservation.`,
+        message: `${req.body.user.username} has cancelled this reservation.`,
         read: false,
         userOneId: booking.Post.hostId,
         userTwoId: booking.guestId

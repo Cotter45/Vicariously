@@ -54,7 +54,7 @@ router.get('/:userId', asyncHandler( async (req, res) => {
 
 // Serve user messages
 router.get('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
-  const userOneId = req.user.id;
+  const userOneId = req.body.user.id;
 
   const messages = await UserMessage.findAll({
     where: {
@@ -68,7 +68,7 @@ router.get('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
 // Send a message
 router.post('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
   const userTwoId = req.params.userId;
-  const userOneId = req.user.id;
+  const userOneId = req.body.user.id;
   const { message } = req.body;
 
   const newMessage = await UserMessage.create({
@@ -84,7 +84,7 @@ router.post('/:userId/messages', requireAuth, asyncHandler( async (req, res) => 
 // Post a new user review
 router.post('/:userId/review', requireAuth, asyncHandler( async (req, res) => {
   const userId = req.params.userId;
-  const reviewerId = req.user.id;
+  const reviewerId = req.body.user.id;
   const { rating, review } = req.body;
 
   const userReview = await UserReview.create({
@@ -99,7 +99,7 @@ router.post('/:userId/review', requireAuth, asyncHandler( async (req, res) => {
 
 // Edit a profile
 router.put('/:userId', requireAuth, asyncHandler( async (req, res) => {
-  const userId = req.user.id;
+  const userId = req.body.user.id;
   const { username, email, password, birthday, profilePicture, description } = req.body;
 
   const hashedPassword = bcrypt.hashSync(password);
@@ -122,13 +122,15 @@ router.put('/:userId', requireAuth, asyncHandler( async (req, res) => {
 // Edit a user review
 router.put('/:userId/reviews/:reviewId', requireAuth, asyncHandler( async (req, res) => {
   const userId = req.params.userId;
-  const reviewerId = req.user.id;
+  const reviewerId = req.body.user.id;
+  const id = req.params.reviewId;
   const { rating, review } = req.body;
 
   const userReview = await UserReview.findOne({
     where: {
       userId,
-      reviewerId
+      reviewerId,
+      id
     }
   })
 
@@ -144,7 +146,7 @@ router.put('/:userId/reviews/:reviewId', requireAuth, asyncHandler( async (req, 
 
 // Delete user account/profile
 router.delete('/:userId', requireAuth, asyncHandler( async (req, res) => {
-  const id = req.user.id;
+  const id = req.body.user.id;
 
   const profile = await User.findOne({ where: { id }});
 
@@ -156,7 +158,7 @@ router.delete('/:userId', requireAuth, asyncHandler( async (req, res) => {
 
 router.delete('/:userId/reviews/:reviewId', requireAuth, asyncHandler( async (req, res) => {
   const userId = req.params.userId;
-  const reviewerId = req.user.id;
+  const reviewerId = req.body.user.id;
 
   const userReview = await UserReview.findOne({
     where: {

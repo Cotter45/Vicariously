@@ -40,11 +40,11 @@ router.post('/', validateLogin, asyncHandler(async (req, res, next) => {
       await setTokenCookie(res, user);
 
       return res.json({ user });
-}));
+  }));
 
 // Log out
 router.delete('/', asyncHandler( async (req, res) => {
-    const id = req.user.id;
+    const id = req.body.user.id;
 
     const user = await User.findOne({
       where: {

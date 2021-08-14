@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 
 const { handleValidationErrors, validateSignup } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, UserMessage, UserReview } = require('../../db/models');
+const { User, UserMessage, UserReview, Post, PostReview, Image, UserInterest } = require('../../db/models');
 
 const router = express.Router();
 
@@ -35,9 +35,21 @@ router.post('/', validateSignup, asyncHandler( async (req, res) => {
 router.get('/:userId', asyncHandler( async (req, res) => {
   const userId = req.params.userId;
 
-  const user = await User.findByPk(userId);
+  const user = await User.findOne({
+    where: {
+      id: userId
+    },
+    include: [ UserReview, UserInterest, UserMessage ]
+  });
 
-  return res.json({ user })
+  const posts = await Post.findAll({
+    where: {
+      hostId: userId
+    },
+    include: [ PostReview, Image ]
+  })
+
+  return res.json({ user, posts })
 }))
 
 // Serve user messages
@@ -138,6 +150,7 @@ router.delete('/:userId', requireAuth, asyncHandler( async (req, res) => {
 
   await profile.destroy();
 
+  res.clearCookie('token');
   return res.json({ message: 'success' })
 }))
 

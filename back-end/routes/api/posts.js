@@ -6,7 +6,7 @@ const { Op } = require('sequelize');
 
 const { validatePost } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
-const { Post, Booking, Category, Image, PostReview, PostRule, UserMessage } = require('../../db/models');
+const { User, Post, Booking, Category, Image, PostReview, PostRule, UserMessage } = require('../../db/models');
 
 const router = express.Router();
 
@@ -110,14 +110,23 @@ router.post('/:postId/bookings', requireAuth, asyncHandler( async (req, res) => 
     const post = await Post.findOne({
         where: {
             id: postId
-        }
+        },
+        include: User
     })
+
     const booking = await Booking.create({
         startDate,
         endDate,
         confirmed: false,
         postId,
         guestId
+    })
+
+    const newMessage = await UserMessage.create({
+        message: `${req.user.username} would like to visit you!`,
+        read: false,
+        userOneId: req.user.id,
+        userTwoId: post.User.id
     })
 
     return res.json({ booking });
@@ -228,6 +237,38 @@ router.put('/:postId/reviews/:reviewId', requireAuth, asyncHandler( async (req, 
     return res.json({ edit })
 }))
 
-// Route
+// Route to update a booking if guest / change dates
+router.put('/:postId/:bookingId', requireAuth, asyncHandler( async (req, res) => {
+    const id = req.params.bookingId;
+    const guestId = req.user.id;
+    const { startDate, endDate } = req.body;
+
+    const booking = await Booking.findOne({
+        where: {
+            id
+        },
+        include: [ Post, User ]
+    });
+    console.log(req.user.username)
+
+    if (booking.guestId === guestId) {
+        await booking.update({
+            startDate,
+            endDate,
+            confirmed: false
+        })
+    }
+
+    const newMessage = await UserMessage.create({
+        message: `${req.user.username} would like to change their reservation`,
+        read: false,
+        userOneId: guestId,
+        userTwoId: booking.User.id
+    })
+
+    return res.json({ message: 'success' })
+}))
+
+
 
 module.exports = router;

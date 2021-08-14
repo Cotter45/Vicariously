@@ -7,7 +7,7 @@ Some might choose to share their gorgeous backyard with a pool and pizza oven, w
 share their master bathrooms with some road weary travellers. Everyone has something in their home that
 could go a long way to help a friend in need.
 
-This site is meant for anyone, and any thing! Our time here is temporary, just like in kindergarten, 'Sharing is Caring'!
+This site is meant for anyone, and any thing! The comforts of home, wherever you roam!
 
 
 ## Database Structure

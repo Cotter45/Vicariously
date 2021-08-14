@@ -49,4 +49,47 @@ router.post('/', requireAuth, asyncHandler( async (req, res) => {
     return res.json({ newPost, newImage });
 }))
 
+// Route to serve posts based on a city, state or country parameter
+router.get('/search/:params', asyncHandler( async (req, res) => {
+    const params = req.params.params.toLowerCase().split(' ').concat(req.params.params.toUpperCase().split(' '));
+    console.log(req.params.params)
+
+    const results = await Post.findAll({
+        where: {
+            [Op.or]: [
+                {
+                    state: {
+                        [Op.or]: {
+                            [Op.in]: params,
+                            [Op.substring]: req.params.params,
+                            [Op.iRegexp]: req.params.params
+
+                        }
+                    }
+                },
+                {
+                    city: {
+                        [Op.or]: {
+                            [Op.in]: params,
+                            [Op.substring]: req.params.params,
+                            [Op.iRegexp]: req.params.params
+                        }
+                    }
+                },
+                {
+                    country: {
+                        [Op.or]: {
+                            [Op.in]: params,
+                            [Op.substring]: req.params.params,
+                            [Op.iRegexp]: req.params.params
+                        }
+                    }
+                }
+            ]
+        }
+    })
+
+    return res.json({ results })
+}))
+
 module.exports = router;

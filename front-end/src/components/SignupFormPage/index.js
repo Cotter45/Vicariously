@@ -69,7 +69,6 @@ function SignupFormPage() {
         <input
           type="text"
           value={username}
-          // onFocus={(e) => checkUsernames(e.target.value)}
           onChange={(e) => setUsername(e.target.value)}
           required
         />

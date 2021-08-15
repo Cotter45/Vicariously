@@ -156,6 +156,7 @@ router.delete('/:userId', requireAuth, asyncHandler( async (req, res) => {
   return res.json({ message: 'success' })
 }))
 
+// Delete a user review
 router.delete('/:userId/reviews/:reviewId', requireAuth, asyncHandler( async (req, res) => {
   const userId = req.params.userId;
   const reviewerId = req.body.user.id;

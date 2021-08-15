@@ -20,7 +20,6 @@ const removeUser = () => {
 
 export const logout = () => async (dispatch) => {
   const session = store.getState().session;
-  console.log(session.user.id)
   const user = session.user;
 
   const response = await csrfFetch('/api/session/', {

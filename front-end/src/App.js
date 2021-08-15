@@ -8,15 +8,16 @@ import Navigation from "./components/Navigation";
 
 function App() {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(sessionActions.restoreUser()).then(() => setIsLoggedIn(true));
   }, [dispatch]);
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
+      <Navigation isLoggedIn={isLoggedIn} />
+      {isLoggedIn && (
         <Switch>
           <Route path="/signup">
             <SignupFormPage />

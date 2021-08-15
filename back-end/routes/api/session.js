@@ -60,7 +60,8 @@ router.delete('/', asyncHandler( async (req, res) => {
 
 // Restore session user
 router.get('/', restoreUser, (req, res) => {
-      const { user } = req;
+      const { user } = req.body;
+      
       if (user) {
         return res.json({
           user: user.toSafeObject()

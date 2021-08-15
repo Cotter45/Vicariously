@@ -54,12 +54,13 @@ router.get('/:userId', asyncHandler( async (req, res) => {
 
 // Serve user messages
 router.get('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
-  const userOneId = req.body.user.id;
+  const userOneId = parseInt(req.params.userId);
 
   const messages = await UserMessage.findAll({
     where: {
       userOneId
-    }
+    },
+    include: User
   })
 
   return res.json({ messages })

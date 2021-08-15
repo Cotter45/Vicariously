@@ -2,10 +2,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormPage';
+
 import './Navigation.css';
+import MessageButton from './MessageButton';
 
 function Navigation({ isLoggedIn }){
   const sessionUser = useSelector(state => state.session.user);
@@ -13,25 +16,25 @@ function Navigation({ isLoggedIn }){
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <ProfileButton user={sessionUser} />
+      <>
+        <ProfileButton user={sessionUser} />
+        <MessageButton user={sessionUser}/>
+      </>
     );
   } else {
     sessionLinks = (
       <>
         <LoginFormModal />
         <SignupFormModal />
-        {/* <NavLink to="/signup">Sign Up</NavLink> */}
       </>
     );
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
+    <nav className='nav-bar'>
+        <NavLink exact to="/"><i className="fas fa-home fa-2x"/></NavLink>
         {isLoggedIn && sessionLinks}
-      </li>
-    </ul>
+    </nav>
   );
 }
 

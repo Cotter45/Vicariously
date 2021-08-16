@@ -58,7 +58,14 @@ router.get('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
 
   const messages = await UserMessage.findAll({
     where: {
-      userOneId
+      [Op.or]: [
+        {
+          userOneId
+        },
+        {
+          userTwoId: userOneId
+        }
+      ]
     },
     include: User
   })

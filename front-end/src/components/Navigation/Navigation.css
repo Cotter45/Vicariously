@@ -108,6 +108,7 @@ button {
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
 .left {
@@ -117,5 +118,5 @@ button {
 
 .right {
     text-align: right;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: rgba(0, 0, 0, .4);
 }

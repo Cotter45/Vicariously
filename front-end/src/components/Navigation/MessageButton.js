@@ -100,7 +100,7 @@ function MessageButton({ user }) {
                     .filter(messageItem => messageItem.userTwoId === message.userTwoId)
                     .sort((a, b) => a.createdAt - b.createdAt)
                     .map(each => (
-                        <div key={each.id} className={each.userOneId === message.UserOneId ? 'left' : 'right'}>{each.message}</div>
+                        <div key={each.id} className={each.userOneId === user.id ? 'left' : 'right'}>{each.message}</div>
                     ))
                 }
                 <form onSubmit={sendMessage}>

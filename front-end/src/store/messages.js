@@ -24,8 +24,6 @@ export const sendMessage = (message) => async (dispatch) => {
 }
 
 export const getMessages = (user) => async (dispatch) => {
-    // const session = store.getState().session;
-    // const user = session.user;
 
     const response = await csrfFetch(`/api/users/${user.id}/messages`, {
         method: 'GET'

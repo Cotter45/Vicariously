@@ -1,6 +1,7 @@
 // front-end/src/components/Navigation/searchbar.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useHistory } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+
 import { searchPosts } from "../../store/posts";
 
 
@@ -60,7 +61,11 @@ function SearchBar() {
             <div className={viewResults && searchResults? 'results-dropdown' : 'hide-me'}>
                 {viewResults && searchResults && searchResults.map(result => (
                     <div key={result.id} className='result' onClick={viewResult}>
-                        <h2>{}</h2>
+                        <img src={result.Images[0].imageUrl} alt='post'></img>
+                        <div className='rating'>
+                            <h2>{result.avgRating}</h2>
+                            <p>{result.city}, {result.country}</p>
+                        </div>
                     </div>
 
                 ))}

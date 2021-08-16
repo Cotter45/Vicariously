@@ -138,3 +138,18 @@ button {
     flex-direction: column;
     gap: 5px;
 }
+
+.result {
+    width: 100vw;
+    height: 75px;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.result > img {
+    height: 50px;
+    width: 50px;
+    border-radius: 15px;
+}

@@ -83,7 +83,7 @@ router.get('/search/:params', asyncHandler( async (req, res) => {
                 }
             ]
         },
-        include: [ PostReview, User ]
+        include: [ PostReview, User, Image ]
     })
 
     for (let i = 0; i < results.length; i++) {
@@ -95,7 +95,14 @@ router.get('/search/:params', asyncHandler( async (req, res) => {
         })
         const sum = postReviews.reduce((prev, curr) => prev + curr.rating, 0);
         const avg = sum / postReviews.length;
-        results[i].dataValues.avgRating = avg;
+        let stars = '';
+        for (let i = 0; i < avg; i++) {
+            stars += '⭐️'
+        }
+        for (let i = stars.length; i < 7; i++) {
+            stars += '✭'
+        }
+        results[i].dataValues.avgRating = stars;
     }
 
     return res.json({ results })

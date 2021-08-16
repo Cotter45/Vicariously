@@ -2,35 +2,66 @@
     color: red;
 }
 
+button > * {
+    pointer-events: none;
+}
+
+button {
+    cursor: pointer;
+}
+
 .nav-bar {
     width: 100%;
     height: 5vh;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
+    position: fixed;
+    top: 10px;
+}
+
+.message-button {
+    cursor: pointer;
+}
+
+.menu {
+    padding-right: 10px;
 }
 
 .profile-dropdown {
     position: absolute;
     top: 50px;
-    width: 200px;
+    right: 10px;
+    width: 250px;
     height: 30vh;
+    gap: 10px;
     border: 1px solid black;
-    border-radius: 15px;
     list-style-type: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+.info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info > img {
+    height: 50px;
+    width: 50px;
+    border-radius: 15px;
+}
+
 .message-dropdown {
     position: absolute;
     top: 50px;
-    width: 200px;
+    right: 10px;
+    width: 250px;
     height: 30vh;
     border: 1px solid black;
-    border-radius: 15px;
     overflow: hidden;
     overflow-y: scroll;
     display: flex;
@@ -43,15 +74,48 @@
     gap: 5px;
     padding-left: 10px;
     border-bottom: 1px solid black;
+    cursor: pointer;
 }
 
 .message > img {
-    height: 25px;
-    width: 25px;
-    border-radius: 25px;
+    height: 50px;
+    width: 50px;
+    border-radius: 15px;
 }
-/* 
-.message > p {
-    height: 15px;
+
+.new-messages {
+    background-color: red;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+    color: white;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
+
+.messenger-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 250px;
+    height: 30vh;
+    border: 1px solid black;
     overflow: hidden;
-} */
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.left {
+    text-align: left;
+    background-color: rgba(0, 0, 0, .1);
+}
+
+.right {
+    text-align: right;
+    background-color: rgba(0, 0, 0, .2);
+}

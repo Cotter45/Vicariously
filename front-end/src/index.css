@@ -1,1 +1,9 @@
 /* TODO Add site wide styles */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+button > * {
+    pointer-events: none;
+}

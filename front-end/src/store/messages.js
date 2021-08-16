@@ -1,8 +1,9 @@
 // front-end/src/store/messages.js
 import { csrfFetch } from './csrf';
-import { store } from '../index';
+// import { store } from '../index';
 
-const GET_MESSAGES = '/api/user/messages'
+const GET_MESSAGES = '/api/users/messages';
+const SEND_MESSAGE = '/api/users/sendMessage'
 
 const storeMessages = (messages) => {
     return {
@@ -11,8 +12,19 @@ const storeMessages = (messages) => {
     }
 }
 
+const newMessage = (message) => {
+    return {
+        type:SEND_MESSAGE,
+        palyoad: message
+    }
+}
+
+export const sendMessage = (message) => async (dispatch) => {
+    const response = await csrfFetch(``)
+}
+
 export const getMessages = (user) => async (dispatch) => {
-    const session = store.getState().session;
+    // const session = store.getState().session;
     // const user = session.user;
 
     const response = await csrfFetch(`/api/users/${user.id}/messages`, {

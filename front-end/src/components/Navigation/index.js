@@ -9,6 +9,7 @@ import SignupFormModal from '../SignupFormPage';
 
 import './Navigation.css';
 import MessageButton from './MessageButton';
+import SearchBar from './searchbar';
 
 function Navigation({ isLoggedIn }){
   const sessionUser = useSelector(state => state.session.user);
@@ -33,6 +34,7 @@ function Navigation({ isLoggedIn }){
   return (
     <nav className='nav-bar'>
         <NavLink exact to="/"><i className="fas fa-home fa-2x"/></NavLink>
+        <SearchBar />
         {isLoggedIn && sessionLinks}
     </nav>
   );

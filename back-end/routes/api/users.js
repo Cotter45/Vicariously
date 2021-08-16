@@ -112,7 +112,6 @@ router.post('/:userId/newMessage', requireAuth, asyncHandler( async (req, res) =
     },
     include: User
   })
-  console.log(returnMessage)
 
   return res.json({ returnMessage })
 }))

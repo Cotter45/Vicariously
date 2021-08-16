@@ -120,3 +120,21 @@ button {
     text-align: right;
     background-color: rgba(0, 0, 0, .4);
 }
+
+.hide-me {
+    display: none;
+}
+
+.results-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 250px;
+    height: 30vh;
+    border: 1px solid black;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

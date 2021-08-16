@@ -70,7 +70,6 @@ const messageReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_MESSAGES:
             newState.messages = action.payload.messages;
-            console.log(newState)
             newState.unreadMessages.push(...action.payload.messages.filter(message => message.read === false))
             return newState;
         case READ_MESSAGES:

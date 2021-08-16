@@ -49,7 +49,6 @@ router.post('/', validatePost, requireAuth, asyncHandler( async (req, res) => {
 // Route to serve posts based on a city, state or country parameter
 router.get('/search/:params', asyncHandler( async (req, res) => {
     const params = req.params.params.toLowerCase().split(' ').concat(req.params.params.toUpperCase().split(' '));
-    console.log(req.params.params)
 
     const results = await Post.findAll({
         where: {
@@ -83,8 +82,21 @@ router.get('/search/:params', asyncHandler( async (req, res) => {
                     }
                 }
             ]
-        }
+        },
+        include: [ PostReview, User ]
     })
+
+    for (let i = 0; i < results.length; i++) {
+        const post = results[i];
+        const postReviews = await PostReview.findAll({
+            where: {
+                postId: post.id
+            }
+        })
+        const sum = postReviews.reduce((prev, curr) => prev + curr.rating, 0);
+        const avg = sum / postReviews.length;
+        results[i].dataValues.avgRating = avg;
+    }
 
     return res.json({ results })
 }))
@@ -166,7 +178,6 @@ router.post('/bookings/:bookingId/confirm', requireAuth, asyncHandler( async (re
         userOneId,
         userTwoId: guestId
     })
-    console.log(newMessage)
 
     return res.json({ message: 'success' })
 }))
@@ -249,7 +260,6 @@ router.put('/:postId/:bookingId', requireAuth, asyncHandler( async (req, res) =>
         },
         include: [ Post, User ]
     });
-    console.log(req.body.user.username)
 
     if (booking.guestId === guestId) {
         await booking.update({

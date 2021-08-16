@@ -5,10 +5,12 @@ import thunk from "redux-thunk";
 
 import sessionReducer from './session';
 import messageReducer from './messages';
+import searchReducer from "./posts";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  messages: messageReducer
+  messages: messageReducer,
+  searchResults: searchReducer
 });
 
 let enhancer;

@@ -9,7 +9,11 @@ function MessageButton({ user }) {
 
   const messages = useSelector(state => state.messages.messages);
 
+  if (messages) {
+  }
+
   const [showMenu, setShowMenu] = useState(false);
+  const [unreadMessages, setUnreadMessages] = useState(0);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -29,6 +33,13 @@ function MessageButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  useEffect(() => {
+      if (!messages) return;
+
+      let unreadMessages = messages.filter(message => message.read === false);
+
+      setUnreadMessages(unreadMessages.length);
+  }, [messages, unreadMessages])
 //   const messageButtonClick = (e) => {
 //     dispatch(messageActions.getMessages());
 //   };
@@ -36,7 +47,8 @@ function MessageButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-        <i className="far fa-comment-dots fa-2x" />
+        <i className="far fa-comment-dots fa-2x">{unreadMessages}</i>
+        {/* <p>{unreadMessages}</p> */}
       </button>
       {showMenu && (
         <div className="message-dropdown">

@@ -17,8 +17,8 @@ function Navigation({ isLoggedIn }){
   if (sessionUser) {
     sessionLinks = (
       <>
-        <ProfileButton user={sessionUser} />
         <MessageButton user={sessionUser}/>
+        <ProfileButton user={sessionUser} />
       </>
     );
   } else {

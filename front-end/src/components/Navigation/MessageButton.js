@@ -32,8 +32,6 @@ function MessageButton({ user }) {
     if (messages) return;
 
     dispatch(messageActions.getMessages(user));
-
-
   }, [messages, dispatch, user])
 
   useEffect(() => {
@@ -53,11 +51,11 @@ function MessageButton({ user }) {
     </button>
     {showMenu && (
       <div className="message-dropdown">
-        {messages && uniqueMessages.map(message => (
-          <div key={message.id} className='message'>
-              <img src={message.User.profilePicture} alt={'profile'}></img>
-              <h3>{message.User.username}</h3>
-              <p>{messages.filter(mess => message.User.username === mess.User.username).length}</p>
+        {messages && uniqueMessages.map(uniqueMessages => (
+          <div key={uniqueMessages.id} className='message'>
+              <img src={uniqueMessages.User.profilePicture} alt={'profile'}></img>
+              <h3>{uniqueMessages.User.username}</h3>
+              <p>{messages.filter(message => uniqueMessages.User.username === message.User.username).length} new</p>
           </div>
         ))}
       </div>

@@ -40,7 +40,7 @@
 .message {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     padding-left: 10px;
     border-bottom: 1px solid black;
 }
@@ -50,8 +50,8 @@
     width: 25px;
     border-radius: 25px;
 }
-
+/* 
 .message > p {
     height: 15px;
     overflow: hidden;
-}
+} */

@@ -9,17 +9,32 @@ function MessageButton({ user }) {
 
   const messages = useSelector(state => state.messages.messages);
 
-  if (messages) {
-  }
-
   const [showMenu, setShowMenu] = useState(false);
-  const [unreadMessages, setUnreadMessages] = useState(0);
+  const [uniqueMessages, setUniqueMessages] = useState([]);
 
   const openMenu = () => {
     if (showMenu) return;
+
+    if (messages) {
+        let messageClip =
+            Array.from(new Set(
+                messages.map(message => message.User.username)))
+                .map(username => {
+                    return messages.find(message => message.User.username === username)
+                })
+        setUniqueMessages(messageClip)
+    }
+
     setShowMenu(true);
-    dispatch(messageActions.getMessages(user))
   };
+
+  useEffect(() => {
+    if (messages) return;
+
+    dispatch(messageActions.getMessages(user));
+
+
+  }, [messages, dispatch, user])
 
   useEffect(() => {
     if (!showMenu) return;
@@ -29,40 +44,25 @@ function MessageButton({ user }) {
     };
 
     document.addEventListener('click', closeMenu);
-
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  useEffect(() => {
-      if (!messages) return;
-
-      let unreadMessages = messages.filter(message => message.read === false);
-
-      setUnreadMessages(unreadMessages.length);
-  }, [messages, unreadMessages])
-//   const messageButtonClick = (e) => {
-//     dispatch(messageActions.getMessages());
-//   };
-
-  return (
-    <>
-      <button onClick={openMenu}>
-        <i className="far fa-comment-dots fa-2x">{unreadMessages}</i>
-        {/* <p>{unreadMessages}</p> */}
-      </button>
-      {showMenu && (
-        <div className="message-dropdown">
-          {messages && messages.map(message => (
-            <div key={message.id} className='message'>
-                <img src={message.User.profilePicture} alt={'profile'}></img>
-                <h3>{message.User.username}:</h3>
-                <p>{message.message}</p>
-            </div>
-          ))}
-        </div>
-      )}
-    </>
-  );
+  return <>
+    <button onClick={openMenu}>
+      <i className="far fa-envelope fa-2x">{messages? ` ${messages.length} new` : ' ' + 0}</i>
+    </button>
+    {showMenu && (
+      <div className="message-dropdown">
+        {messages && uniqueMessages.map(message => (
+          <div key={message.id} className='message'>
+              <img src={message.User.profilePicture} alt={'profile'}></img>
+              <h3>{message.User.username}</h3>
+              <p>{messages.filter(mess => message.User.username === mess.User.username).length}</p>
+          </div>
+        ))}
+      </div>
+    )}
+  </>;
 }
 
 export default MessageButton;

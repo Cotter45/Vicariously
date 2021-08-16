@@ -17,6 +17,7 @@
     width: 200px;
     height: 30vh;
     border: 1px solid black;
+    border-radius: 15px;
     list-style-type: none;
     display: flex;
     flex-direction: column;
@@ -29,6 +30,7 @@
     width: 200px;
     height: 30vh;
     border: 1px solid black;
+    border-radius: 15px;
     overflow: hidden;
     overflow-y: scroll;
     display: flex;
@@ -38,7 +40,8 @@
 .message {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
+    padding-left: 10px;
     border-bottom: 1px solid black;
 }
 

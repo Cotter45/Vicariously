@@ -8,10 +8,12 @@ function MessageButton({ user }) {
   const dispatch = useDispatch();
 
   const messages = useSelector(state => state.messages.messages);
+  const unreadMessages = useSelector(state => state.messages.unreadMessages);
 
   const [showMenu, setShowMenu] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [responding, setResponding] = useState(false);
+  const [userTwoId, setUserTwoId] = useState('');
   const [message, setMessage] = useState({});
   const [uniqueMessages, setUniqueMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -33,14 +35,25 @@ function MessageButton({ user }) {
   };
 
   const openMessage = (message) => {
+    const markMessages = messages.filter(eachMessage => eachMessage.userTwoId === message.userTwoId);
     setShowMessage(true);
     setMessage(message);
+    setUserTwoId(message.userTwoId);
+    dispatch(messageActions.readMessages(markMessages));
   }
 
   const sendMessage = (e) => {
-      e.preventDefault();
-    console.log(newMessage)
-    //   dispatch(sendMessage(e.target.value))
+    setShowMessage(true);
+    setResponding(true);
+
+    const message = {
+        message: newMessage,
+        userOneId: user.id,
+        userTwoId
+    }
+
+    dispatch(messageActions.sendMessage(message));
+    setNewMessage('');
   }
 
   useEffect(() => {
@@ -81,29 +94,29 @@ function MessageButton({ user }) {
             <button onClick={openMenu}>
                 <i className="far fa-envelope fa-2x"></i>
             </button>
-            <div className='new-messages'>{messages? `${messages.length}` : null}</div>
+            <div className='new-messages'>{unreadMessages? unreadMessages.length : 0}</div>
         </div>
         {showMenu && showMessage === false && (
             <div className="message-dropdown">
-                {messages && uniqueMessages.map(uniqueMessage => (
-                    <div key={uniqueMessage.id} className='message' onClick={() => openMessage(uniqueMessage)}>
+                {messages && uniqueMessages.map((uniqueMessage, index) => (
+                    <div key={uniqueMessage.message} className='message' onClick={() => openMessage(uniqueMessage)}>
                         <img src={uniqueMessage.User.profilePicture} alt={'profile'}></img>
                         <h3>{uniqueMessage.User.username}</h3>
-                        <p>{messages.filter(message => uniqueMessage.User.username === message.User.username).length} new</p>
+                        <p>{unreadMessages.filter(each => each.userTwoId === uniqueMessage.User.id).length} new</p>
                     </div>
                 ))}
             </div>
         )}
         {showMessage && showMenu === false && (
             <div className='messenger-dropdown'>
-                {messages && messages
+                {messages
                     .filter(messageItem => messageItem.userTwoId === message.userTwoId)
                     .sort((a, b) => a.createdAt - b.createdAt)
-                    .map(each => (
+                    .map((each, index) => (
                         <div key={each.id} className={each.userOneId === user.id ? 'left' : 'right'}>{each.message}</div>
                     ))
                 }
-                <form onSubmit={sendMessage}>
+                <div>
                     <label>
                         <input type='text'
                             placeholder='Type here...'
@@ -111,10 +124,14 @@ function MessageButton({ user }) {
                             onChange={(event) => setNewMessage(event.target.value)}
                             onFocus={() => setResponding(true)}
                             onBlur={() => setResponding(false)}
-                            ></input>
+                        ></input>
                     </label>
-                    <button type='submit'>Send</button>
-                </form>
+                    <button
+                        onFocus={() => setResponding(true)}
+                        onBlur={() => setResponding(false)}
+                        onClick={sendMessage}
+                    >Send</button>
+                </div>
             </div>
         )}
     </>

@@ -73,11 +73,29 @@ router.get('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
   return res.json({ messages })
 }))
 
+// Mark user messages as read
+router.put('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
+  const userOneId = req.params.userId;
+  const userTwoId = req.body[0].userTwoId;
+
+  const messages = await UserMessage.findAll({
+    where: {
+      userOneId,
+      userTwoId
+    },
+    include: User
+  })
+
+  const updatedMessages = messages.forEach(async message => await message.update({ read: true }))
+
+  return res.json({ messages })
+}))
+
 // Send a message
-router.post('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
-  const userTwoId = req.params.userId;
-  const userOneId = req.body.user.id;
-  const { message } = req.body;
+router.post('/:userId/newMessage', requireAuth, asyncHandler( async (req, res) => {
+  // const userTwoId = req.params.userId;
+  // const userOneId = req.body.user.id;
+  const { message, userOneId, userTwoId } = req.body;
 
   const newMessage = await UserMessage.create({
     message,
@@ -86,7 +104,17 @@ router.post('/:userId/messages', requireAuth, asyncHandler( async (req, res) => 
     userTwoId
   })
 
-  return res.json({ newMessage })
+  const returnMessage = await UserMessage.findOne({
+    where: {
+      userOneId,
+      userTwoId,
+      message
+    },
+    include: User
+  })
+  console.log(returnMessage)
+
+  return res.json({ returnMessage })
 }))
 
 // Post a new user review

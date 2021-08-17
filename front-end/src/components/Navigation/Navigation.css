@@ -32,7 +32,7 @@ button {
 .menu-dropdown {
     position: fixed;
     top: 50px;
-    right: 10px;
+    right: 200px;
     width: 250px;
     height: 30vh;
     gap: 10px;
@@ -61,8 +61,8 @@ button {
 .message-dropdown {
     position: fixed;
     z-index: 1;
-    top: 50px;
-    right: 10px;
+    top: 75px;
+    right: 200px;
     width: 250px;
     height: 30vh;
     background-color: white;
@@ -106,8 +106,8 @@ button {
 .messenger-dropdown {
     position: fixed;
     z-index: 1;
-    top: 50px;
-    right: 10px;
+    top: 75px;
+    right: 200px;
     width: 250px;
     height: 30vh;
     background-color: white;

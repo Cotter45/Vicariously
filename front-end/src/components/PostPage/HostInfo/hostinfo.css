@@ -21,6 +21,12 @@
 .calendar {
     padding-top: 50px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.selected-dates {
+    display: flex;
+    gap: 15px;
 }

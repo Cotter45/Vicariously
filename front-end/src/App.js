@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import PostPage from "./components/PostPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,9 +23,9 @@ function App() {
       <Navigation isLoggedIn={isLoggedIn} />
       {isLoggedIn && (
         <Switch>
-          {/* <Route path="/signup">
-            <SignupFormPage />
-          </Route> */}
+          <Route path="/posts/:postId">
+            <PostPage />
+          </Route>
         </Switch>
       )}
     </>

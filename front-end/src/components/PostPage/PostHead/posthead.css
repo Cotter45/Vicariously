@@ -1,0 +1,21 @@
+.post-head {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+    gap: 10px;
+}
+
+.description {
+    text-align: center;
+}
+
+
+.right-head {
+    justify-content: flex-end;
+    align-items: flex-end;
+    display: flex;
+}
+
+.categories {
+    display: flex;
+}

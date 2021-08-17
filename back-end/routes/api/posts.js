@@ -6,7 +6,7 @@ const { Op } = require('sequelize');
 
 const { validatePost } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
-const { User, Post, Booking, Category, Image, PostReview, PostRule, UserMessage } = require('../../db/models');
+const { User, Post, Booking, Category, Image, PostReview, PostRule, UserMessage, UserReview } = require('../../db/models');
 
 const router = express.Router();
 
@@ -112,10 +112,28 @@ router.get('/search/:params', asyncHandler( async (req, res) => {
 router.get('/:postId', asyncHandler( async (req, res) => {
     const post = await Post.findOne({
         where: {
-            id: req.params.postId
+            id: parseInt(req.params.postId)
         },
-        include: [ Category, Image, Booking, PostReview ]
+        include: [ Category, Image, Booking, PostReview, User, PostRule ]
     })
+
+
+    const postReviews = await PostReview.findAll({
+        where: {
+            postId: post.id
+        }
+    })
+    const sum = postReviews.reduce((prev, curr) => prev + curr.rating, 0);
+    const avg = sum / postReviews.length;
+    let stars = '';
+    for (let i = 0; i < avg; i++) {
+        stars += '⭐️'
+    }
+    for (let i = stars.length; i < 7; i++) {
+        stars += '✭'
+    }
+    post.dataValues.avgRating = stars;
+
 
     return res.json({ post });
 }))

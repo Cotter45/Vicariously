@@ -1,13 +1,15 @@
 // front-end/src/components/Navigation/searchbar.js
-import React, { useState, useEffect, useHistory } from "react";
+import { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { searchPosts } from "../../store/posts";
+import { searchPosts, getPost } from "../../store/posts";
 
 
 
 function SearchBar() {
     const dispatch = useDispatch();
+    let history = useHistory();
 
     const searchResults = useSelector(state => state.searchResults.searchResults);
 
@@ -24,8 +26,9 @@ function SearchBar() {
         setSearchParams('');
     }
 
-    const viewResult = () => {
-
+    const viewResult = (id) => {
+        dispatch(getPost(id));
+        history.push(`/posts/${id}`)
     }
 
     useEffect(() => {
@@ -60,7 +63,7 @@ function SearchBar() {
             </form>
             <div className={viewResults && searchResults? 'results-dropdown' : 'hide-me'}>
                 {viewResults && searchResults && searchResults.map(result => (
-                    <div key={result.id} className='result' onClick={viewResult}>
+                    <div key={result.id} className='result' onClick={() => viewResult(result.id)}>
                         <img src={result.Images[0].imageUrl} alt='post'></img>
                         <div className='rating'>
                             <h2>{result.avgRating}</h2>

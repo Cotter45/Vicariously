@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as messageActions from '../../store/messages';
+import * as messageActions from '../../../store/messages';
 
 function MessageButton({ user }) {
   const dispatch = useDispatch();
@@ -43,6 +43,8 @@ function MessageButton({ user }) {
   }
 
   const sendMessage = (e) => {
+    e.preventDefault();
+
     setShowMessage(true);
     setResponding(true);
 
@@ -116,22 +118,18 @@ function MessageButton({ user }) {
                         <div key={each.id} className={each.userOneId === user.id ? 'left' : 'right'}>{each.message}</div>
                     ))
                 }
-                <div>
+                <form onSubmit={sendMessage}>
                     <label>
                         <input type='text'
                             placeholder='Type here...'
+                            id='message'
                             value={newMessage}
                             onChange={(event) => setNewMessage(event.target.value)}
                             onFocus={() => setResponding(true)}
                             onBlur={() => setResponding(false)}
                         ></input>
                     </label>
-                    <button
-                        onFocus={() => setResponding(true)}
-                        onBlur={() => setResponding(false)}
-                        onClick={sendMessage}
-                    >Send</button>
-                </div>
+                </form>
             </div>
         )}
     </>

@@ -1,7 +1,7 @@
 // front-end/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
+import * as sessionActions from '../../../store/session';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function ProfileButton({ user }) {
         </button>
       </div>
       {showMenu && (
-        <div className="profile-dropdown">
+        <div className="menu-dropdown">
           <div className='info'>
             <img src={user.profilePicture} alt='profile'></img>
             <div>

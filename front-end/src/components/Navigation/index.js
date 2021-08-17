@@ -3,13 +3,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import ProfileButton from './MenuButton';
+import ProfileButton from './Menu/MenuButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormPage';
 
 import './Navigation.css';
-import MessageButton from './MessageButton';
-import SearchBar from './searchbar';
+import MessageButton from './Messages/MessageButton';
+import SearchBar from './Search/searchbar';
 
 function Navigation({ isLoggedIn }){
   const sessionUser = useSelector(state => state.session.user);
@@ -17,10 +17,10 @@ function Navigation({ isLoggedIn }){
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <>
+      <div className='nav-buttons'>
         <MessageButton user={sessionUser}/>
         <ProfileButton user={sessionUser} />
-      </>
+      </div>
     );
   } else {
     sessionLinks = (

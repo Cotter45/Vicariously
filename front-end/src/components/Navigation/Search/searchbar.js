@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { searchPosts, getPost } from "../../store/posts";
+import { searchPosts, getPost } from "../../../store/posts";
 
 
 
@@ -54,12 +54,11 @@ function SearchBar() {
             <form onSubmit={handleSearch}>
                 <input
                     placeholder='Search by location...'
+                    className='search'
                     value={searchParams}
                     onChange={(e) => setSearchParams(e.target.value)}
                     onClick={() => setViewResults(true)}
                     ></input>
-
-                <button type='submit'>Search</button>
             </form>
             <div className={viewResults && searchResults? 'results-dropdown' : 'hide-me'}>
                 {viewResults && searchResults && searchResults.map(result => (
@@ -69,6 +68,7 @@ function SearchBar() {
                             <h2>{result.avgRating}</h2>
                             <p>{result.city}, {result.country}</p>
                         </div>
+                        <h3>{result.title}</h3>
                     </div>
 
                 ))}

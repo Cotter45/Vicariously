@@ -14,11 +14,11 @@ button {
     width: 100%;
     height: 5vh;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-evenly;
     align-items: center;
     gap: 10px;
-    position: fixed;
-    top: 10px;
+    position: sticky;
+    top: 15px;
 }
 
 .message-button {
@@ -29,18 +29,21 @@ button {
     padding-right: 10px;
 }
 
-.profile-dropdown {
-    position: absolute;
+.menu-dropdown {
+    position: fixed;
     top: 50px;
     right: 10px;
     width: 250px;
     height: 30vh;
     gap: 10px;
-    border: 1px solid black;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 15px;
     list-style-type: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 1;
 }
 
 .info {
@@ -56,12 +59,15 @@ button {
 }
 
 .message-dropdown {
-    position: absolute;
+    position: fixed;
+    z-index: 1;
     top: 50px;
     right: 10px;
     width: 250px;
     height: 30vh;
-    border: 1px solid black;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 15px;
     overflow: hidden;
     overflow-y: scroll;
     display: flex;
@@ -92,18 +98,23 @@ button {
     height: 20px;
     width: 20px;
     color: white;
-    position: absolute;
-    top: 20px;
-    right: 40px;
+    position: relative;
+    bottom: 10px;
+    right: -15px;
+    /* top: 20px;
+    right: 65px; */
 }
 
 .messenger-dropdown {
-    position: absolute;
+    position: fixed;
+    z-index: 1;
     top: 50px;
     right: 10px;
     width: 250px;
     height: 30vh;
-    border: 1px solid black;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 15px;
     overflow: hidden;
     overflow-y: scroll;
     display: flex;
@@ -125,13 +136,29 @@ button {
     display: none;
 }
 
+.search {
+    width: 500px;
+    height: 50px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px gray;
+    padding: 0 10px;
+}
+
+.search:focus {
+    outline-width: 0;
+}
+
 .results-dropdown {
-    position: absolute;
-    top: 50px;
-    right: 10px;
-    width: 250px;
-    height: 30vh;
-    border: 1px solid black;
+    position: fixed;
+    z-index: 1;
+    top: 75px;
+    left: 30vw;
+    width: 500px;
+    height: 15vh;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 15px;
     overflow: hidden;
     overflow-y: scroll;
     display: flex;
@@ -140,7 +167,7 @@ button {
 }
 
 .result {
-    width: 250px;
+    width: 100%;
     height: 75px;
     border-bottom: 1px solid black;
     display: flex;
@@ -159,4 +186,19 @@ button {
 .result,
 .result > * {
     cursor: pointer;
+}
+
+#message {
+    position: absolute;
+    bottom: 0;
+    height: 25px;
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.nav-buttons {
+    display: flex;
+    width: 100px;
+    gap: 5px;
 }

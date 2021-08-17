@@ -7,3 +7,8 @@
 button > * {
     pointer-events: none;
 }
+
+html, body, #root {
+    height: 100% !important;
+    min-height: 100vh;
+}

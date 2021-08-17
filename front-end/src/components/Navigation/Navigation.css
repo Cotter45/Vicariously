@@ -101,8 +101,6 @@ button {
     position: relative;
     bottom: 10px;
     right: -15px;
-    /* top: 20px;
-    right: 65px; */
 }
 
 .messenger-dropdown {
@@ -120,6 +118,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    padding: 10px 0;
 }
 
 .left {
@@ -129,7 +128,7 @@ button {
 
 .right {
     text-align: right;
-    background-color: rgba(0, 0, 0, .4);
+    background-color: rgba(0, 0, 0, .3);
 }
 
 .hide-me {
@@ -190,11 +189,17 @@ button {
 
 #message {
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     height: 25px;
-    border: 1px solid black;
-    border-radius: 15px;
-    width: 100%;
+    border-width: 0;
+    border-top: 1px solid gray;
+    width: 90%;
+    padding: 0 10px;
+    outline: none;
+}
+
+#message:focus {
+    outline-width: 0;
 }
 
 .nav-buttons {

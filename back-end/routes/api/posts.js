@@ -123,6 +123,13 @@ router.get('/:postId', asyncHandler( async (req, res) => {
             postId: post.id
         }
     })
+
+    const userReviews = await UserReview.findAll({
+        where: {
+            id: post.hostId
+        }
+    })
+
     const sum = postReviews.reduce((prev, curr) => prev + curr.rating, 0);
     const avg = sum / postReviews.length;
     let stars = '';
@@ -133,6 +140,18 @@ router.get('/:postId', asyncHandler( async (req, res) => {
         stars += '✭'
     }
     post.dataValues.avgRating = stars;
+
+    const secondSum = userReviews.reduce((prev, curr) => prev + curr.rating, 0);
+    const secondAvg = secondSum / userReviews.length;
+    let secondStars = '';
+    for (let i = 0; i < avg; i++) {
+        secondStars += '⭐️'
+    }
+    for (let i = secondStars.length; i < 7; i++) {
+        secondStars += '✭'
+    }
+    post.dataValues.numUserRatings = userReviews.length;
+    post.dataValues.avgUserRating = secondStars;
 
 
     return res.json({ post });

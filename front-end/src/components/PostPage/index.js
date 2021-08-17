@@ -2,9 +2,10 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import { getPost } from '../../store/posts';
-import ImageContainer from './ImageContainer';
 
+import { getPost } from '../../store/posts';
+import HostInfo from './HostInfo';
+import ImageContainer from './ImageContainer';
 import PostHead from './PostHead';
 
 import './postpage.css';
@@ -28,6 +29,7 @@ function PostPage() {
                 <>
                     <PostHead post={selectedPost} />
                     <ImageContainer post={selectedPost} />
+                    <HostInfo post={selectedPost} />
                 </>
             )}
         </div>

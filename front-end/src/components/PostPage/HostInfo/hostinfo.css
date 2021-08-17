@@ -1,0 +1,26 @@
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.host {
+    height: 100px;
+    width: 40vw;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.host-picture > img {
+    height: 100px;
+    width: 100px;
+}
+
+.calendar {
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

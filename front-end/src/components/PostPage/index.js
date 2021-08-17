@@ -23,7 +23,7 @@ function PostPage() {
 
     return (
         <div className='post-page'>
-            <h2>{selectedPost && selectedPost.description}</h2>
+            <h2>{selectedPost && selectedPost.title}</h2>
             {selectedPost && (
                 <>
                     <PostHead post={selectedPost} />

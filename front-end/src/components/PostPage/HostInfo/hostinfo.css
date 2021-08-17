@@ -2,6 +2,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 500px;
+    padding: 50px 50px;
+    border-bottom: 1px solid lightgray;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .host {
@@ -10,7 +19,8 @@
     display: flex;
     gap: 20px;
     align-items: center;
-    padding-top: 50px;
+    padding: 50px 50px;
+    border-bottom: 1px solid lightgray;
 }
 
 .host-picture > img {
@@ -18,15 +28,99 @@
     width: 100px;
 }
 
+.name {
+    font-size: 25px;
+}
+
 .calendar {
-    padding-top: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+    height: 500px;
+    width: 500px;
+}
+
+.calendar > * {
+    border-radius: 15px;
 }
 
 .selected-dates {
     display: flex;
     gap: 15px;
+}
+
+.disabled-date {
+    pointer-events: none;
+    color: gray;
+    background-color: gray;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth.disabled-date {
+    background-color: lightgray;
+}
+
+.react-calendar__month-view__days__day.disabled-date {
+    background-color: lightgray;
+}
+
+.react-calendar__month-view__days__day.disabled-date.react-calendar__tile--now {
+    background-color: yellow;
+}
+
+.react-calendar__month-view__days__day.booked-date {
+    background-color: lightblue;
+}
+.booked-date {
+    pointer-events: none;
+}
+
+.post-rules {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 50px 50px;
+    border-bottom: 1px solid lightgray;
+}
+
+.post-rules > ul {
+    padding-left: 50px;
+}
+
+.selected-dates {
+    display: flex;
+    gap: 100px;
+}
+
+.calendar-head {
+    margin-bottom: 20px;
+    text-decoration: underline;
+}
+
+.key {
+    height: 50px;
+    width: 250px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.yellow {
+    height: 25px;
+    width: 25px;
+    background-color: yellow;
+}
+
+.blue {
+    height: 25px;
+    width: 25px;
+    background-color: lightblue;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 50px 50px;
 }

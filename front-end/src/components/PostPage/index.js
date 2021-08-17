@@ -7,6 +7,7 @@ import { getPost } from '../../store/posts';
 import HostInfo from './HostInfo';
 import ImageContainer from './ImageContainer';
 import PostHead from './PostHead';
+import Reviews from './Reviews';
 
 import './postpage.css';
 
@@ -30,6 +31,7 @@ function PostPage() {
                     <PostHead post={selectedPost} />
                     <ImageContainer post={selectedPost} />
                     <HostInfo post={selectedPost} />
+                    <Reviews post={selectedPost} />
                 </>
             )}
         </div>

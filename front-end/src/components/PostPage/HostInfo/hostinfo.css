@@ -66,16 +66,17 @@
     background-color: lightgray;
 }
 
-.react-calendar__month-view__days__day.disabled-date.react-calendar__tile--now {
+.react-calendar__month-view__days__day.react-calendar__tile--now.disabled-date {
     background-color: yellow;
 }
 
-.react-calendar__month-view__days__day.booked-date {
-    background-color: lightblue;
-}
 .booked-date {
     pointer-events: none;
 }
+.react-calendar__month-view__days__day.booked-date {
+    background-color: lightgray;
+}
+
 
 .post-rules {
     display: flex;
@@ -99,26 +100,7 @@
     text-decoration: underline;
 }
 
-.key {
-    height: 50px;
-    width: 250px;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.yellow {
-    height: 25px;
-    width: 25px;
-    background-color: yellow;
-}
-
-.blue {
-    height: 25px;
-    width: 25px;
-    background-color: lightblue;
-}
-
-.description {
+.spot-description {
     display: flex;
     flex-direction: column;
     gap: 10px;

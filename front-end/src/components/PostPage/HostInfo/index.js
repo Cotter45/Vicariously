@@ -1,6 +1,6 @@
 // front-end/src/components/PostPage/HostInfo/index.js
 import Calendar from 'react-calendar';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import './hostinfo.css';
 import 'react-calendar/dist/Calendar.css';
@@ -8,25 +8,13 @@ import 'react-calendar/dist/Calendar.css';
 function HostInfo({post}) {
     const host = post.User;
 
-    const [value, setValue] = useState();
-    // const [disabledDates, setDisabledDates] = useState([]);
+    const [value, onChange] = useState();
 
-    console.log(value)
     const bookingDates = post.Bookings.map(booking => {
         return [
             booking.startDate, booking.endDate
         ]
     })
-
-    // useEffect(() => {
-    //     if (!value) return;
-
-    //     const removeDates = () => {
-    //         setValue();
-    //     }
-    //     document.addEventListener('click', removeDates);
-    //     return () => document.removeEventListener('click', removeDates);
-    // }, [value])
 
     const tileClassName = ({date, view}) => {
         if (view === 'month') {
@@ -35,14 +23,9 @@ function HostInfo({post}) {
                 let bookedDate = bookingDates[i];
                 if (date >= new Date(bookedDate[0]) && date <= new Date(bookedDate[1])) return 'booked-date';
             }
-
+            return;
         }
     }
-
-
-
-
-
 
 
     return (
@@ -67,21 +50,15 @@ function HostInfo({post}) {
                         ))}
                     </ul>
                 </div>
-                <div className='description'>
+                <div className='spot-description'>
                     <h2>All about {host.username}'s spot</h2>
                     <p>{post.description}</p>
                 </div>
             </div>
             <div className='calendar'>
                 <h2 className='calendar-head'>Stop by for a Visit</h2>
-                <div className='key'>
-                    <div className='yellow'></div>
-                    <p>: Today</p>
-                    <div className='blue'></div>
-                    <p>: Booked</p>
-                </div>
                 <Calendar
-                    onChange={setValue}
+                    onChange={onChange}
                     value={value}
                     selectRange
                     tileClassName={tileClassName}

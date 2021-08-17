@@ -1,0 +1,20 @@
+.reviews-container {
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 50px;
+    padding-bottom: 200px;
+}
+
+.reviewer-info {
+    display: flex;
+    gap: 10px;
+}
+
+.reviewer-picture {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+}

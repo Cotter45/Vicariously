@@ -83,7 +83,7 @@ router.get('/search/:params', asyncHandler( async (req, res) => {
                 }
             ]
         },
-        include: [ PostReview, User, Image ]
+        include: [ PostReview, User, Image, Category ]
     })
 
     for (let i = 0; i < results.length; i++) {

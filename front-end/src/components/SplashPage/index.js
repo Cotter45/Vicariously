@@ -13,18 +13,25 @@ function SplashPage() {
 
     // const user = useSelector(state => state.session.user);
     const posts = useSelector(state => state.posts.featuredPosts);
-
+console.log(posts)
 
     const [cities, showCities] = useState(false);
     const [states, showStates] = useState(false);
     const [countries, showCountries] = useState(false);
     const [categories, showCategories] = useState(false);
+    const [showPost, setShowPost] = useState(false);
 
     useEffect(() => {
         if (posts) return;
 
         dispatch(getFeatures());
     }, [posts, dispatch])
+
+    useEffect(() => {
+        if (!showPost) return;
+
+        history.push(`/posts/${showPost}`)
+    }, [history, showPost])
 
     const explore = () => {
         history.push('/explore');
@@ -93,6 +100,7 @@ function SplashPage() {
                                 <button
                                     className='selected'
                                     key={post.id}
+                                    onClick={() => setShowPost(post.id)}
                                 >{post.city}</button>
                             ))}
                         </div>
@@ -103,6 +111,7 @@ function SplashPage() {
                                 <button
                                     className='selected'
                                     key={post.id}
+                                    onClick={() => setShowPost(post.id)}
                                 >{post.state}</button>
                             ))}
                         </div>
@@ -113,6 +122,7 @@ function SplashPage() {
                                 <button
                                     className='selected'
                                     key={post.id}
+                                    onClick={() => setShowPost(post.id)}
                                 >{post.country}</button>
                             ))}
                         </div>
@@ -124,6 +134,7 @@ function SplashPage() {
                                     <button
                                         className='selected'
                                         key={category.category}
+                                        onClick={() => setShowPost(post.id)}
                                     >{category.category}</button>
                                 ))
                             ))}

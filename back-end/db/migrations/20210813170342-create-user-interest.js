@@ -10,8 +10,7 @@ module.exports = {
       },
       interest: {
         type: Sequelize.STRING(50),
-        allowNull: false,
-        unique: true
+        allowNull: false
       },
       userId: {
         type: Sequelize.INTEGER,

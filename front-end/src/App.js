@@ -6,6 +6,7 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import PostPage from "./components/PostPage";
+import SplashPage from "./components/SplashPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ function App() {
       <Navigation isLoggedIn={isLoggedIn} />
       {isLoggedIn && (
         <Switch>
+          <Route exact path='/'>
+            <SplashPage />
+          </Route>
           <Route path="/posts/:postId">
             <PostPage />
           </Route>

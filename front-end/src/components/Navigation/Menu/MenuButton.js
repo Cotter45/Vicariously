@@ -38,7 +38,7 @@ function ProfileButton({ user }) {
       </div>
       {showMenu && (
         <div className="menu-dropdown">
-          <div className='info'>
+          <div className='menu-info'>
             <img src={user.profilePicture} alt='profile'></img>
             <div>
               <h3>{user.username}</h3>

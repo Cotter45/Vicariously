@@ -166,7 +166,8 @@ router.post('/:postId/bookings', requireAuth, asyncHandler( async (req, res) => 
     const postId = req.params.postId;
     const guestId = req.body.user.id;
     const { startDate, endDate } = req.body;
-
+    console.log('postId', postId, 'guestId', guestId, 'startDate', startDate, 'endDate', endDate)
+    console.log(req.body)
     const post = await Post.findOne({
         where: {
             id: postId
@@ -189,7 +190,7 @@ router.post('/:postId/bookings', requireAuth, asyncHandler( async (req, res) => 
         userTwoId: post.User.id
     })
 
-    return res.json({ booking });
+    return res.json({ booking, newMessage });
 }))
 
 // Route to get all uncomfirmed bookings for a specific post

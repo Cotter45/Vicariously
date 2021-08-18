@@ -10,7 +10,7 @@ import searchReducer from "./posts";
 const rootReducer = combineReducers({
   session: sessionReducer,
   messages: messageReducer,
-  searchResults: searchReducer
+  posts: searchReducer
 });
 
 let enhancer;

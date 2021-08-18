@@ -11,7 +11,7 @@ function SearchBar() {
     const dispatch = useDispatch();
     let history = useHistory();
 
-    const searchResults = useSelector(state => state.searchResults.searchResults);
+    const searchResults = useSelector(state => state.posts.searchResults);
 
     const [searchParams, setSearchParams] = useState('');
     const [viewResults, setViewResults] = useState(false);

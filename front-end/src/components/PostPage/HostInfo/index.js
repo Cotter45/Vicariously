@@ -1,14 +1,25 @@
 // front-end/src/components/PostPage/HostInfo/index.js
 import Calendar from 'react-calendar';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { bookPost } from '../../../store/posts';
 
 import './hostinfo.css';
 import 'react-calendar/dist/Calendar.css';
 
 function HostInfo({post}) {
     const host = post.User;
+    const dispatch = useDispatch();
 
-    const [value, onChange] = useState();
+    const user = useSelector(state => state.session.user);
+
+    const [date, setDate] = useState();
+    const [success, setSuccess] = useState(false);
+
+    const onChange = date => {
+        setDate(date);
+    }
 
     const bookingDates = post.Bookings.map(booking => {
         return [
@@ -26,6 +37,20 @@ function HostInfo({post}) {
             return;
         }
     }
+
+    const requestBooking = () => {
+        if (!user || !date) return;
+
+        const dates = {
+            startDate: date[0].toDateString(),
+            endDate: date[1].toDateString(),
+            user
+        }
+
+        const book = dispatch(bookPost(dates, post.id));
+        if (book) setSuccess(true)
+    }
+
 
     return (
         <div className='info'>
@@ -58,28 +83,39 @@ function HostInfo({post}) {
                 <h2 className='calendar-head'>Stop by for a Visit</h2>
                 <Calendar
                     onChange={onChange}
-                    value={value}
+                    value={date}
                     selectRange
-                    onClickDay={date => console.log(date)}
                     tileClassName={tileClassName}
                     />
                 <div className='selected-dates'>
                     <div className='start'>
                         <h3>Start</h3>
-                        {value && (
-                            <p>{value[0].toDateString()}</p>
-                        )}
+                        <div>
+                            {date && (
+                                <p>{date[0].toDateString()}</p>
+                            )}
+                        </div>
                     </div>
                     <div className='end'>
                         <h3>End</h3>
-                        {value && (
-                            <p>{value[1].toDateString()}</p>
-                        )}
+                        <div>
+                            {date && (
+                                <p>{date[1].toDateString()}</p>
+                            )}
+                        </div>
                     </div>
+                </div>
+                <div className='book'>
+                    <button type='button' onClick={requestBooking}>Request a Visit</button>
+                    {!user && (
+                        <p>You must be logged in</p>
+                    )}
+                    {success && (
+                        <p>Your request has been sent!</p>
+                    )}
                 </div>
             </div>
         </div>
-
     )
 }
 

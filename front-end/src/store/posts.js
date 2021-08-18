@@ -1,10 +1,18 @@
 // front-end/src/store/posts.js
 import { csrfFetch } from './csrf';
-// import { store } from '../index';
+import { sendMessage } from './messages';
 
 
 const SEARCH_POSTS = '/api/posts/search';
-const GET_POST = '/api/posts/:postId'
+const GET_POST = '/api/posts/:postId';
+const BOOK_POST = '/api/posts/book';
+
+const book = (dates) => {
+    return {
+        type: BOOK_POST,
+        payload: dates
+    }
+}
 
 const post = (post) => {
     return {
@@ -18,6 +26,18 @@ const search = (searchResults) => {
         type: SEARCH_POSTS,
         payload: searchResults
     }
+}
+
+export const bookPost = (dates, postId) => async (dispatch) => {
+    const fetch = await csrfFetch(`/api/posts/${postId}/bookings`, {
+        method: 'POST',
+        body: JSON.stringify(dates)
+    })
+
+    const response = await fetch.json();
+    dispatch(book(response));
+    dispatch(sendMessage(response.newMessage))
+    return response;
 }
 
 export const getPost = (postId) => async (dispatch) => {
@@ -47,6 +67,9 @@ const searchReducer = (state = initialState, action) => {
             return newState;
         case GET_POST:
             newState.posts = action.payload;
+            return newState;
+        case BOOK_POST:
+            newState.bookings = action.payload;
             return newState;
         default:
             return state;

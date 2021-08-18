@@ -15,7 +15,7 @@ function PostPage() {
     const { postId } = useParams();
     const dispatch = useDispatch();
 
-    const selectedPost = useSelector(state => state.searchResults.posts.post);
+    const selectedPost = useSelector(state => state.posts.posts.post);
 
     useEffect(() => {
         if (selectedPost) return;

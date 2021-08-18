@@ -7,12 +7,14 @@ import sessionReducer from './session';
 import messageReducer from './messages';
 import searchReducer from "./posts";
 import mapsReducer from "./maps";
+import userReducer from "./users";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   messages: messageReducer,
   posts: searchReducer,
-  maps: mapsReducer
+  maps: mapsReducer,
+  users: userReducer
 });
 
 let enhancer;

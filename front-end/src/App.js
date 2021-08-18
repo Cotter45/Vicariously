@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import PostPage from "./components/PostPage";
 import SplashPage from "./components/SplashPage";
 import ExplorePage from "./components/ExplorePage";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path='/explore'>
             <ExplorePage />
+          </Route>
+          <Route path='/profile/:userId'>
+            <ProfilePage />
           </Route>
           <Route path='/'>
             <SplashPage />

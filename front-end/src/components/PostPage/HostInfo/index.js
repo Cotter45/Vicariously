@@ -2,6 +2,7 @@
 import Calendar from 'react-calendar';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import { bookPost } from '../../../store/posts';
 
@@ -11,6 +12,7 @@ import 'react-calendar/dist/Calendar.css';
 function HostInfo({post}) {
     const host = post.User;
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const user = useSelector(state => state.session.user);
 
@@ -51,11 +53,15 @@ function HostInfo({post}) {
         if (book) setSuccess(true)
     }
 
+    const profile = () => {
+        history.push(`/profile/${host.id}`)
+    }
+
 
     return (
         <div className='info'>
             <div className='left-side'>
-                <div className='host'>
+                <div onClick={profile} className='host'>
                     <div className='host-picture'>
                         <img src={host.profilePicture} alt='host'></img>
                     </div>

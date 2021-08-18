@@ -25,6 +25,10 @@
     border-bottom: 1px solid lightgray;
 }
 
+.host:hover {
+    cursor: pointer;
+}
+
 .host-picture > img {
     height: 100px;
     width: 100px;

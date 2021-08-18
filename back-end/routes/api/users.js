@@ -49,7 +49,26 @@ router.get('/:userId', asyncHandler( async (req, res) => {
     include: [ PostReview, Image ]
   })
 
-  return res.json({ user, posts })
+  const userReviews = await UserReview.findAll({
+    where: {
+      userId
+    }
+  })
+
+  const sum = userReviews.reduce((prev, curr) => prev + curr.rating, 0);
+  const avg = sum / userReviews.length;
+  let stars = '';
+  for (let i = 0; i < avg; i++) {
+      stars += '⭐️'
+  }
+  for (let i = stars.length; i < 7; i++) {
+      stars += '✭'
+  }
+
+  user.dataValues.avgUserRating = stars;
+  user.dataValues.posts = posts;
+
+  return res.json({ user })
 }))
 
 // Serve user messages
@@ -135,16 +154,12 @@ router.post('/:userId/review', requireAuth, asyncHandler( async (req, res) => {
 // Edit a profile
 router.put('/:userId', requireAuth, asyncHandler( async (req, res) => {
   const userId = req.body.user.id;
-  const { username, email, password, birthday, profilePicture, description } = req.body;
-
-  const hashedPassword = bcrypt.hashSync(password);
+  const { username, birthday, profilePicture, description } = req.body;
 
   const user = await User.findByPk(userId);
 
   const update = await user.update({
     username,
-    email,
-    hashedPassword,
     birthday,
     profilePicture,
     description,
@@ -181,8 +196,7 @@ router.put('/:userId/reviews/:reviewId', requireAuth, asyncHandler( async (req, 
 
 // Delete user account/profile
 router.delete('/:userId', requireAuth, asyncHandler( async (req, res) => {
-  const id = req.body.user.id;
-
+  const id = req.params.userId;
   const profile = await User.findOne({ where: { id }});
 
   await profile.destroy();

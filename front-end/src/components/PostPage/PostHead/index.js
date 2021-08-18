@@ -10,7 +10,7 @@ function PostHead({post}) {
                 <div className='location'>{`📍 ${post.address} ${post.city}, ${post.state}`}</div>
                 <div className='categories'>
                     {post.Categories.map(category => (
-                        <div className='category' key={category}>{category.category}</div>
+                        <div className='category' key={category.id}>{category.category}</div>
                     ))}
                 </div>
             </div>

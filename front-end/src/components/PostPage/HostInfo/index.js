@@ -27,7 +27,6 @@ function HostInfo({post}) {
         }
     }
 
-
     return (
         <div className='info'>
             <div className='left-side'>

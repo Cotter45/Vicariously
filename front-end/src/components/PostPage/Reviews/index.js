@@ -4,14 +4,13 @@ import './reviews.css';
 
 function Reviews({post}) {
     const reviews = post.postReviews;
-    console.log(reviews)
 
     return (
         <div className='reviews-container'>
             <h2>🌟 {reviews.length} reviews</h2>
             {reviews.map(review => (
-                <>
-                    <div className='reviewer-info' key={review.User.id}>
+                <div key={review.id}>
+                    <div className='reviewer-info'>
                         <img className='reviewer-picture' src={review.User.profilePicture} alt='user'></img>
                         <div>
                             <h4>{review.User.username}</h4>
@@ -19,7 +18,7 @@ function Reviews({post}) {
                         </div>
                     </div>
                     <p>{review.review}</p>
-                </>
+                </div>
             ))}
         </div>
     )

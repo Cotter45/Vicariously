@@ -53,7 +53,7 @@
 }
 
 .disabled-date {
-    pointer-events: none;
+    /* pointer-events: none; */
     color: gray;
     background-color: gray;
 }
@@ -70,9 +70,9 @@
     background-color: yellow;
 }
 
-.booked-date {
+/* .booked-date {
     pointer-events: none;
-}
+} */
 .react-calendar__month-view__days__day.booked-date {
     background-color: lightgray;
 }

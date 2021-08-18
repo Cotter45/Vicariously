@@ -11,7 +11,7 @@ function ImageContainer({post}) {
             </div>
             <div className='secondary-images'>
                 {post.Images.map((image, index) => (
-                    <img key={index} src={image.imageUrl} alt='secondary'></img>
+                    <img key={image.id} src={image.imageUrl} alt='secondary'></img>
                 ))}
             </div>
         </div>

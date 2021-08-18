@@ -1,0 +1,26 @@
+{
+  "name": "vicariously",
+  "version": "1.0.0",
+  "description": "## This app is meant to be a clone of couchsurfing.com with a twist.",
+  "main": "index.js",
+  "scripts": {
+    "heroku-postbuild": "npm run build --prefix front-end",
+    "install": "npm --prefix back-end install back-end && npm --prefix front-end install front-end",
+    "dev:backend": "npm install --prefix back-end start",
+    "dev:frontend": "npm install --prefix front-end start",
+    "sequelize": "npm run --prefix back-end sequelize",
+    "sequelize-cli": "npm run --prefix back-end sequelize-cli",
+    "start": "npm start --prefix back-end"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cotter45/Vicariously.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cotter45/Vicariously/issues"
+  },
+  "homepage": "https://github.com/Cotter45/Vicariously#readme"
+}

@@ -1,6 +1,7 @@
 // front-end/src/components/SplashPage/index.js
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { getFeatures } from '../../store/posts';
 
@@ -8,6 +9,7 @@ import './splashpage.css'
 
 function SplashPage() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     // const user = useSelector(state => state.session.user);
     const posts = useSelector(state => state.posts.featuredPosts);
@@ -24,12 +26,17 @@ function SplashPage() {
         dispatch(getFeatures());
     }, [posts, dispatch])
 
+    const explore = () => {
+        history.push('/explore');
+    }
+
     return (
         <div className='main'>
             <div className='splash'>
                 <div className='splash-memo'>
                     <h3>No place like home?</h3>
                     <p>Vicariously was created for you to connect with <br></br> people wherever you are and experience what <br></br> home means for them.</p>
+                    <button className='category-buttons' onClick={explore}>Explore</button>
                 </div>
             </div>
             <div className='featured-posts'>

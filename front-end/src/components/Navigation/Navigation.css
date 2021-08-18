@@ -2,7 +2,7 @@
     color: red;
 }
 
-button > * {
+.nav-bar > button > * {
     pointer-events: none;
 }
 

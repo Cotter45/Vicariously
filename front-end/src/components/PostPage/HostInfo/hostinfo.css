@@ -52,10 +52,8 @@
     gap: 15px;
 }
 
-.disabled-date {
-    /* pointer-events: none; */
-    color: gray;
-    background-color: gray;
+.react-calendar__month-view__days > button > * {
+    pointer-events: all;
 }
 
 .react-calendar__month-view__days__day--neighboringMonth.disabled-date {
@@ -70,12 +68,24 @@
     background-color: yellow;
 }
 
-/* .booked-date {
-    pointer-events: none;
-} */
 .react-calendar__month-view__days__day.booked-date {
     background-color: lightgray;
 }
+
+.react-calendar__month-view__days_day {
+    pointer-events: all;
+}
+
+.disabled-date {
+    pointer-events: none;
+    color: gray;
+    background-color: gray;
+}
+
+.booked-date {
+    pointer-events: none;
+}
+
 
 
 .post-rules {

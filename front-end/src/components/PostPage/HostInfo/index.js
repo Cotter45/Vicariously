@@ -18,10 +18,10 @@ function HostInfo({post}) {
 
     const tileClassName = ({date, view}) => {
         if (view === 'month') {
-            if (date < new Date()) return 'disabled-date';
+            if (new Date(date) < new Date()) return 'disabled-date';
             for (let i = 0; i < bookingDates.length; i++) {
                 let bookedDate = bookingDates[i];
-                if (date >= new Date(bookedDate[0]) && date <= new Date(bookedDate[1])) return 'booked-date';
+                if (new Date(date) >= new Date(bookedDate[0]) && new Date(date) <= new Date(bookedDate[1])) return 'booked-date';
             }
             return;
         }
@@ -60,6 +60,7 @@ function HostInfo({post}) {
                     onChange={onChange}
                     value={value}
                     selectRange
+                    onClickDay={date => console.log(date)}
                     tileClassName={tileClassName}
                     />
                 <div className='selected-dates'>

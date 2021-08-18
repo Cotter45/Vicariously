@@ -25,7 +25,7 @@ function EditProfile({ username, setUsername, birthday, setBirthday, profilePict
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='modal-form' onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
@@ -33,24 +33,25 @@ function EditProfile({ username, setUsername, birthday, setBirthday, profilePict
       </ul>
       <label>
         Username
+      </label>
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-      </label>
       <label>
         Birthday
+      </label>
         <input
           type="date"
           value={birthday}
           onChange={(e) => setBirthday(e.target.value)}
           required
         />
-      </label>
       <label>
         Profile Picture
+      </label>
         <input
           type="text"
           value={profilePicture}
@@ -58,16 +59,15 @@ function EditProfile({ username, setUsername, birthday, setBirthday, profilePict
           required
         />
         <label>
-        Description
-        <input
+          Description
+        </label>
+        <textarea
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
-        />
-      </label>
-      </label>
-      <button type="submit">Make changes</button>
+        ></textarea>
+      <button className='edit-profile-button' type="submit">Make changes</button>
     </form>
   );
 }

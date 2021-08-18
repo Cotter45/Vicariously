@@ -34,6 +34,7 @@
 
 .post-card {
     width: 50vw;
+    min-height: 270px;
     height: 40vh;
     display: flex;
     gap: 15px;

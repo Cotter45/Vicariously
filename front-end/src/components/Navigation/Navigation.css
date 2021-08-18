@@ -1,5 +1,8 @@
 .active {
-    color: red;
+    color: white;
+    text-decoration: none;
+    font-family: 'Chalkduster, fantasy';
+    font-size: 40px;
 }
 
 .nav-bar > button > * {
@@ -25,11 +28,27 @@ button {
 }
 
 .message-button {
-    cursor: pointer;
+    cursor: pointer;;
+}
+
+.message-button > button {
+    height: 50px;
+    width: 50px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px gray;
 }
 
 .menu {
     padding-right: 10px;
+}
+
+.menu > button {
+    height: 50px;
+    width: 50px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px gray;
 }
 
 .menu-dropdown {
@@ -102,7 +121,7 @@ button {
     width: 20px;
     color: white;
     position: relative;
-    bottom: 10px;
+    bottom: 15px;
     right: -15px;
 }
 
@@ -121,7 +140,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 10px 0;
+    padding-bottom: 25px;
 }
 
 .left {
@@ -191,12 +210,13 @@ button {
 }
 
 #message {
-    position: absolute;
-    bottom: 10px;
+    position: fixed;
+    top: 300px;
     height: 25px;
+    width: 225px;
     border-width: 0;
     border-top: 1px solid gray;
-    width: 90%;
+    border-radius: 15px;
     padding: 0 10px;
     outline: none;
 }
@@ -209,4 +229,24 @@ button {
     display: flex;
     width: 100px;
     gap: 5px;
+}
+
+.green {
+    height: 15px;
+    width: 15px;
+    background-color: green;
+    justify-self: flex-end;
+    border-radius: 25px;
+    position: absolute;
+    right: 25px;
+}
+
+.red {
+    height: 15px;
+    width: 15px;
+    background-color: red;
+    justify-self: flex-end;
+    border-radius: 25px;
+    position: absolute;
+    right: 25px;
 }

@@ -105,6 +105,7 @@ function MessageButton({ user }) {
                         <img src={uniqueMessage.User.profilePicture} alt={'profile'}></img>
                         <h3>{uniqueMessage.User.username}</h3>
                         <p>{unreadMessages.filter(each => each.userTwoId === uniqueMessage.User.id).length} new</p>
+                        <div className={uniqueMessage.User.online ? 'green' : 'red'}></div>
                     </div>
                 ))}
             </div>

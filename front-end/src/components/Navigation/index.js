@@ -11,6 +11,8 @@ import './Navigation.css';
 import MessageButton from './Messages/MessageButton';
 import SearchBar from './Search/searchbar';
 
+
+{/* <i className="fas fa-home fa-2x"/> */}
 function Navigation({ isLoggedIn }){
   const sessionUser = useSelector(state => state.session.user);
 
@@ -33,7 +35,7 @@ function Navigation({ isLoggedIn }){
 
   return (
     <nav className='nav-bar'>
-        <NavLink exact to="/"><i className="fas fa-home fa-2x"/></NavLink>
+        <NavLink className='active' exact to="/">Vicariously</NavLink>
         <SearchBar />
         {isLoggedIn && sessionLinks}
     </nav>

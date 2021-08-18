@@ -24,11 +24,11 @@ function App() {
       <Navigation isLoggedIn={isLoggedIn} />
       {isLoggedIn && (
         <Switch>
-          <Route exact path='/'>
-            <SplashPage />
-          </Route>
           <Route path="/posts/:postId">
             <PostPage />
+          </Route>
+          <Route path='/'>
+            <SplashPage />
           </Route>
         </Switch>
       )}

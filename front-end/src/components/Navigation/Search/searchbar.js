@@ -72,6 +72,7 @@ function SearchBar() {
                     </div>
 
                 ))}
+                <p>Showing {searchResults ? searchResults.length : 0} results</p>
             </div>
         </>
     )

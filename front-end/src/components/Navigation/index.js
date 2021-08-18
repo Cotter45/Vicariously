@@ -12,7 +12,6 @@ import MessageButton from './Messages/MessageButton';
 import SearchBar from './Search/searchbar';
 
 
-{/* <i className="fas fa-home fa-2x"/> */}
 function Navigation({ isLoggedIn }){
   const sessionUser = useSelector(state => state.session.user);
 

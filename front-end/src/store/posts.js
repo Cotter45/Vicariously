@@ -6,6 +6,14 @@ import { sendMessage } from './messages';
 const SEARCH_POSTS = '/api/posts/search';
 const GET_POST = '/api/posts/:postId';
 const BOOK_POST = '/api/posts/book';
+const FEATURED_POSTS = '/api/posts/featured';
+
+const featured = (posts) => {
+    return {
+        type: FEATURED_POSTS,
+        payload: posts
+    }
+}
 
 const book = (dates) => {
     return {
@@ -26,6 +34,13 @@ const search = (searchResults) => {
         type: SEARCH_POSTS,
         payload: searchResults
     }
+}
+
+export const getFeatures = () => async (dispatch) => {
+    const fetch = await csrfFetch('/api/posts/');
+    const response = await fetch.json();
+    dispatch(featured(response));
+    return response;
 }
 
 export const bookPost = (dates, postId) => async (dispatch) => {
@@ -62,11 +77,14 @@ const initialState = { searchResults: null, posts: [] }
 const searchReducer = (state = initialState, action) => {
     let newState = { ...state };
     switch(action.type) {
+        case FEATURED_POSTS:
+            newState.featuredPosts = action.payload.posts;
+            return newState;
         case SEARCH_POSTS:
             newState.searchResults = action.payload;
             return newState;
         case GET_POST:
-            newState.posts = action.payload;
+            newState.posts[action.payload.post.id] = action.payload.post;
             return newState;
         case BOOK_POST:
             newState.bookings = action.payload;

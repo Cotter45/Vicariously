@@ -96,7 +96,7 @@ function MessageButton({ user }) {
             <button onClick={openMenu}>
                 <i className="far fa-envelope fa-2x"></i>
             </button>
-            <div className={unreadMessages ? 'new-messages' : null}></div>
+            <div className={unreadMessages.length ? 'new-messages' : null}></div>
         </div>
         {showMenu && showMessage === false && (
             <div className="message-dropdown">

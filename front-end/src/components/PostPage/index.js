@@ -1,5 +1,5 @@
 // front-end/src/components/PostPage/index.js
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 
@@ -15,23 +15,23 @@ function PostPage() {
     const { postId } = useParams();
     const dispatch = useDispatch();
 
-    const selectedPost = useSelector(state => state.posts.posts.post);
+    const post = useSelector(state => state.posts.posts[postId]);
 
     useEffect(() => {
-        if (selectedPost) return;
+        if (post) return;
 
         return dispatch(getPost(postId));
-    }, [dispatch, postId, selectedPost])
+    }, [dispatch, postId, post])
 
     return (
         <div className='post-page'>
-            <h2>{selectedPost && selectedPost.title}</h2>
-            {selectedPost && (
+            <h2>{post && post.title}</h2>
+            {post && (
                 <>
-                    <PostHead post={selectedPost} />
-                    <ImageContainer post={selectedPost} />
-                    <HostInfo post={selectedPost} />
-                    <Reviews post={selectedPost} />
+                    <PostHead post={post} />
+                    <ImageContainer post={post} />
+                    <HostInfo post={post} />
+                    <Reviews post={post} />
                 </>
             )}
         </div>

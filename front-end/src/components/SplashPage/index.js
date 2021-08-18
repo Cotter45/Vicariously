@@ -13,7 +13,6 @@ function SplashPage() {
 
     // const user = useSelector(state => state.session.user);
     const posts = useSelector(state => state.posts.featuredPosts);
-console.log(posts)
 
     const [cities, showCities] = useState(false);
     const [states, showStates] = useState(false);
@@ -31,6 +30,7 @@ console.log(posts)
         if (!showPost) return;
 
         history.push(`/posts/${showPost}`)
+        setShowPost(false);
     }, [history, showPost])
 
     const explore = () => {

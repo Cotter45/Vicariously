@@ -6,11 +6,13 @@ import thunk from "redux-thunk";
 import sessionReducer from './session';
 import messageReducer from './messages';
 import searchReducer from "./posts";
+import mapsReducer from "./maps";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   messages: messageReducer,
-  posts: searchReducer
+  posts: searchReducer,
+  maps: mapsReducer
 });
 
 let enhancer;

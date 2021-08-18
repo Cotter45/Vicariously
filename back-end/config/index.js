@@ -1,6 +1,7 @@
 module.exports = {
     environment: process.env.NODE_ENV || 'development',
     port: process.env.PORT || 5000,
+    googleMapsAPIKey: process.env.MAPS_API_KEY,
     db: {
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,

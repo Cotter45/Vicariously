@@ -10,7 +10,10 @@ function SplashPage() {
     return (
         <div className='main'>
             <div className='splash'>
-                <h2>hello</h2>
+                <div className='splash-memo'>
+                    <h3>Miss your neighbors?</h3>
+                    <p>Vicariously was created for you to connect with <br></br> people wherever you are.</p>
+                </div>
             </div>
         </div>
     )

@@ -26,10 +26,10 @@ function Navigation({ isLoggedIn }){
     );
   } else {
     sessionLinks = (
-      <>
+      <div className='logged-out'>
         <LoginFormModal />
         <SignupFormModal />
-      </>
+      </div>
     );
   }
 

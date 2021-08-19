@@ -1,8 +1,10 @@
 .post-head {
-    width: 100%;
+    width: 100% !important;
+    width: 100vw;
     display: flex;
     padding-top: 10px;
     gap: 10px;
+    border-bottom: 1px solid lightgray;
 }
 
 .description {
@@ -15,7 +17,7 @@
     align-items: flex-end;
     display: flex;
 }
-
+/* 
 .categories {
     display: flex;
-}
+} */

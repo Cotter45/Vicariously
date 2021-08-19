@@ -30,7 +30,7 @@ function ExplorePage() {
     return (
         <div className='explore-page'>
             <div className='explore-left'>
-                <h2>Featured Posts</h2>
+                <h1>Featured Posts</h1>
                 {posts && posts.map(post => (
                     <div key={post.id} onClick={() => visitPost(post.id)} className='post-card'>
                         <div className='post-card-image-container'>

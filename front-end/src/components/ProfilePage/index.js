@@ -46,6 +46,7 @@ function ProfilePage() {
         <div className='profile-page-container'>
             {user && (
                 <>
+                    <h1>{user.username}'s Profile</h1>
                     <div className='profile-container'>
                         <div className='user-left'>
                             <div className='post-card-image-container'>
@@ -77,7 +78,7 @@ function ProfilePage() {
                         </div>
                     </div>
                     <div className='listings-container'>
-                        <h2>{user.username}'s Listings</h2>
+                        <h1>{user.username}'s Listings</h1>
                         {user.posts.map(post => (
                             <div key={post.id} onClick={() => visitPost(post.id)} className='post-card'>
                             <div className='post-card-image-container'>

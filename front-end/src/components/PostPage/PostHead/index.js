@@ -8,7 +8,7 @@ function PostHead({post}) {
             <div className='left-head'>
                 <div className='reviews'>{post.PostReviews.length} Reviews  {post.avgRating}</div>
                 <div className='location'>{`📍 ${post.address} ${post.city}, ${post.state}`}</div>
-                <div className='categories'>
+                <div className='categories-post'>
                     {post.Categories.map(category => (
                         <div className='category' key={category.id}>{category.category}</div>
                     ))}

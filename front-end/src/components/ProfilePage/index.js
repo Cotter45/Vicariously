@@ -8,6 +8,7 @@ import MapContainer from '../Maps';
 import { getProfile } from '../../store/users';
 import EditProfileModal from './EditProfileModal';
 import DeleteProfileModal from './DeleteProfileModal';
+import Reviews from '../PostPage/Reviews';
 
 function ProfilePage() {
     const dispatch = useDispatch();
@@ -56,7 +57,10 @@ function ProfilePage() {
                                 <h3>{username}</h3>
                                 <h3>{user.UserReviews.length} reviews {user.avgUserRating}</h3>
                                 <p><b>Birthday</b> {new Date(birthday).toDateString()}</p>
-                                <p>{description}</p>
+                                <h3>Bio</h3>
+                                <div className='description'>
+                                    <p>{description}</p>
+                                </div>
                                 {sessionUser && sessionUser.id === user.id && (
                                     <div className='edit'>
                                         <EditProfileModal
@@ -80,25 +84,27 @@ function ProfilePage() {
                     <div className='listings-container'>
                         <h1>{user.username}'s Listings</h1>
                         {user.posts.map(post => (
-                            <div key={post.id} onClick={() => visitPost(post.id)} className='post-card'>
-                            <div className='post-card-image-container'>
-                                <img className='post-card-image' src={post.Images[0].imageUrl} alt='posting'></img>
-                            </div>
-                            <div className='post-card-info'>
-                                <div className='title'>
-                                    <h3>{post.title}</h3>
+                            <div key={post.id} onClick={() => visitPost(post.id)} className='listing-container'>
+                                <div className='post-card-image-container'>
+                                    <img className='post-card-image' src={post.Images[0].imageUrl} alt='posting'></img>
                                 </div>
-                                <div className='post-info'>
-                                    <p>{post.address} {post.city}, <b>{post.state} {post.country}</b> </p>
-                                    <p>{post.description}</p>
-                                    <p>{post.PostReviews.length} reviews</p>
-                                </div>
+                                <div className='post-card-info'>
+                                    <div className='title'>
+                                        <h3>{post.title}</h3>
+                                    </div>
+                                    <div className='post-info'>
+                                        <p>{post.address} {post.city}, <b>{post.state} {post.country}</b> </p>
+                                        <div className='description'>
+                                            <p>{post.description}</p>
+                                        </div>
+                                        <p>{post.PostReviews.length} reviews</p>
+                                    </div>
                             </div>
                         </div>
                         ))}
-                        <div className='explore-right'>
+                        {/* <div className='explore-right'>
                             <MapContainer />
-                        </div>
+                        </div> */}
                     </div>
                 </>
             )}

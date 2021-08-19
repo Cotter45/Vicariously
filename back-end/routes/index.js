@@ -23,12 +23,12 @@ if (process.env.NODE_ENV === 'production') {
     router.get('/', (req, res) => {
       res.cookie('XSRF-TOKEN', req.csrfToken());
       return res.sendFile(
-        path.resolve(__dirname, '../../front-end', 'build', 'index.html')
+        path.resolve(__dirname, '../../../front-end', 'build', 'index.html')
       );
     });
 
     // Serve the static assets in the front-end's build folder
-    router.use(express.static(path.resolve("../front-end/build")));
+    router.use(express.static(path.resolve("../../../front-end/build")));
 
     // Serve the front-end's index.html file at all other routes NOT starting with /api
     router.get(/^(?!\/?api).*/, (req, res) => {

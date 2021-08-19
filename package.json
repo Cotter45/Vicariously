@@ -6,8 +6,8 @@
   "scripts": {
     "heroku-postbuild": "npm run build --prefix front-end",
     "install": "npm --prefix back-end install back-end && npm --prefix front-end install front-end",
-    "dev:backend": "npm install --prefix back-end start",
-    "dev:frontend": "npm install --prefix front-end start",
+    "dev:back-end": "npm install --prefix back-end start",
+    "dev:front-end": "npm install --prefix front-end start",
     "sequelize": "npm run --prefix back-end sequelize",
     "sequelize-cli": "npm run --prefix back-end sequelize-cli",
     "start": "npm start --prefix back-end"

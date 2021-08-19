@@ -1,7 +1,7 @@
 // front-end/src/components/ExplorePage/index.js
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { getFeatures } from '../../store/posts';
 
@@ -17,6 +17,8 @@ function ExplorePage() {
 
     const posts = useSelector(state => state.posts.featuredPosts);
 
+    const [location, setLocation] = useState([])
+
     useEffect(() => {
         if (posts) return;
 
@@ -27,12 +29,23 @@ function ExplorePage() {
         history.push(`/posts/${postId}`)
     }
 
+    const showLocation = (post) => {
+        setLocation([{lat: +post.lat, lng: +post.lng}])
+    }
+
+    let timeout;
+
     return (
         <div className='explore-page'>
             <div className='explore-left'>
                 <h1>Featured Posts</h1>
+                <h4>Hover to see location (most are in the ocean because of faker)</h4>
                 {posts && posts.map(post => (
-                    <div key={post.id} onClick={() => visitPost(post.id)} className='post-card'>
+                    <div key={post.id}
+                            onMouseOver={() => timeout = setTimeout(() => showLocation(post), 500)}
+                            onMouseOut={() => timeout ? clearTimeout(timeout) : null}
+                            onClick={() => visitPost(post.id)}
+                            className='post-card'>
                         <div className='post-card-image-container'>
                             <img className='post-card-image' src={post.Images[0].imageUrl} alt='posting'></img>
                         </div>
@@ -50,7 +63,7 @@ function ExplorePage() {
                 ))}
             </div>
             <div className='explore-right'>
-                <MapContainer posts={posts} />
+                <MapContainer location={location} />
             </div>
         </div>
     )

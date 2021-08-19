@@ -7,6 +7,14 @@ const SEARCH_POSTS = '/api/posts/search';
 const GET_POST = '/api/posts/:postId';
 const BOOK_POST = '/api/posts/book';
 const FEATURED_POSTS = '/api/posts/featured';
+const CREATE_POST = '/api/posts/create';
+
+const create = (post) => {
+    return {
+        type: CREATE_POST,
+        payload: post
+    }
+}
 
 const featured = (posts) => {
     return {

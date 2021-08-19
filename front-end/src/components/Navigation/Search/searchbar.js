@@ -54,6 +54,7 @@ function SearchBar() {
             <form onSubmit={handleSearch}>
                 <input
                     placeholder='Search by location...'
+                    type='search'
                     className='search'
                     value={searchParams}
                     onChange={(e) => setSearchParams(e.target.value)}

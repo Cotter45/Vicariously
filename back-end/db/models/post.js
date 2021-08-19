@@ -1,4 +1,7 @@
 'use strict';
+
+const faker = require('faker');
+
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
     title: DataTypes.STRING,
@@ -6,8 +9,14 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     country: DataTypes.STRING,
-    lat: DataTypes.DECIMAL,
-    lng: DataTypes.DECIMAL,
+    lat: {
+      type: DataTypes.DECIMAL,
+      defaultValue: faker.address.latitude()
+    },
+    lng: {
+      type: DataTypes.DECIMAL,
+      defaultValue: faker.address.longitude()
+    },
     description: DataTypes.TEXT,
     hostId: DataTypes.INTEGER
   }, {});

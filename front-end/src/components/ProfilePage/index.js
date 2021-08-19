@@ -8,6 +8,7 @@ import { getProfile } from '../../store/users';
 import EditProfileModal from './EditProfileModal';
 import DeleteProfileModal from './DeleteProfileModal';
 import UserReviewModal from './UserReviewModal';
+import CreatePostModal from './CreatePostModal';
 
 function ProfilePage() {
     const dispatch = useDispatch();
@@ -95,6 +96,9 @@ function ProfilePage() {
                     </div>
                     <div className='listings-container'>
                         <h1>{user.username}'s Listings</h1>
+                        {sessionUser && sessionUser.id === user.id && (
+                            <CreatePostModal />
+                        )}
                         {user.posts.map(post => (
                             <div key={post.id} onClick={() => visitPost(post.id)} className='listing-container'>
                                 <div className='post-card-image-container'>
@@ -114,6 +118,21 @@ function ProfilePage() {
                             </div>
                         </div>
                         ))}
+                    </div>
+                    <div className='reviews-container'>
+                        <h2>🌟 {user.userReviews.length} reviews</h2>
+                        {user.userReviews.map(review => (
+                            <div key={review.id}>
+                                <div className='reviewer-info'>
+                                    <img className='reviewer-picture' src={review.User.profilePicture} alt='user'></img>
+                                    <div>
+                                        <h4>{review.User.username}</h4>
+                                        <p>{new Date(review.createdAt).toDateString()}</p>
+                                    </div>
+                                </div>
+                                <p>{review.review}</p>
+                            </div>
+                         ))}
                     </div>
                 </>
             )}

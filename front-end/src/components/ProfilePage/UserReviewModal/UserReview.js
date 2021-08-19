@@ -26,7 +26,7 @@ function UserReview({userId, userReviews, setUserReviews, setShowModal}) {
 
         setErrors([]);
         setShowModal(false);
-        // setUserReviews([...userReviews, newReview])
+        setUserReviews([...userReviews, newReview])
         return dispatch(reviewUser(userId, newReview))
     }
 

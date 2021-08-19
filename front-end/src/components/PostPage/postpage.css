@@ -7,3 +7,10 @@
     top: 10vh;
     left: 10vw;
 }
+
+.post-map {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding-top: 50px;
+}

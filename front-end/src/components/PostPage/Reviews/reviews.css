@@ -1,11 +1,15 @@
 .reviews-container {
-    width: 100%;
+    width: 80vw;
     border-bottom: 1px solid lightgray;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    flex-wrap: wrap;
     flex-direction: column;
-    gap: 25px;
-    padding: 50px;
-    padding-bottom: 200px;
+    grid-gap: 25px;
+    padding: 50px 0;
+    height: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .reviewer-info {

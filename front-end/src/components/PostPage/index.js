@@ -10,6 +10,7 @@ import PostHead from './PostHead';
 import Reviews from './Reviews';
 
 import './postpage.css';
+import MapContainer from '../Maps';
 
 function PostPage() {
     const { postId } = useParams();
@@ -17,11 +18,23 @@ function PostPage() {
 
     const post = useSelector(state => state.posts.posts[postId]);
 
+    const [location, setLocation] = useState(false);
+
     useEffect(() => {
         if (post) return;
 
         return dispatch(getPost(postId));
     }, [dispatch, postId, post])
+
+    useEffect(() => {
+        if (!post) return;
+        if (location) return;
+console.log('hey')
+        return setLocation([{
+            lat: +post.lat,
+            lng: +post.lng
+        }])
+    }, [post, location])
 
     return (
         <div className='post-page'>
@@ -32,6 +45,12 @@ function PostPage() {
                     <ImageContainer post={post} />
                     <HostInfo post={post} />
                     <Reviews post={post} />
+                    <div className='post-map'>
+                        <h2>Where you'll be</h2>
+                        {location && (
+                            <MapContainer location={location} />
+                        )}
+                    </div>
                 </>
             )}
         </div>

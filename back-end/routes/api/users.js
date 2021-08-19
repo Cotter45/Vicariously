@@ -52,7 +52,8 @@ router.get('/:userId', asyncHandler( async (req, res) => {
   const userReviews = await UserReview.findAll({
     where: {
       userId
-    }
+    },
+    include: User
   })
 
   const sum = userReviews.reduce((prev, curr) => prev + curr.rating, 0);
@@ -67,6 +68,7 @@ router.get('/:userId', asyncHandler( async (req, res) => {
 
   user.dataValues.avgUserRating = stars;
   user.dataValues.posts = posts;
+  user.dataValues.userReviews = userReviews;
 
   return res.json({ user })
 }))

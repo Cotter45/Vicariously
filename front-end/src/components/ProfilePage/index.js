@@ -84,7 +84,7 @@ function ProfilePage() {
                                     <div className='edit'>
                                         <UserReviewModal
                                             userId={user.id}
-                                            userReview={userReviews}
+                                            userReviews={userReviews}
                                             setUserReviews={setUserReviews} />
                                     </div>
                                 )}

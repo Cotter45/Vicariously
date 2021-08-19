@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Modal } from '../../context/Modal/Modal';
 import UserReview from './UserReview';
 
-function UserReviewModal({userId}) {
+function UserReviewModal({userId, userReviews, setUserReviews}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -14,6 +14,9 @@ function UserReviewModal({userId}) {
         <Modal onClose={() => setShowModal(false)}>
           <UserReview
             userId={userId}
+            userReviews={userReviews}
+            setUserReviews={setUserReviews}
+            setShowModal={setShowModal}
           />
         </Modal>
       )}

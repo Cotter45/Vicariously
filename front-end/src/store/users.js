@@ -4,6 +4,14 @@ import { csrfFetch } from './csrf';
 const GET_PROFILE = '/api/users/profile';
 const EDIT_PROFILE = '/api/users/edit';
 const DELETE_PROFILE = '/api/users/delete';
+const REVIEW_USER = '/api/users/review';
+
+const reviewMe = (review) => {
+    return {
+        type: REVIEW_USER,
+        payload: review.userReview
+    }
+}
 
 const deleteMe = () => {
     return {
@@ -24,6 +32,16 @@ const profile = ({user}) => {
         type: GET_PROFILE,
         payload: user
     }
+}
+
+export const reviewUser = (userId, review) => async (dispatch) => {
+    const fetch = await csrfFetch(`/api/users/${userId}/review`, {
+        method: 'POST',
+        body: JSON.stringify(review)
+    })
+    const response = await fetch.json();
+    dispatch(reviewMe(response));
+    return response;
 }
 
 export const deleteProfile = (userId) => async (dispatch) => {
@@ -52,13 +70,17 @@ export const getProfile = (userId) => async (dispatch) => {
     return response;
 }
 
-const initialState = { users: [] }
+const initialState = { users: [], myReviews: {} }
 
 const userReducer = (state = initialState, action) => {
     let newState = { ...state };
     switch(action.type) {
         case GET_PROFILE:
             newState.users = [ ...newState.users, action.payload]
+            return newState;
+        case REVIEW_USER:
+            const id = action.payload.id;
+            newState.myReviews[id] = action.payload;
             return newState;
         default:
             return state;

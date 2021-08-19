@@ -4,11 +4,10 @@ import { useParams, useHistory } from 'react-router';
 import { useEffect, useState } from 'react';
 
 import './profilepage.css';
-import MapContainer from '../Maps';
 import { getProfile } from '../../store/users';
 import EditProfileModal from './EditProfileModal';
 import DeleteProfileModal from './DeleteProfileModal';
-import Reviews from '../PostPage/Reviews';
+import UserReviewModal from './UserReviewModal';
 
 function ProfilePage() {
     const dispatch = useDispatch();
@@ -23,6 +22,7 @@ function ProfilePage() {
     const [birthday, setBirthday] = useState(user ? user.birthday : '');
     const [profilePicture, setProfilePicture] = useState(user ? user.profilePicture : '');
     const [description, setDescription] = useState(user ? user.description : '');
+    const [userReviews, setUserReviews] = useState(user ? user.UserReviews : '');
 
     useEffect(() => {
         if (user) return;
@@ -37,6 +37,7 @@ function ProfilePage() {
         setBirthday(user.birthday);
         setProfilePicture(user.profilePicture);
         setDescription(user.description);
+        setUserReviews(user.UserReviews);
     }, [user])
 
     const visitPost = (postId) => {
@@ -54,7 +55,10 @@ function ProfilePage() {
                                 <img className='post-card-image' src={profilePicture} alt='profile'></img>
                             </div>
                             <div className='post-card-info'>
-                                <h3>{username}</h3>
+                                <div className='username'>
+                                    <h3>{username}</h3>
+                                    <div className={user.online ? 'online' : 'offline' }></div>
+                                </div>
                                 <h3>{user.UserReviews.length} reviews {user.avgUserRating}</h3>
                                 <p><b>Birthday</b> {new Date(birthday).toDateString()}</p>
                                 <h3>Bio</h3>
@@ -64,16 +68,24 @@ function ProfilePage() {
                                 {sessionUser && sessionUser.id === user.id && (
                                     <div className='edit'>
                                         <EditProfileModal
-                                        username={username}
-                                        setUsername={setUsername}
-                                        birthday={birthday}
-                                        setBirthday={setBirthday}
-                                        profilePicture={profilePicture}
-                                        setProfilePicture={setProfilePicture}
-                                        description={description}
-                                        setDescription={setDescription}
+                                            username={username}
+                                            setUsername={setUsername}
+                                            birthday={birthday}
+                                            setBirthday={setBirthday}
+                                            profilePicture={profilePicture}
+                                            setProfilePicture={setProfilePicture}
+                                            description={description}
+                                            setDescription={setDescription}
                                         />
                                         <DeleteProfileModal userId={user.id}/>
+                                    </div>
+                                )}
+                                {sessionUser && sessionUser.id !== user.id && (
+                                    <div className='edit'>
+                                        <UserReviewModal
+                                            userId={user.id}
+                                            userReview={userReviews}
+                                            setUserReviews={setUserReviews} />
                                     </div>
                                 )}
                             </div>
@@ -102,9 +114,6 @@ function ProfilePage() {
                             </div>
                         </div>
                         ))}
-                        {/* <div className='explore-right'>
-                            <MapContainer />
-                        </div> */}
                     </div>
                 </>
             )}

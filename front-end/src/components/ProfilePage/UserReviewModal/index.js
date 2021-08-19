@@ -1,18 +1,18 @@
-// front-end/src/components/DeleteProfileModal/index.js
+// front-end/src/components/UserReviewModal/index.js
 import { useState } from 'react';
 
 import { Modal } from '../../context/Modal/Modal';
-import DeleteProfile from './DeleteProfile';
+import UserReview from './UserReview';
 
-function DeleteProfileModal({userId}) {
+function UserReviewModal({userId}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className='edit-profile' onClick={() => setShowModal(true)}>Delete</button>
+      <button className='edit-profile' onClick={() => setShowModal(true)}>Review</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <DeleteProfile
+          <UserReview
             userId={userId}
           />
         </Modal>
@@ -21,4 +21,4 @@ function DeleteProfileModal({userId}) {
   );
 }
 
-export default DeleteProfileModal;
+export default UserReviewModal;

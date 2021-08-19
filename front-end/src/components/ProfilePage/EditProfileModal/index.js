@@ -13,14 +13,14 @@ function EditProfileModal({ username, setUsername, birthday, setBirthday, profil
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditProfile
-          username={username}
-          setUsername={setUsername}
-          birthday={birthday}
-          setBirthday={setBirthday}
-          profilePicture={profilePicture}
-          setProfilePicture={setProfilePicture}
-          description={description}
-          setDescription={setDescription}
+            username={username}
+            setUsername={setUsername}
+            birthday={birthday}
+            setBirthday={setBirthday}
+            profilePicture={profilePicture}
+            setProfilePicture={setProfilePicture}
+            description={description}
+            setDescription={setDescription}
           />
         </Modal>
       )}

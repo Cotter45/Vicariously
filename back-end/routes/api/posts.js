@@ -25,9 +25,10 @@ router.get('/', asyncHandler( async (req, res) => {
 // Route to create new post
 router.post('/', validatePost, requireAuth, asyncHandler( async (req, res) => {
     const hostId = req.body.user.id;
-    const { address, city, state, country, lat, lng, description, imageUrl } = req.body;
+    const { title, address, city, state, country, lat, lng, description, imageUrl } = req.body;
 
     const newPost = await Post.create({
+        title,
         address,
         city,
         state,
@@ -38,12 +39,87 @@ router.post('/', validatePost, requireAuth, asyncHandler( async (req, res) => {
         hostId
     })
 
-    const newImage = await Image.create({
-        imageUrl,
-        postId: newPost.id
+    const post = await Post.findOne({
+        where: {
+            id: newPost.id
+        },
+        include: [ Category, Image, Booking, PostReview, User, PostRule ]
     })
 
-    return res.json({ newPost, newImage });
+    const newImage = await Image.create({
+        imageUrl,
+        postId: post.id
+    })
+
+    const postReviews = await PostReview.findAll({
+        where: {
+            postId: post.id
+        },
+        include: User
+    })
+
+    const userReviews = await UserReview.findAll({
+        where: {
+            id: post.hostId
+        },
+        include: User
+    })
+
+    const sum = postReviews.reduce((prev, curr) => prev + curr.rating, 0);
+    const avg = sum / postReviews.length;
+    let stars = '';
+    for (let i = 0; i < avg; i++) {
+        stars += '⭐️'
+    }
+    for (let i = stars.length; i < 7; i++) {
+        stars += '✭'
+    }
+    post.dataValues.avgRating = stars;
+
+    const secondSum = userReviews.reduce((prev, curr) => prev + curr.rating, 0);
+    const secondAvg = secondSum / userReviews.length;
+    let secondStars = '';
+    for (let i = 0; i < secondAvg; i++) {
+        secondStars += '⭐️'
+    }
+    for (let i = secondStars.length; i < 7; i++) {
+        secondStars += '✭'
+    }
+
+    post.dataValues.numUserRatings = userReviews.length;
+    post.dataValues.avgUserRating = secondStars;
+    post.dataValues.postReviews = postReviews;
+    post.dataValues.userReviews = userReviews;
+    post.dataValues.Images = newImage;
+
+    return res.json({ post });
+}))
+
+// Route to add images to a post
+router.post('/:postId/images', asyncHandler( async (req, res) => {
+    const postId = req.params.postId;
+    const { imageUrl } = req.body;
+
+    const newImage = await Image.create({
+        imageUrl,
+        postId
+    })
+
+    res.json({ message: 'success' });
+}))
+
+// Route to add rules to a post
+router.post('/:postId/rules', asyncHandler( async (req, res) => {
+    const postId = parseInt(req.params.postId, 10);
+    console.log(postId)
+    const { rule } = req.body;
+
+    const newRule = await PostRule.create({
+        rule,
+        postId
+    })
+
+    res.json({ message: 'success' })
 }))
 
 // Route to serve posts based on a city, state or country parameter

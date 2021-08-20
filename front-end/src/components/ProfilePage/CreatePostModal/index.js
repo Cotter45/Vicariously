@@ -6,7 +6,7 @@ import { Modal } from '../../context/Modal/Modal';
 import CreatePost from './CreatePost';
 
 
-function CreatePostModal({ username, setUsername, birthday, setBirthday, profilePicture, setProfilePicture, description, setDescription }) {
+function CreatePostModal() {
   const [showModal, setShowModal] = useState(false);
 
   return (

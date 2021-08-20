@@ -59,7 +59,7 @@ const Maps = ({ apiKey, location }) => {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={5}
+          zoom={7}
         >
           {markers && markers.map((location, index) => (
             <Marker

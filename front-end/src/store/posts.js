@@ -9,6 +9,7 @@ const BOOK_POST = '/api/posts/book';
 const FEATURED_POSTS = '/api/posts/featured';
 const CREATE_POST = '/api/posts/create';
 
+
 const create = (post) => {
     return {
         type: CREATE_POST,
@@ -42,6 +43,34 @@ const search = (searchResults) => {
         type: SEARCH_POSTS,
         payload: searchResults
     }
+}
+
+export const addRule = (rule, postId) => async (dispatch) => {
+    const fetch = await csrfFetch(`/api/posts/${postId}/rules`, {
+        method: 'POST',
+        body: JSON.stringify(rule)
+    })
+    const response = await fetch.json();
+    return response;
+}
+
+export const addImage = (imageUrl, postId) => async (dispatch) => {
+    const fetch = await csrfFetch(`/api/posts/${postId}/images`, {
+        method: 'POST',
+        body: JSON.stringify(imageUrl)
+    })
+    const response = await fetch.json();
+    return response;
+}
+
+export const createPost = (newPost) => async (dispatch) => {
+    const fetch = await csrfFetch('/api/posts/', {
+        method: 'POST',
+        body: JSON.stringify(newPost)
+    })
+    const response = await fetch.json();
+    dispatch(create(response));
+    return response;
 }
 
 export const getFeatures = () => async (dispatch) => {
@@ -80,7 +109,7 @@ export const searchPosts = (params) => async (dispatch) => {
     return response;
 }
 
-const initialState = { searchResults: null, posts: [] }
+const initialState = { searchResults: null, posts: [], newPost: null }
 
 const searchReducer = (state = initialState, action) => {
     let newState = { ...state };
@@ -97,6 +126,10 @@ const searchReducer = (state = initialState, action) => {
         case BOOK_POST:
             newState.bookings = action.payload;
             return newState;
+        case CREATE_POST:
+            newState.newPost = action.payload.post;
+            return newState;
+
         default:
             return state;
     }

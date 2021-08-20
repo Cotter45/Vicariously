@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router";
 
 import * as sessionActions from '../../../store/session';
+import CreatePostModal from "../../ProfilePage/CreatePostModal";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();

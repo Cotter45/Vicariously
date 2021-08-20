@@ -10,6 +10,7 @@ import SignupFormModal from '../SignupFormPage';
 import './Navigation.css';
 import MessageButton from './Messages/MessageButton';
 import SearchBar from './Search/searchbar';
+import CreatePostModal from '../ProfilePage/CreatePostModal';
 
 
 function Navigation({ isLoggedIn }){
@@ -21,6 +22,9 @@ function Navigation({ isLoggedIn }){
       <div className='nav-buttons'>
         <MessageButton user={sessionUser}/>
         <ProfileButton user={sessionUser} />
+        <div className='nav-modals'>
+          <CreatePostModal />
+        </div>
       </div>
     );
   } else {

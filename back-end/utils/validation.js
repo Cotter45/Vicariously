@@ -58,6 +58,11 @@ const validateSignup = [
 
 // validate a new posting
 const validatePost = [
+  check('title')
+    .exists({checkFalsy: true })
+    .withMessage('Please provide a title.')
+    .isLength({ min: 5, max: 100 })
+    .withMessage('Please keep title within 5 and 100 characters.'),
   check('address')
     .exists({ checkFalsy: true })
     .withMessage('Please provide an address.')
@@ -87,7 +92,7 @@ const validatePost = [
     .exists({ checkFalsy: true })
     .withMessage('Please provide an image URL.')
     .isURL()
-    .withMessage('Please provide a valid image URL.'),
+    .withMessage('Please provide a valid URL.'),
   handleValidationErrors,
 ];
 

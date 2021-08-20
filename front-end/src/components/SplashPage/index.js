@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { getFeatures } from '../../store/posts';
+import { getBookings } from '../../store/users';
+
+
 
 import './splashpage.css'
 
@@ -13,12 +16,24 @@ function SplashPage() {
 
     // const user = useSelector(state => state.session.user);
     const posts = useSelector(state => state.posts.featuredPosts);
+    const user = useSelector(state => state.session.user);
+    const bookings = useSelector(state => state.users.bookings);
+    const myStays = useSelector(state => state.users.myStays);
+
+    // console.log(myStays.length, bookings.length)
+    useEffect(() => {
+        if ((bookings && bookings.length) || (myStays && myStays.length)) return;
+        // if (!bookings.length) return;
+
+        return dispatch(getBookings(user.id));
+    }, [bookings, myStays, dispatch, user.id])
 
     const [cities, showCities] = useState(false);
     const [states, showStates] = useState(false);
     const [countries, showCountries] = useState(false);
     const [categories, showCategories] = useState(false);
     const [showPost, setShowPost] = useState(false);
+
 
     useEffect(() => {
         if (posts) return;

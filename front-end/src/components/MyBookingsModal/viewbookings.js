@@ -2,9 +2,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getBookings } from "../../store/users";
 
 import './bookings.css';
+import { getBookings } from "../../store/users";
+import { deletePost } from "../../store/users";
 
 function ViewBookings({ setShowModal }) {
     const dispatch = useDispatch();
@@ -14,22 +15,35 @@ function ViewBookings({ setShowModal }) {
     const bookings = useSelector(state => state.users.bookings);
     const myStays = useSelector(state => state.users.myStays);
 
+    const [bookings1, setBookings] = useState(bookings);
+    const [myStays1, setMyStays] = useState(myStays);
+
     useEffect(() => {
-        if (bookings.length || myStays.length) return;
+        if ((bookings && bookings.length) || (myStays && myStays.length)) return;
 
         return dispatch(getBookings(user.id));
-    })
+    }, [bookings, myStays, dispatch, user.id])
+
+
 
     const reRoute = (postId) => {
         history.push(`/posts/${postId}`)
         setShowModal(false);
     }
 
+    console.log(myStays1)
+    const removePost = (postId) => {
+        const post = myStays1.find(post => post.id === postId);
+        myStays1.splice(myStays.indexOf(post, 1));
+        setMyStays(myStays1)
+        dispatch(deletePost(postId))
+    }
+
     return (
         <div id='booking-container'>
             <div className='card-container' >
                 <h2>My Stays</h2>
-                    {bookings && bookings.map((booking, index) => (
+                    {bookings1 && bookings1.map((booking, index) => (
                         <div key={booking.id} onClick={e => reRoute(booking.Post.id)} id='booking'>
                             <div>
                                 <h4>{booking.Post.title}</h4>
@@ -53,11 +67,11 @@ function ViewBookings({ setShowModal }) {
             </div>
             <div className='card-container'>
                 <h2>My Listings</h2>
-                {myStays && myStays.map((stay, index) => (
-                    <>
+                {myStays1 && myStays1.map((stay, index) => (
+                    <div className='row'>
                         <div key={stay.id} onClick={e => reRoute(stay.id)} id='stay'>
                             <div id='stay-image'>
-                                <img src={stay.Images[0].imageUrl} alt='stay'></img>
+                                <img src={stay.Images.length && stay.Images[0].imageUrl} alt='stay'></img>
                             </div>
                             <div id='center'>
                                 <h4>{stay.title}</h4>
@@ -68,20 +82,15 @@ function ViewBookings({ setShowModal }) {
                                                 <button id='center-button'>Pending Confirmation</button>
                                             </>
                                         )}
-                                        {booking && (
-                                            <>
-                                                <button id='center-button'>View Bookings</button>
-                                            </>
-                                        )}
                                     </div>
                                 ))}
                             </div>
-                            <div className='buttons'>
-                                <button>Edit</button>
-                                <button>Delete</button>
-                            </div>
                         </div>
-                    </>
+                        <div className='buttons'>
+                            <button>Edit</button>
+                            <button onClick={e => removePost(stay.id)}>Delete</button>
+                        </div>
+                    </div>
                 ))}
             </div>
         </div>

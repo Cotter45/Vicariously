@@ -6,6 +6,8 @@ const EDIT_PROFILE = '/api/users/edit';
 const DELETE_PROFILE = '/api/users/delete';
 const REVIEW_USER = '/api/users/review';
 const GET_BOOKINGS = '/api/users/bookings';
+const MY_POSTS = '/api/users/myPosts';
+const DELETE_POST = '/api/posts/delete';
 
 const bookings = (bookings) => {
     return {
@@ -42,12 +44,42 @@ const profile = ({user}) => {
     }
 }
 
+const myPosts = ({ posts }) => {
+    console.log(posts)
+    return {
+        type: MY_POSTS,
+        payload: posts
+    }
+}
+
+const removePost = (postId) => {
+    return {
+        type: DELETE_POST,
+        payload: postId
+    }
+}
+
+export const deletePost = (postId) => async (dispatch) => {
+    const fetch = await csrfFetch(`/api/posts/${postId}`, {
+        method: 'DELETE'
+    })
+    const response = await fetch.json();
+    dispatch(removePost(postId));
+    return response;
+}
+
 export const getBookings = (userId) => async (dispatch) => {
     const fetch = await csrfFetch(`/api/users/${userId}/bookings`);
     const response = await fetch.json();
     if (response.message === 'None') {
+        console.log('none')
+        dispatch(myPosts(response))
+        return;
+    } else if (response.message === 'Nada') {
+        console.log('nada')
         return;
     } else {
+        console.log('both')
         dispatch(bookings(response));
         return response;
     }
@@ -101,9 +133,16 @@ const userReducer = (state = initialState, action) => {
             const id = action.payload.id;
             newState.myReviews[id] = action.payload;
             return newState;
+        case MY_POSTS:
+            newState.myStays = action.payload;
+            return newState;
         case GET_BOOKINGS:
             newState.bookings = action.payload.bookings;
             newState.myStays = action.payload.posts;
+            return newState;
+        case DELETE_POST:
+            const post = newState.myStays.find(post => post.id === action.payload);
+            newState.myStays.splice(newState.myStays.indexOf(post), 1);
             return newState;
         default:
             return state;

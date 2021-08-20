@@ -242,10 +242,12 @@ router.get('/:userId/bookings', requireAuth, asyncHandler( async (req, res) => {
     include: [Booking, User, Image]
   })
 
-  if (!bookings.length) {
-    return res.json({ message: 'None' })
+  if (bookings.length && posts.length) {
+    return res.json({ posts, bookings})
+  } else if (posts.length && !bookings.length) {
+      return res.json({ posts, message: 'None' })
   } else {
-    return res.json({ bookings, posts })
+      return res.json({ message: 'Nada' })
   }
 }))
 

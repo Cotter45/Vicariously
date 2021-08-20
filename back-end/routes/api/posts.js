@@ -6,7 +6,7 @@ const { Op } = require('sequelize');
 
 const { validatePost } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
-const { User, Post, Booking, Category, Image, PostReview, PostRule, UserMessage, UserReview } = require('../../db/models');
+const { User, Post, Booking, Category, Image, PostReview, PostRule, UserMessage, UserReview, PostCategory } = require('../../db/models');
 
 const router = express.Router();
 
@@ -405,20 +405,26 @@ router.put('/:postId/:bookingId', requireAuth, asyncHandler( async (req, res) =>
 // Route to delete a posting if owner of posting
 router.delete('/:postId', requireAuth, asyncHandler( async (req, res) => {
     const id = req.params.postId;
-    const hostId = req.body.user.id;
 
     const post = await Post.findOne({
         where: {
-            id,
-            hostId
+            id
         }
     })
 
-    if (post.hostId === hostId) {
-        await post.destroy();
-    }
+    const postCategories = await PostCategory.findAll({
+        where: {
+            postId: id
+        }
+    })
 
-    return res.json({ message: 'success' })
+    postCategories.forEach( async category => {
+        await category.destroy();
+    })
+
+    await post.destroy();
+
+    return res.json({ postId: id })
 }))
 
 // Route to delete a review if owner of review

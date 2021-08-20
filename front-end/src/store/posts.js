@@ -1,6 +1,7 @@
 // front-end/src/store/posts.js
 import { csrfFetch } from './csrf';
 import { sendMessage } from './messages';
+import { getBookings } from './users';
 
 
 const SEARCH_POSTS = '/api/posts/search';
@@ -8,7 +9,14 @@ const GET_POST = '/api/posts/:postId';
 const BOOK_POST = '/api/posts/book';
 const FEATURED_POSTS = '/api/posts/featured';
 const CREATE_POST = '/api/posts/create';
+// const DELETE_POST = '/api/posts/delete';
 
+// const removePost = (postId) => {
+//     return {
+//         type: DELETE_POST,
+//         payload: postId
+//     }
+// }
 
 const create = (post) => {
     return {
@@ -44,6 +52,15 @@ const search = (searchResults) => {
         payload: searchResults
     }
 }
+
+// export const deletePost = (postId) => async (dispatch) => {
+//     const fetch = await csrfFetch(`/api/posts/${postId}`, {
+//         method: 'DELETE'
+//     })
+//     const response = await fetch.json();
+//     dispatch(removePost(postId));
+//     return response;
+// }
 
 export const addRule = (rule, postId) => async (dispatch) => {
     const fetch = await csrfFetch(`/api/posts/${postId}/rules`, {
@@ -88,7 +105,8 @@ export const bookPost = (dates, postId) => async (dispatch) => {
 
     const response = await fetch.json();
     dispatch(book(response));
-    dispatch(sendMessage(response.newMessage))
+    dispatch(sendMessage(response.newMessage));
+    dispatch(getBookings(response.booking.guestId));
     return response;
 }
 
@@ -109,7 +127,7 @@ export const searchPosts = (params) => async (dispatch) => {
     return response;
 }
 
-const initialState = { searchResults: null, posts: [], newPost: null }
+const initialState = { searchResults: null, posts: {}, newPost: null }
 
 const searchReducer = (state = initialState, action) => {
     let newState = { ...state };
@@ -129,6 +147,9 @@ const searchReducer = (state = initialState, action) => {
         case CREATE_POST:
             newState.newPost = action.payload.post;
             return newState;
+        // case DELETE_POST:
+        //     if (newState.posts.posts[action.payload]) delete newState.posts.posts[action.payload];
+        //     return newState;
 
         default:
             return state;

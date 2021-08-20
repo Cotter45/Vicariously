@@ -1,4 +1,4 @@
-// front-end/src/components/Navigation/ProfileButton.js
+// front-end/src/components/Navigation/MenuButton.js
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router";
@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 import * as sessionActions from '../../../store/session';
 import CreatePostModal from "../../ProfilePage/CreatePostModal";
 
-function ProfileButton({ user }) {
+function MenuButton({ user }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -38,6 +38,8 @@ function ProfileButton({ user }) {
     history.push(`/profile/${user.id}`);
   }
 
+
+
   return (
     <>
       <div className='menu'>
@@ -64,4 +66,4 @@ function ProfileButton({ user }) {
   );
 }
 
-export default ProfileButton;
+export default MenuButton;

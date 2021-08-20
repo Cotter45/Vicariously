@@ -3,7 +3,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import ProfileButton from './Menu/MenuButton';
+import MenuButton from './Menu/MenuButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormPage';
 
@@ -21,7 +21,7 @@ function Navigation({ isLoggedIn }){
     sessionLinks = (
       <div className='nav-buttons'>
         <MessageButton user={sessionUser}/>
-        <ProfileButton user={sessionUser} />
+        <MenuButton user={sessionUser} />
         <div className='nav-modals'>
           <CreatePostModal />
         </div>

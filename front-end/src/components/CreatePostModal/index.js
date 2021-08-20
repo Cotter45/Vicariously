@@ -1,7 +1,7 @@
 // front-end/src/components/CreatePostModal/index.js
 import { useState } from 'react';
 
-import { Modal } from '../../context/Modal/Modal';
+import { Modal } from '../context/Modal/Modal';
 
 import CreatePost from './CreatePost';
 
@@ -10,14 +10,14 @@ function CreatePostModal() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <>
-      <button className='edit-profile' onClick={() => setShowModal(true)}>New Post</button>
+    <div className='message-button'>
+      <button onClick={() => setShowModal(true)}><i className="fas fa-plus fa-2x"/></button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <CreatePost setShowModal={setShowModal} />
         </Modal>
       )}
-    </>
+    </div>
   );
 }
 

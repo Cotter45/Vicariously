@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 
 const { handleValidationErrors, validateSignup } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, UserMessage, UserReview, Post, PostReview, Image, UserInterest } = require('../../db/models');
+const { User, UserMessage, UserReview, Post, PostReview, Image, UserInterest, Booking } = require('../../db/models');
 
 const router = express.Router();
 
@@ -222,6 +222,31 @@ router.delete('/:userId/reviews/:reviewId', requireAuth, asyncHandler( async (re
   await userReview.destroy();
 
   return res.json({ message: 'success' })
+}))
+
+// Route to get all of a users bookings
+router.get('/:userId/bookings', requireAuth, asyncHandler( async (req, res) => {
+  const guestId = req.params.userId;
+
+  const bookings = await Booking.findAll({
+    where: {
+      guestId
+    },
+    include: Post
+  })
+
+  const posts = await Post.findAll({
+    where: {
+      hostId: guestId
+    },
+    include: [Booking, User, Image]
+  })
+
+  if (!bookings.length) {
+    return res.json({ message: 'None' })
+  } else {
+    return res.json({ bookings, posts })
+  }
 }))
 
 

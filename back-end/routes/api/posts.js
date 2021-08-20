@@ -267,17 +267,17 @@ router.post('/:postId/bookings', requireAuth, asyncHandler( async (req, res) => 
     return res.json({ booking, newMessage });
 }))
 
-// Route to get all uncomfirmed bookings for a specific post
-router.get('/:postId/bookings', requireAuth, asyncHandler( async (req, res) => {
-    const postId = req.params.postId;
-    const bookings = await Booking.findAll({
-        where: {
-            postId,
-            confirmed: false
-        }
-    })
-    return res.json({ bookings });
-}))
+// // Route to get all uncomfirmed bookings for a specific post
+// router.get('/:postId/bookings', requireAuth, asyncHandler( async (req, res) => {
+//     const postId = req.params.postId;
+//     const bookings = await Booking.findAll({
+//         where: {
+//             postId,
+//             confirmed: false
+//         }
+//     })
+//     return res.json({ bookings });
+// }))
 
 
 // Route to confirm a booking

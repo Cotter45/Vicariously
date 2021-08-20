@@ -5,6 +5,14 @@ const GET_PROFILE = '/api/users/profile';
 const EDIT_PROFILE = '/api/users/edit';
 const DELETE_PROFILE = '/api/users/delete';
 const REVIEW_USER = '/api/users/review';
+const GET_BOOKINGS = '/api/users/bookings';
+
+const bookings = (bookings) => {
+    return {
+        type: GET_BOOKINGS,
+        payload: bookings
+    }
+}
 
 const reviewMe = (review) => {
     return {
@@ -31,6 +39,17 @@ const profile = ({user}) => {
     return {
         type: GET_PROFILE,
         payload: user
+    }
+}
+
+export const getBookings = (userId) => async (dispatch) => {
+    const fetch = await csrfFetch(`/api/users/${userId}/bookings`);
+    const response = await fetch.json();
+    if (response.message === 'None') {
+        return;
+    } else {
+        dispatch(bookings(response));
+        return response;
     }
 }
 
@@ -70,7 +89,7 @@ export const getProfile = (userId) => async (dispatch) => {
     return response;
 }
 
-const initialState = { users: [], myReviews: {} }
+const initialState = { users: [], myReviews: {}, bookings: [], myStays: [] }
 
 const userReducer = (state = initialState, action) => {
     let newState = { ...state };
@@ -81,6 +100,10 @@ const userReducer = (state = initialState, action) => {
         case REVIEW_USER:
             const id = action.payload.id;
             newState.myReviews[id] = action.payload;
+            return newState;
+        case GET_BOOKINGS:
+            newState.bookings = action.payload.bookings;
+            newState.myStays = action.payload.posts;
             return newState;
         default:
             return state;

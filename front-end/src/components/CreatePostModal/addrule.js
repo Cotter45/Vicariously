@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import './createpost.css';
-import { addRule } from "../../../store/posts";
+import { addRule } from "../../store/posts";
 
 
 function AddRule({ setAddRules, setShowModal, newPost }) {

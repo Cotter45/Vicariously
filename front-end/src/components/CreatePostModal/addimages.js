@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import './createpost.css';
-import { addImage } from "../../../store/posts";
+import { addImage } from "../../store/posts";
 
 function AddImage({ setAddRules, newPost, setAddImages, submitted, setSubmitted }) {
     const dispatch = useDispatch();;

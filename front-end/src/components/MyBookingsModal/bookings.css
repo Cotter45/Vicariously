@@ -1,0 +1,96 @@
+#booking-container {
+    height: 60vh;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card-container {
+    height: 100%;
+    width: 80vw;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#booking {
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px gray;
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100px;
+}
+
+#booking:hover {
+    cursor: pointer;
+}
+
+#dates {
+    display: flex;
+    gap: 10px;
+}
+
+#stay {
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px gray;
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 5px;
+    align-items: center;
+    height: 100px;
+}
+
+#stay:hover {
+    cursor: pointer;
+}
+
+#stay-image > img {
+    height: 80px;
+    width: 80px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.buttons button {
+    height: 25px;
+    width: 50px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px gray;
+    font-size: 15px;
+    color: white;
+    background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%) !important;
+}
+
+#center {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+#center-button {
+    height: 25px;
+    width: 150px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px gray;
+    font-size: 15px;
+    color: white;
+    background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%) !important;
+}

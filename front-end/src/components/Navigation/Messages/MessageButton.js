@@ -1,4 +1,4 @@
-// front-end/src/components/Navigation/MenuButton.js
+// front-end/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 

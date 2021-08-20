@@ -3,14 +3,15 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import MenuButton from './Menu/MenuButton';
+import ProfileButton from './Menu/ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormPage';
 
 import './Navigation.css';
 import MessageButton from './Messages/MessageButton';
 import SearchBar from './Search/searchbar';
-import CreatePostModal from '../ProfilePage/CreatePostModal';
+import CreatePostModal from '../CreatePostModal';
+import ViewBookingsModal from '../MyBookingsModal';
 
 
 function Navigation({ isLoggedIn }){
@@ -20,11 +21,10 @@ function Navigation({ isLoggedIn }){
   if (sessionUser) {
     sessionLinks = (
       <div className='nav-buttons'>
+        <CreatePostModal />
+        <ViewBookingsModal />
         <MessageButton user={sessionUser}/>
-        <MenuButton user={sessionUser} />
-        <div className='nav-modals'>
-          <CreatePostModal />
-        </div>
+        <ProfileButton user={sessionUser} />
       </div>
     );
   } else {

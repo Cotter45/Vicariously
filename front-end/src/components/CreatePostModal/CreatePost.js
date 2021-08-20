@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import './createpost.css';
-import { createPost } from "../../../store/posts";
+import { createPost } from "../../store/posts";
 import AddImage from "./addimages";
 import AddRule from "./addrule";
 

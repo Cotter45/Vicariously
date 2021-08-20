@@ -8,7 +8,7 @@ import { getProfile } from '../../store/users';
 import EditProfileModal from './EditProfileModal';
 import DeleteProfileModal from './DeleteProfileModal';
 import UserReviewModal from './UserReviewModal';
-import CreatePostModal from './CreatePostModal';
+import CreatePostModal from '../CreatePostModal';
 
 function ProfilePage() {
     const dispatch = useDispatch();
@@ -97,7 +97,10 @@ function ProfilePage() {
                     <div className='listings-container'>
                         <h1>{user.username}'s Listings</h1>
                         {sessionUser && sessionUser.id === user.id && (
-                            <CreatePostModal />
+                            <div className='new-post'>
+                                <h2>New</h2>
+                                <CreatePostModal />
+                            </div>
                         )}
                         {user.posts.map(post => (
                             <div key={post.id} onClick={() => visitPost(post.id)} className='listing-container'>

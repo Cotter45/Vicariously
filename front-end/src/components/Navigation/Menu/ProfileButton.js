@@ -1,12 +1,11 @@
-// front-end/src/components/Navigation/MenuButton.js
+// front-end/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router";
 
 import * as sessionActions from '../../../store/session';
-import CreatePostModal from "../../ProfilePage/CreatePostModal";
 
-function MenuButton({ user }) {
+function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -44,7 +43,7 @@ function MenuButton({ user }) {
     <>
       <div className='menu'>
         <button onClick={openMenu}>
-          <i className="fas fa-bars fa-2x" />
+          <i className="far fa-user-circle fa-2x" />
         </button>
       </div>
       {showMenu && (
@@ -66,4 +65,4 @@ function MenuButton({ user }) {
   );
 }
 
-export default MenuButton;
+export default ProfileButton;

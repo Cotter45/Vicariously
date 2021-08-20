@@ -22,7 +22,7 @@ function ExplorePage() {
     useEffect(() => {
         if (posts) return;
 
-        dispatch(getFeatures());
+        return dispatch(getFeatures());
     }, [posts, dispatch]);
 
     const visitPost = (postId) => {
@@ -42,7 +42,7 @@ function ExplorePage() {
                 <h4>Hover to see location (most are in the ocean because of faker)</h4>
                 {posts && posts.map(post => (
                     <div key={post.id}
-                            onMouseOver={() => timeout = setTimeout(() => showLocation(post), 500)}
+                            onMouseOver={() => timeout = setTimeout(() => showLocation(post), 100)}
                             onMouseOut={() => timeout ? clearTimeout(timeout) : null}
                             onClick={() => visitPost(post.id)}
                             className='post-card'>

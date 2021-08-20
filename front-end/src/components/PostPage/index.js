@@ -29,7 +29,7 @@ function PostPage() {
     useEffect(() => {
         if (!post) return;
         if (location) return;
-console.log('hey')
+        
         return setLocation([{
             lat: +post.lat,
             lng: +post.lng

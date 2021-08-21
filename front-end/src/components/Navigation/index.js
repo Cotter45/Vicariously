@@ -1,7 +1,7 @@
 // front-end/src/components/Navigation/index.js
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ProfileButton from './Menu/ProfileButton';
 import LoginFormModal from '../LoginFormModal';
@@ -12,10 +12,20 @@ import MessageButton from './Messages/MessageButton';
 import SearchBar from './Search/searchbar';
 import CreatePostModal from '../CreatePostModal';
 import ViewBookingsModal from '../MyBookingsModal';
+import { login } from '../../store/session';
 
 
 function Navigation({ isLoggedIn }){
   const sessionUser = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
+
+  const demo = async () => {
+    const user = {
+      credential: 'demo',
+      password: 'password'
+    }
+    await dispatch(login(user))
+  }
 
   let sessionLinks;
   if (sessionUser) {
@@ -30,6 +40,7 @@ function Navigation({ isLoggedIn }){
   } else {
     sessionLinks = (
       <div className='logged-out'>
+        <button onClick={demo}>Demo</button>
         <LoginFormModal />
         <SignupFormModal />
       </div>

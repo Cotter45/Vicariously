@@ -5,7 +5,6 @@ import { Redirect } from "react-router-dom";
 
 import * as sessionActions from "../../store/session";
 
-import './SignupFormPage.css';
 
 function SignupForm() {
   const dispatch = useDispatch();
@@ -51,74 +50,74 @@ function SignupForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='modal-form' id='create-post' onSubmit={handleSubmit}>
       <ul>
         {errors && errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>
         Email
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
       </label>
+      <input
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
       <label>
         Username
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
       </label>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
       <label>
         Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
       </label>
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
       <label>
         Confirm Password
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
       </label>
+      <input
+        type="password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        required
+      />
       <label>
         Birthday
-        <input
-          type="date"
-          value={birthday}
-          onChange={(e) => setBirthday(e.target.value)}
-          required
-        />
       </label>
+      <input
+        type="date"
+        value={birthday}
+        onChange={(e) => setBirthday(e.target.value)}
+        required
+      />
       <label>
         Profile Picture
-        <input
-          type="url"
-          value={profilePicture}
-          onChange={(e) => setProfilePicture(e.target.value)}
-          required
-        />
       </label>
+      <input
+        type="url"
+        value={profilePicture}
+        onChange={(e) => setProfilePicture(e.target.value)}
+        required
+      />
       <label>
         Description
-        <textarea
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        ></textarea>
       </label>
-      <button type="submit">Sign Up</button>
+      <textarea
+        type="text"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        required
+      ></textarea>
+      <button className='category-buttons' type="submit">Sign Up</button>
     </form>
   );
 }

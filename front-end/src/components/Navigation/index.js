@@ -13,7 +13,6 @@ import SearchBar from './Search/searchbar';
 import CreatePostModal from '../CreatePostModal';
 import ViewBookingsModal from '../MyBookingsModal';
 import { login } from '../../store/session';
-import DemoButton from '../DemoButton/demobutton';
 
 
 function Navigation({ isLoggedIn }){
@@ -42,8 +41,7 @@ function Navigation({ isLoggedIn }){
   } else {
     sessionLinks = (
       <div className='logged-out'>
-        {/* <button onClick={demo}>Demo</button> */}
-        <DemoButton />
+        <button onClick={demo}>Demo</button>
         <LoginFormModal />
         <SignupFormModal />
       </div>

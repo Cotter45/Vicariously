@@ -19,7 +19,8 @@ function Navigation({ isLoggedIn }){
   const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-  const demo = async () => {
+  const demo = async (e) => {
+    e.preventDefault();
     const user = {
       credential: 'demo',
       password: 'password'
@@ -40,7 +41,9 @@ function Navigation({ isLoggedIn }){
   } else {
     sessionLinks = (
       <div className='logged-out'>
-        <button onClick={demo}>Demo</button>
+        <form onSubmit={(e) => demo(e)}>
+          <button>Demo</button>
+        </form>
         <LoginFormModal />
         <SignupFormModal />
       </div>

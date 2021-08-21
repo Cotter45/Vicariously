@@ -19,12 +19,14 @@ function Navigation({ isLoggedIn }){
   const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  const user = {
+    credential: 'demo',
+    password: 'password'
+  }
+
   const demo = async (e) => {
     e.preventDefault();
-    const user = {
-      credential: 'demo',
-      password: 'password'
-    }
+
     await dispatch(login(user))
   }
 

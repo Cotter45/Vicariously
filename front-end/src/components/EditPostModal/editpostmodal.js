@@ -39,7 +39,6 @@ function EditPost({ setShowModal, post, setEdit, setUpdate }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let err = [];
 
         let newPost = {
             title,

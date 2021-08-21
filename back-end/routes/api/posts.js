@@ -380,9 +380,8 @@ router.put('/:postId/reviews/:reviewId', requireAuth, asyncHandler( async (req, 
 }))
 
 // Route to update a booking if guest / change dates
-router.put('/:postId/:bookingId', requireAuth, asyncHandler( async (req, res) => {
+router.put('/bookings/:bookingId', requireAuth, asyncHandler( async (req, res) => {
     const id = req.params.bookingId;
-    const guestId = req.body.user.id;
     const { startDate, endDate } = req.body;
 
     const booking = await Booking.findOne({
@@ -392,13 +391,11 @@ router.put('/:postId/:bookingId', requireAuth, asyncHandler( async (req, res) =>
         include: [ Post, User ]
     });
 
-    if (booking.guestId === guestId) {
-        await booking.update({
-            startDate,
-            endDate,
-            confirmed: false
-        })
-    }
+    await booking.update({
+        startDate,
+        endDate,
+        confirmed: false
+    })
 
     const newMessage = await UserMessage.create({
         message: `${req.body.user.username} would like to change their reservation`,

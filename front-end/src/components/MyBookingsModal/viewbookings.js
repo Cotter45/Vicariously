@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import './bookings.css';
 import { getBookings, deletePost, cancelBooking } from "../../store/users";
 import EditPost from "../PostPage/EditPostModal/editpostmodal";
+import EditReservation from "../ReservationModal/EditBooking";
 
 function ViewBookings({ setShowModal }) {
     const dispatch = useDispatch();
@@ -17,10 +18,14 @@ function ViewBookings({ setShowModal }) {
 
     const [reservations, setReservations] = useState(bookings);
     const [myListings, setMyListings] = useState(myStays);
+    const [stay, setStay] = useState([]);
+    const [booking, setBooking] = useState([]);
+
+
     const [change, setChange] = useState(false);
     const [edit, setEdit] = useState(false);
-    const [stay, setStay] = useState([]);
     const [update, setUpdate] = useState(false);
+    const [editBooking, setEditBooking] = useState(false);
 
     useEffect(() => {
         if (!reservations.length && !myListings.length) {
@@ -66,15 +71,20 @@ function ViewBookings({ setShowModal }) {
         setChange(true);
     }
 
+    const changeBooking = async (booking) => {
+        setBooking(booking);
+        setEditBooking(true);
+    }
+
     return (
         <>
-        {!edit && (
+        {!edit && !editBooking && (
             <div id='booking-container'>
                 <div className='card-container' >
                     <h2>My Stays</h2>
                         {!change && reservations && reservations.map((booking, index) => (
-                            <div className='row'>
-                                <div key={booking.id} onClick={e => reRoute(booking.Post.id)} id='booking'>
+                            <div key={booking.id} className='row'>
+                                <div onClick={e => reRoute(booking.Post.id)} id='booking'>
                                     <div>
                                         <h4>{booking.Post.title}</h4>
                                     </div>
@@ -90,7 +100,7 @@ function ViewBookings({ setShowModal }) {
                                     </div>
                                 </div>
                                 <div className='buttons'>
-                                    <button>Update</button>
+                                    <button onClick={() => changeBooking(booking)}>Update</button>
                                     <button onClick={() => cancel(booking.id, user.username)}>Cancel</button>
                                 </div>
                             </div>
@@ -126,8 +136,11 @@ function ViewBookings({ setShowModal }) {
                 </div>
             </div>
         )}
-        {edit && (
+        {edit && !editBooking && (
             <EditPost setUpdate={setUpdate} setEdit={setEdit} post={stay} />
+        )}
+        {editBooking && !edit && (
+            <EditReservation setUpdate={setUpdate} setEditBooking={setEditBooking} booking={booking} />
         )}
     </>
     )

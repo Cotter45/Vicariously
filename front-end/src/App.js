@@ -36,7 +36,7 @@ function App() {
             <ProfilePage />
           </Route>
           <Route path='/'>
-            <SplashPage />
+            {/* <SplashPage /> */}
           </Route>
         </Switch>
       )}

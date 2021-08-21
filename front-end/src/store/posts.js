@@ -69,14 +69,14 @@ export const createPost = (newPost) => async (dispatch) => {
         body: JSON.stringify(newPost)
     })
     const response = await fetch.json();
-    dispatch(create(response));
+    await dispatch(create(response));
     return response;
 }
 
 export const getFeatures = () => async (dispatch) => {
     const fetch = await csrfFetch('/api/posts/');
     const response = await fetch.json();
-    dispatch(featured(response));
+    await dispatch(featured(response));
     return response;
 }
 
@@ -87,9 +87,9 @@ export const bookPost = (dates, postId) => async (dispatch) => {
     })
 
     const response = await fetch.json();
-    dispatch(book(response));
-    dispatch(sendMessage(response.newMessage));
-    dispatch(getBookings(response.booking.guestId));
+    await dispatch(book(response));
+    await dispatch(sendMessage(response.newMessage));
+    await dispatch(getBookings(response.booking.guestId));
     return response;
 }
 
@@ -97,7 +97,7 @@ export const getPost = (postId) => async (dispatch) => {
     const fetch = await csrfFetch(`/api/posts/${postId}`);
 
     const response = await fetch.json();
-    dispatch(post(response))
+    await dispatch(post(response))
     return response;
 }
 
@@ -106,7 +106,7 @@ export const searchPosts = (params) => async (dispatch) => {
     const fetch = await csrfFetch(`/api/posts/search/${params}`);
 
     const response = await fetch.json();
-    dispatch(search(response.results));
+    await dispatch(search(response.results));
     return response;
 }
 
@@ -125,7 +125,8 @@ const searchReducer = (state = initialState, action) => {
             newState.posts[action.payload.post.id] = action.payload.post;
             return newState;
         case BOOK_POST:
-            newState.bookings = action.payload;
+            // console.log('book post', action.payload.booking)
+            newState.bookings = action.payload.booking;
             return newState;
         case CREATE_POST:
             newState.newPost = action.payload.post;

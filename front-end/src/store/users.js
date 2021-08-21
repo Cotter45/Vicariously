@@ -82,8 +82,8 @@ export const cancelBooking = (bookingId, username) => async (dispatch) => {
         body: JSON.stringify({username})
     })
     const response = await fetch.json();
-    dispatch(sendMessage(response.newMessage));
-    dispatch(cancel(response));
+    await dispatch(sendMessage(response.newMessage));
+    await dispatch(cancel({bookingId}));
     return response;
 }
 
@@ -102,7 +102,7 @@ export const deletePost = (postId) => async (dispatch) => {
         method: 'DELETE'
     })
     const response = await fetch.json();
-    dispatch(removePost(postId));
+    await dispatch(removePost(postId));
     return response;
 }
 
@@ -110,12 +110,12 @@ export const getBookings = (userId) => async (dispatch) => {
     const fetch = await csrfFetch(`/api/users/${userId}/bookings`);
     const response = await fetch.json();
     if (response.message === 'None') {
-        dispatch(myPosts(response))
+        await dispatch(myPosts(response))
         return;
     } else if (response.message === 'Nada') {
         return;
     } else {
-        dispatch(bookings(response));
+        await dispatch(bookings(response));
         return response;
     }
 }
@@ -145,14 +145,14 @@ export const editProfile = (edits, userId) => async (dispatch) => {
         body: JSON.stringify(edits)
     });
     const response = await fetch.json();
-    dispatch(edit(response));
+    await dispatch(edit(response));
     return response;
 }
 
 export const getProfile = (userId) => async (dispatch) => {
     const fetch = await csrfFetch(`/api/users/${userId}`);
     const response = await fetch.json();
-    dispatch(profile(response));
+    await dispatch(profile(response));
     return response;
 }
 
@@ -184,7 +184,6 @@ const userReducer = (state = initialState, action) => {
             newState.myStays.splice(newState.myStays.indexOf(postToUpdate), 1, action.payload);
             return newState;
         case CANCEL_BOOKING:
-            console.log(action.payload)
             const booking = newState.bookings.find(booking => booking.id === action.payload);
             newState.bookings.splice(newState.bookings.indexOf(booking), 1);
             return newState;

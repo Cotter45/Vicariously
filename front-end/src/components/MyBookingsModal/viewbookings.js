@@ -51,6 +51,15 @@ function ViewBookings({ setShowModal }) {
         return setUpdate(false);
     }, [bookings, myStays, update])
 
+    // useEffect(() => {
+    //     if (!editBooking) return;
+
+    //     setReservations(bookings);
+    //     setMyListings(myStays);
+
+    //     return setEditBooking(false);
+    // }, [bookings, editBooking, myStays])
+
     const reRoute = (postId) => {
         history.push(`/posts/${postId}`)
         setShowModal(false);
@@ -78,11 +87,11 @@ function ViewBookings({ setShowModal }) {
 
     return (
         <>
-        {!edit && !editBooking && (
+        {!edit && !editBooking && !update && (
             <div id='booking-container'>
                 <div className='card-container' >
                     <h2>My Stays</h2>
-                        {!change && reservations && reservations.map((booking, index) => (
+                        {!update && reservations && reservations.map((booking, index) => (
                             <div key={booking.id} className='row'>
                                 <div onClick={e => reRoute(booking.Post.id)} id='booking'>
                                     <div>

@@ -67,6 +67,10 @@
     background-color: lightgray;
 }
 
+.react-calendar__month-view__days__day.my-dates {
+    background-color: lightblue;
+}
+
 .react-calendar__month-view__days__day.react-calendar__tile--now.disabled-date {
     background-color: yellow;
 }
@@ -124,7 +128,7 @@
 
 .book {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     /* padding: 15px; */
     width: 100%;
     justify-content: center;

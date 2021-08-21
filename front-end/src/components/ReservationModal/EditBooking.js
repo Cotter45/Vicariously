@@ -15,6 +15,7 @@ function EditReservation({ setUpdate, setEditBooking, booking }) {
 
     const [date, setDate] = useState();
     const [bookingDates, setBookingDates] = useState([]);
+    const [cancelled, setCancelled] = useState(false);
 
     useEffect(() => {
         if (post) return;
@@ -43,6 +44,7 @@ function EditReservation({ setUpdate, setEditBooking, booking }) {
             for (let i = 0; i < bookingDates.length; i++) {
                 let bookedDate = bookingDates[i];
                 if (new Date(date) >= new Date(bookedDate[0]) && new Date(date) <= new Date(bookedDate[1])) return 'booked-date';
+                if (new Date(date) >= new Date(booking.startDate) && new Date(date) <= new Date(booking.endDate)) return 'my-dates';
             }
             return;
         }
@@ -56,15 +58,16 @@ function EditReservation({ setUpdate, setEditBooking, booking }) {
             endDate: date[1].toDateString(),
             user
         }
-
-        await dispatch(bookPost(dates, post.id));
         await dispatch(cancelBooking(booking.id, user.username));
+        await dispatch(bookPost(dates, post.id));
         setUpdate(true);
         setEditBooking(false);
     }
 
-    const cancelUpdate = () => {
+    const cancelUpdate = async () => {
+        await dispatch(cancelBooking(booking.id, user.username))
         setUpdate(true);
+        setCancelled(true);
         setEditBooking(false);
     }
 
@@ -85,14 +88,20 @@ function EditReservation({ setUpdate, setEditBooking, booking }) {
                             <div className='start'>
                                 <h3>Start</h3>
                                 <div>
+                                    {! date && (
+                                        <p>Current date: {new Date(booking.startDate).toDateString()}</p>
+                                    )}
                                     {date && (
-                                        <p>{date[0].toDateString()}</p>
+                                        <p>New Date: {date[0].toDateString()}</p>
                                     )}
                                 </div>
                             </div>
                             <div className='end'>
                                 <h3>End</h3>
                                 <div>
+                                {! date && (
+                                        <p>Current date: {new Date(booking.endDate).toDateString()}</p>
+                                    )}
                                     {date && (
                                         <p>{date[1].toDateString()}</p>
                                     )}

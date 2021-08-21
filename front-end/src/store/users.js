@@ -1,4 +1,5 @@
 // front-end/src/store/users.js
+import EditPost from '../components/PostPage/EditPostModal/editpostmodal';
 import { csrfFetch } from './csrf';
 
 const GET_PROFILE = '/api/users/profile';
@@ -8,6 +9,14 @@ const REVIEW_USER = '/api/users/review';
 const GET_BOOKINGS = '/api/users/bookings';
 const MY_POSTS = '/api/users/myPosts';
 const DELETE_POST = '/api/posts/delete';
+const EDIT_POST = '/api/posts/edit';
+
+const postEdit = ({ newPost }) => {
+    return {
+        type: EDIT_POST,
+        payload: newPost
+    }
+}
 
 const bookings = (bookings) => {
     return {
@@ -56,6 +65,16 @@ const removePost = (postId) => {
         type: DELETE_POST,
         payload: postId
     }
+}
+
+export const editPost = (post, postId) => async (dispatch) => {
+    const fetch = await csrfFetch(`/api/posts/${postId}`, {
+        method: 'PUT',
+        body: JSON.stringify(post)
+    })
+    const response = await fetch.json();
+    dispatch(postEdit(response));
+    return response;
 }
 
 export const deletePost = (postId) => async (dispatch) => {
@@ -139,6 +158,10 @@ const userReducer = (state = initialState, action) => {
         case DELETE_POST:
             const post = newState.myStays.find(post => post.id === action.payload);
             newState.myStays.splice(newState.myStays.indexOf(post), 1);
+            return newState;
+        case EDIT_POST:
+            const postToUpdate = newState.myStays.find(post => post.id === action.payload.id);
+            newState.myStays.splice(newState.myStays.indexOf(postToUpdate), 1, action.payload);
             return newState;
         default:
             return state;

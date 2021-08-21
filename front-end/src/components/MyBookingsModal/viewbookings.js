@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import './bookings.css';
 import { getBookings } from "../../store/users";
 import { deletePost } from "../../store/users";
-import EditPostModal from "../PostPage/index";
 import EditPost from "../PostPage/EditPostModal/editpostmodal";
 
 function ViewBookings({ setShowModal }) {
@@ -22,9 +21,10 @@ function ViewBookings({ setShowModal }) {
     const [change, setChange] = useState(false);
     const [edit, setEdit] = useState(false);
     const [stay, setStay] = useState([]);
+    const [update, setUpdate] = useState(false);
 
     useEffect(() => {
-        if (!reservations || !myListings) {
+        if (!reservations.length || !myListings.length) {
             dispatch(getBookings(user.id))
             setReservations(bookings);
             setMyListings(myStays)
@@ -33,9 +33,19 @@ function ViewBookings({ setShowModal }) {
 
     useEffect(() => {
         if (!change) return;
+        setReservations(bookings);
+        setMyListings(myStays);
 
         return setChange(false);
-    }, [change, dispatch, user.id])
+    }, [bookings, change, dispatch, myStays, user.id])
+
+    useEffect(() => {
+        if (!update) return;
+        setReservations(bookings);
+        setMyListings(myStays);
+
+        return setUpdate(false);
+    }, [bookings, myStays, update])
 
     const reRoute = (postId) => {
         history.push(`/posts/${postId}`)
@@ -55,7 +65,6 @@ function ViewBookings({ setShowModal }) {
     return (
         <>
         {!edit && (
-
             <div id='booking-container'>
                 <div className='card-container' >
                     <h2>My Stays</h2>
@@ -112,7 +121,7 @@ function ViewBookings({ setShowModal }) {
             </div>
         )}
         {edit && (
-            <EditPost setEdit={setEdit} post={stay} />
+            <EditPost setUpdate={setUpdate} setEdit={setEdit} post={stay} />
         )}
     </>
     )

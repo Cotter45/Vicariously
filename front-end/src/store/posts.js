@@ -9,14 +9,6 @@ const GET_POST = '/api/posts/:postId';
 const BOOK_POST = '/api/posts/book';
 const FEATURED_POSTS = '/api/posts/featured';
 const CREATE_POST = '/api/posts/create';
-// const DELETE_POST = '/api/posts/delete';
-
-// const removePost = (postId) => {
-//     return {
-//         type: DELETE_POST,
-//         payload: postId
-//     }
-// }
 
 const create = (post) => {
     return {
@@ -52,15 +44,6 @@ const search = (searchResults) => {
         payload: searchResults
     }
 }
-
-// export const deletePost = (postId) => async (dispatch) => {
-//     const fetch = await csrfFetch(`/api/posts/${postId}`, {
-//         method: 'DELETE'
-//     })
-//     const response = await fetch.json();
-//     dispatch(removePost(postId));
-//     return response;
-// }
 
 export const addRule = (rule, postId) => async (dispatch) => {
     const fetch = await csrfFetch(`/api/posts/${postId}/rules`, {

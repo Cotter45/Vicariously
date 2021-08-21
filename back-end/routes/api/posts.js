@@ -324,7 +324,7 @@ router.post('/:postId/review', requireAuth, asyncHandler( async (req, res) => {
 // Route to edit a post
 router.put('/:postId', requireAuth, asyncHandler( async (req, res) => {
     const postId = req.params.postId;
-    const { address, city, state, country, lat, lng, description } = req.body;
+    const { title, address, city, state, country, lat, lng, description } = req.body;
     const hostId = req.body.user.id;
 
     const post = await Post.findOne({
@@ -334,6 +334,7 @@ router.put('/:postId', requireAuth, asyncHandler( async (req, res) => {
     })
 
     const edit = await post.update({
+        title,
         address,
         city,
         state,
@@ -344,7 +345,14 @@ router.put('/:postId', requireAuth, asyncHandler( async (req, res) => {
         hostId
     })
 
-    return res.json({ edit })
+    const newPost = await Post.findOne({
+        where: {
+            id: postId
+        },
+        include: [Booking, User, Image]
+    })
+
+    return res.json({ newPost })
 }))
 
 // Route to edit a posts reviews

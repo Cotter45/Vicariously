@@ -20,10 +20,8 @@ function SplashPage() {
     const bookings = useSelector(state => state.users.bookings);
     const myStays = useSelector(state => state.users.myStays);
 
-    // console.log(myStays.length, bookings.length)
     useEffect(() => {
         if ((bookings && bookings.length) || (myStays && myStays.length)) return;
-        // if (!bookings.length) return;
 
         return dispatch(getBookings(user.id));
     }, [bookings, myStays, dispatch, user.id])

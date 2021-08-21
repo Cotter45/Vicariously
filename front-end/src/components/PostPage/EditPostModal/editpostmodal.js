@@ -1,9 +1,10 @@
 // front-end/src/components/CreatePost/CreatePost.js
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { editPost } from "../../../store/users";
 
 
-function EditPost({ setShowModal, post, setEdit }) {
+function EditPost({ setShowModal, post, setEdit, setUpdate }) {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.session.user);
@@ -36,7 +37,7 @@ function EditPost({ setShowModal, post, setEdit }) {
         setErrors(errs);
     }, [address, city, country, description, imageUrl, state, title.length])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         let err = [];
 
@@ -52,6 +53,10 @@ function EditPost({ setShowModal, post, setEdit }) {
             imageUrl,
             hostId: user.id
         }
+
+        await dispatch(editPost(newPost, post.id));
+        setUpdate(true);
+        setEdit(false);
     }
 
   return (

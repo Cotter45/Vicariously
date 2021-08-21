@@ -48,7 +48,7 @@ function ProfilePage() {
     return (
         <div className='profile-page-container'>
             {user && (
-                <>
+                <div id='profile'>
                     <h1>{user.username}'s Profile</h1>
                     <div className='profile-container'>
                         <div className='user-left'>
@@ -137,7 +137,7 @@ function ProfilePage() {
                             </div>
                          ))}
                     </div>
-                </>
+                </div>
             )}
         </div>
     )

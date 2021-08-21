@@ -147,10 +147,6 @@ const searchReducer = (state = initialState, action) => {
         case CREATE_POST:
             newState.newPost = action.payload.post;
             return newState;
-        // case DELETE_POST:
-        //     if (newState.posts.posts[action.payload]) delete newState.posts.posts[action.payload];
-        //     return newState;
-
         default:
             return state;
     }

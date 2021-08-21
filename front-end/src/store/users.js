@@ -45,7 +45,6 @@ const profile = ({user}) => {
 }
 
 const myPosts = ({ posts }) => {
-    console.log(posts)
     return {
         type: MY_POSTS,
         payload: posts
@@ -72,14 +71,11 @@ export const getBookings = (userId) => async (dispatch) => {
     const fetch = await csrfFetch(`/api/users/${userId}/bookings`);
     const response = await fetch.json();
     if (response.message === 'None') {
-        console.log('none')
         dispatch(myPosts(response))
         return;
     } else if (response.message === 'Nada') {
-        console.log('nada')
         return;
     } else {
-        console.log('both')
         dispatch(bookings(response));
         return response;
     }

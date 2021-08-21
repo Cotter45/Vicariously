@@ -23,22 +23,24 @@ function App() {
 
   return (
     <>
-      <Navigation isLoggedIn={isLoggedIn} />
       {isLoggedIn && (
-        <Switch>
-          <Route path="/posts/:postId">
-            <PostPage />
-          </Route>
-          <Route path='/explore'>
-            <ExplorePage />
-          </Route>
-          <Route path='/profile/:userId'>
-            <ProfilePage />
-          </Route>
-          <Route path='/'>
-            <SplashPage />
-          </Route>
-        </Switch>
+        <>
+          <Navigation isLoggedIn={isLoggedIn} />
+          <Switch>
+            <Route path="/posts/:postId">
+              <PostPage />
+            </Route>
+            <Route path='/explore'>
+              <ExplorePage />
+            </Route>
+            <Route path='/profile/:userId'>
+              <ProfilePage />
+            </Route>
+            <Route path='/'>
+              <SplashPage />
+            </Route>
+          </Switch>
+        </>
       )}
     </>
   );

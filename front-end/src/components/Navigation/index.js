@@ -24,9 +24,7 @@ function Navigation({ isLoggedIn }){
     password: 'password'
   }
 
-  const demo = (e) => {
-    e.preventDefault();
-
+  const demo = () => {
     dispatch(login(user))
   }
 
@@ -43,9 +41,7 @@ function Navigation({ isLoggedIn }){
   } else {
     sessionLinks = (
       <div className='logged-out'>
-        <form onSubmit={(e) => demo(e)}>
-          <button>Demo</button>
-        </form>
+        <button onClick={demo}>Demo</button>
         <LoginFormModal />
         <SignupFormModal />
       </div>

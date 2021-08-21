@@ -19,6 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
 // Serve React build files in production
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
+  const isProduction = true;
   // Serve the frontend's index.html file at the root route
   router.get('/', (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken(), { secure: isProduction });

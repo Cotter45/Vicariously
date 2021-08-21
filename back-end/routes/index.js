@@ -4,7 +4,7 @@ const router = express.Router();
 
 const apiRouter = require('./api');
 
-router.use('/api', apiRouter);
+
 
 
 // Add a XSRF-TOKEN cookie in development
@@ -19,10 +19,9 @@ if (process.env.NODE_ENV !== 'production') {
 // Serve React build files in production
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
-  const isProduction = true;
   // Serve the frontend's index.html file at the root route
   router.get('/', (req, res) => {
-    res.cookie('XSRF-TOKEN', req.csrfToken(), { secure: isProduction });
+    res.cookie('XSRF-TOKEN', req.csrfToken());
     return res.sendFile(
       path.resolve(__dirname, '../../front-end', 'build', 'index.html')
     );
@@ -39,6 +38,8 @@ if (process.env.NODE_ENV === 'production') {
     );
   });
 }
+
+router.use('/api', apiRouter);
 
 
 module.exports = router;

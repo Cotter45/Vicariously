@@ -15,10 +15,11 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    if (isLoggedIn) return;
 
     dispatch(sessionActions.restoreUser()).then(() => setIsLoggedIn(true));
 
-  }, [dispatch]);
+  }, [dispatch, isLoggedIn]);
 
 
   return (

@@ -4,12 +4,6 @@ const faker = require('faker');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      */
    return queryInterface.bulkInsert('Posts', [
      { title: 'Somewhere to test your website', address: '404 Testing Ave', city: 'Test', state: 'Success', country: 'USA', lat: 39.9526, lng: 75.1652, description: 'Great spot to test a web site! I really wish I had more time here to fully flush out all of the details!', hostId: 1 },
      { title: 'In need of a kitchen?', address: faker.address.streetAddress(), city: faker.address.city(), state: faker.address.state(), country: faker.address.country(), lat: faker.address.latitude(), lng: faker.address.longitude(), description: faker.lorem.paragraph(), hostId: 1 },
@@ -34,12 +28,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      */
    return queryInterface.bulkDelete('Posts', null, {});
   }
 };

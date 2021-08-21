@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { getFeatures } from '../../store/posts';
-import { getBookings } from '../../store/users';
-
 
 
 import './splashpage.css'
@@ -14,9 +12,7 @@ function SplashPage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // const user = useSelector(state => state.session.user);
     const posts = useSelector(state => state.posts.featuredPosts);
-    const user = useSelector(state => state.session.user);
 
     const [cities, showCities] = useState(false);
     const [states, showStates] = useState(false);

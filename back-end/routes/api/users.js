@@ -114,8 +114,6 @@ router.put('/:userId/messages', requireAuth, asyncHandler( async (req, res) => {
 
 // Send a message
 router.post('/:userId/newMessage', requireAuth, asyncHandler( async (req, res) => {
-  // const userTwoId = req.params.userId;
-  // const userOneId = req.body.user.id;
   const { message, userOneId, userTwoId } = req.body;
 
   const newMessage = await UserMessage.create({

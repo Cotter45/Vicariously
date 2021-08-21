@@ -15,7 +15,7 @@ function EditReservation({ setUpdate, setEditBooking, booking }) {
 
     const [date, setDate] = useState();
     const [bookingDates, setBookingDates] = useState([]);
-    const [cancelled, setCancelled] = useState(false);
+    const [setCancelled] = useState(false);
 
     useEffect(() => {
         if (post) return;

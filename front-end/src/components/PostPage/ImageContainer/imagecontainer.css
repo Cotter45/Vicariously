@@ -1,9 +1,9 @@
 .image-container {
     margin-top: 25px;
     height: 500px;
-    display: flex;
     gap: 10px;
     overflow: hidden;
+    display: flex;
 }
 
 .primary-image {

@@ -125,7 +125,6 @@ const searchReducer = (state = initialState, action) => {
             newState.posts[action.payload.post.id] = action.payload.post;
             return newState;
         case BOOK_POST:
-            // console.log('book post', action.payload.booking)
             newState.bookings = action.payload.booking;
             return newState;
         case CREATE_POST:

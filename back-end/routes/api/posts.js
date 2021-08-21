@@ -111,7 +111,6 @@ router.post('/:postId/images', asyncHandler( async (req, res) => {
 // Route to add rules to a post
 router.post('/:postId/rules', asyncHandler( async (req, res) => {
     const postId = parseInt(req.params.postId, 10);
-    console.log(postId)
     const { rule } = req.body;
 
     const newRule = await PostRule.create({
@@ -266,19 +265,6 @@ router.post('/:postId/bookings', requireAuth, asyncHandler( async (req, res) => 
 
     return res.json({ booking, newMessage });
 }))
-
-// // Route to get all uncomfirmed bookings for a specific post
-// router.get('/:postId/bookings', requireAuth, asyncHandler( async (req, res) => {
-//     const postId = req.params.postId;
-//     const bookings = await Booking.findAll({
-//         where: {
-//             postId,
-//             confirmed: false
-//         }
-//     })
-//     return res.json({ bookings });
-// }))
-
 
 // Route to confirm a booking
 router.post('/bookings/:bookingId/confirm', requireAuth, asyncHandler( async (req, res) => {

@@ -195,8 +195,6 @@ button {
     position: absolute;
     z-index: 1;
     top: 80px;
-    /* left: 10px; */
-    /* transform: translate(-50%, -50%); */
     width: 515px;
     height: 150px;
     background-color: white;

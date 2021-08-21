@@ -1,5 +1,4 @@
 // front-end/src/store/users.js
-import EditPost from '../components/PostPage/EditPostModal/editpostmodal';
 import { csrfFetch } from './csrf';
 import { sendMessage } from './messages';
 

@@ -32,7 +32,6 @@ function AddImage({ setAddRules, newPost, setAddImages, submitted, setSubmitted 
                 if (err.length) return;
                 setNewImage('');
                 setErrors([]);
-                // setAddImages(false);
                 setSubmitted(true);
             })
       }

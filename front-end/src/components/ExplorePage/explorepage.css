@@ -21,7 +21,6 @@
 .explore-right {
     width: 35%;
     height: 810px;
-    /* padding-right: 10px; */
     position: fixed;
     right: 5px;
     border: 1px solid gray;

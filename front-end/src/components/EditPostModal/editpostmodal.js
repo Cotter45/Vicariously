@@ -1,7 +1,7 @@
 // front-end/src/components/CreatePost/CreatePost.js
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editPost } from "../../../store/users";
+import { editPost } from "../../store/users";
 
 
 function EditPost({ setShowModal, post, setEdit, setUpdate }) {

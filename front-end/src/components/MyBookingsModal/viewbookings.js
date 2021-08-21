@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import './bookings.css';
 import { getBookings, deletePost, cancelBooking } from "../../store/users";
-import EditPost from "../PostPage/EditPostModal/editpostmodal";
+import EditPost from "../EditPostModal/editpostmodal";
 import EditReservation from "../ReservationModal/EditBooking";
 
 function ViewBookings({ setShowModal }) {
@@ -50,15 +50,6 @@ function ViewBookings({ setShowModal }) {
 
         return setUpdate(false);
     }, [bookings, myStays, update])
-
-    // useEffect(() => {
-    //     if (!editBooking) return;
-
-    //     setReservations(bookings);
-    //     setMyListings(myStays);
-
-    //     return setEditBooking(false);
-    // }, [bookings, editBooking, myStays])
 
     const reRoute = (postId) => {
         history.push(`/posts/${postId}`)

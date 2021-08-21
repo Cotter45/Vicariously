@@ -5,7 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     categoryId: DataTypes.INTEGER
   }, {});
   PostCategory.associate = function(models) {
-    // associations can be defined here
   };
   return PostCategory;
 };

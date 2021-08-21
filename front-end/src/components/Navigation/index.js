@@ -24,10 +24,10 @@ function Navigation({ isLoggedIn }){
     password: 'password'
   }
 
-  const demo = async (e) => {
+  const demo = (e) => {
     e.preventDefault();
 
-    await dispatch(login(user))
+    dispatch(login(user))
   }
 
   let sessionLinks;

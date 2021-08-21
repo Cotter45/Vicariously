@@ -456,7 +456,7 @@ router.delete('/:postId/reviews/:reviewId', requireAuth, asyncHandler( async (re
 }))
 
 // Route to delete a booking if you're the host or guest
-router.delete('/:postId/bookings/:bookingId', requireAuth, asyncHandler( async (req, res) => {
+router.delete('/bookings/:bookingId', requireAuth, asyncHandler( async (req, res) => {
     const id = req.params.bookingId;
 
     const booking = await Booking.findOne({
@@ -467,7 +467,7 @@ router.delete('/:postId/bookings/:bookingId', requireAuth, asyncHandler( async (
     });
 
     const newMessage = await UserMessage.create({
-        message: `${req.body.user.username} has cancelled this reservation.`,
+        message: `${req.body.username} has cancelled this reservation.`,
         read: false,
         userOneId: booking.Post.hostId,
         userTwoId: booking.guestId
@@ -475,7 +475,7 @@ router.delete('/:postId/bookings/:bookingId', requireAuth, asyncHandler( async (
 
     await booking.destroy()
 
-    return res.json({ message: 'success' })
+    return res.json({ bookingId: id, newMessage })
 }))
 
 

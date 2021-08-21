@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import './bookings.css';
-import { getBookings } from "../../store/users";
-import { deletePost } from "../../store/users";
+import { getBookings, deletePost, cancelBooking } from "../../store/users";
 import EditPost from "../PostPage/EditPostModal/editpostmodal";
 
 function ViewBookings({ setShowModal }) {
@@ -24,7 +23,7 @@ function ViewBookings({ setShowModal }) {
     const [update, setUpdate] = useState(false);
 
     useEffect(() => {
-        if (!reservations.length || !myListings.length) {
+        if (!reservations.length && !myListings.length) {
             dispatch(getBookings(user.id))
             setReservations(bookings);
             setMyListings(myStays)
@@ -62,6 +61,11 @@ function ViewBookings({ setShowModal }) {
         setEdit(true);
     }
 
+    const cancel = async (bookingId, username) => {
+        await dispatch(cancelBooking(bookingId, username));
+        setChange(true);
+    }
+
     return (
         <>
         {!edit && (
@@ -69,23 +73,25 @@ function ViewBookings({ setShowModal }) {
                 <div className='card-container' >
                     <h2>My Stays</h2>
                         {!change && reservations && reservations.map((booking, index) => (
-                            <div key={booking.id} onClick={e => reRoute(booking.Post.id)} id='booking'>
-                                <div>
-                                    <h4>{booking.Post.title}</h4>
-                                </div>
-                                <div id='dates'>
+                            <div className='row'>
+                                <div key={booking.id} onClick={e => reRoute(booking.Post.id)} id='booking'>
                                     <div>
-                                        <h4>Start Date</h4>
-                                        <p>{booking.startDate}</p>
+                                        <h4>{booking.Post.title}</h4>
                                     </div>
-                                    <div>
-                                        <h4>End Date</h4>
-                                        <p>{booking.endDate}</p>
+                                    <div id='dates'>
+                                        <div>
+                                            <h4>Start Date</h4>
+                                            <p>{booking.startDate}</p>
+                                        </div>
+                                        <div>
+                                            <h4>End Date</h4>
+                                            <p>{booking.endDate}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className='buttons'>
                                     <button>Update</button>
-                                    <button>Cancel</button>
+                                    <button onClick={() => cancel(booking.id, user.username)}>Cancel</button>
                                 </div>
                             </div>
                         ))}

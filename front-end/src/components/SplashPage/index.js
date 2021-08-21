@@ -17,14 +17,6 @@ function SplashPage() {
     // const user = useSelector(state => state.session.user);
     const posts = useSelector(state => state.posts.featuredPosts);
     const user = useSelector(state => state.session.user);
-    const bookings = useSelector(state => state.users.bookings);
-    const myStays = useSelector(state => state.users.myStays);
-
-    useEffect(() => {
-        if ((bookings && bookings.length) || (myStays && myStays.length)) return;
-
-        return dispatch(getBookings(user.id));
-    }, [bookings, myStays, dispatch, user.id])
 
     const [cities, showCities] = useState(false);
     const [states, showStates] = useState(false);

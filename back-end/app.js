@@ -34,13 +34,11 @@ app.use(
 csurf({
     cookie: {
     secure: isProduction,
-    sameSite: "Lax",
-    httpOnly: true,
+    sameSite: isProduction && "Lax",
+    httpOnly: false,
     },
 })
 );
-
-// isProduction && 
 
   // Connect all the routes
 app.use(routes);

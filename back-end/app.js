@@ -11,8 +11,6 @@ const routes = require('./routes');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
-console.log('environment', environment, 'isProduction', isProduction)
-
 const app = express();
 
 app.use(morgan('dev'));

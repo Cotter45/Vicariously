@@ -1,6 +1,7 @@
 // back-end/routes/index.js
 const express = require('express');
 const router = express.Router();
+const csrf = require('csurf');
 
 const apiRouter = require('./api');
 

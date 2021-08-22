@@ -7,7 +7,6 @@ const apiRouter = require('./api');
 
 
 
-
 // Add a XSRF-TOKEN cookie in development
 if (process.env.NODE_ENV !== 'production') {
     router.get('/api/csrf/restore', (req, res) => {
@@ -20,6 +19,16 @@ if (process.env.NODE_ENV !== 'production') {
 // Serve React build files in production
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
+
+  // if not https redirect to https
+  router.all('*', (req, res, next) => {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      res.redirect(`https://${req.hostname}${req.url}`);
+    } else {
+      next();
+    }
+  });
+  
   // Serve the frontend's index.html file at the root route
   router.get('/', (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken());

@@ -9,6 +9,7 @@ import PostPage from "./components/PostPage";
 import SplashPage from "./components/SplashPage";
 import ExplorePage from "./components/ExplorePage";
 import ProfilePage from "./components/ProfilePage";
+import AboutMe from "./components/AboutMe";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function App() {
       {isLoggedIn && (
         <>
           <Navigation isLoggedIn={isLoggedIn} />
+          <AboutMe />
           <Switch>
             <Route path="/posts/:postId">
               <PostPage />

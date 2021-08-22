@@ -35,7 +35,7 @@ csurf({
     cookie: {
     secure: isProduction,
     sameSite: isProduction && "Lax",
-    httpOnly: false,
+    httpOnly: true,
     },
 })
 );

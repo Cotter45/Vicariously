@@ -23,6 +23,8 @@ This site is meant for anyone, and any thing! Your new neighborhood is just a cl
 
 ## To set up locally
 
+* Google Maps API is key is restricted to heroku!
+
 1. Download the zip file
 2. Open with preferred editor
 3. Use the command 'npm install' in a terminal for both the front-end and back-end sections, the back-end will run on port 5000 and the front-end will run on port 3000

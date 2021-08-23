@@ -72,3 +72,15 @@ Postgres/Sequelize
 
 ### Check out the wiki to see my documentation
 - https://github.com/Cotter45/Vicariously/wiki
+
+### Some Screenshots
+
+![Splash Page](./info/SplashPage.png)
+
+![Explore Page](./info/ExplorePage.png)
+
+![Post Page](./info/PostPage.png)
+
+![Profile Page](./info/ProfilePage.png)
+
+![Modal Example](./info/ModalExample.png)

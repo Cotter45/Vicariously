@@ -23,7 +23,7 @@ This site is meant for anyone, and any thing! Your new neighborhood is just a cl
 
 ## To set up locally
 
-* Google Maps API is key is restricted to heroku!
+* Google Maps API key is restricted to heroku!
 
 1. Download the zip file
 2. Open with preferred editor

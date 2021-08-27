@@ -46,16 +46,16 @@ function ProfilePage() {
     }
 
     return (
-        <div className='profile-page-container'>
+        <div className='profile-page-container' id='mobile-profile-container'>
             {user && (
-                <div id='profile'>
+                <div className='profile'>
                     <h1>{user.username}'s Profile</h1>
-                    <div className='profile-container'>
-                        <div className='user-left'>
-                            <div className='post-card-image-container'>
+                    <div className='profile-container' id='profile-container'>
+                        <div className='user-left' id='user-left'>
+                            <div className='post-card-image-container' id='profile-image-container'>
                                 <img className='post-card-image' src={profilePicture} alt='profile'></img>
                             </div>
-                            <div className='post-card-info'>
+                            <div className='post-card-info' id='profile-info'>
                                 <div className='username'>
                                     <h3>{username}</h3>
                                     <div className={user.online ? 'online' : 'offline' }></div>
@@ -63,7 +63,7 @@ function ProfilePage() {
                                 <h3>{user.UserReviews.length} reviews {user.avgUserRating}</h3>
                                 <p><b>Birthday</b> {new Date(birthday).toDateString()}</p>
                                 <h3>Bio</h3>
-                                <div className='description'>
+                                <div className='description' id='description'>
                                     <p>{description}</p>
                                 </div>
                                 {sessionUser && sessionUser.id === user.id && (
@@ -94,21 +94,21 @@ function ProfilePage() {
                             </div>
                         </div>
                     </div>
-                    <div className='listings-container'>
+                    <div className='listings-container' id='listings-container'>
                         <h1>{user.username}'s Listings</h1>
                         {sessionUser && sessionUser.id === user.id && (
-                            <div className='new-post'>
+                            <div className='new-post' id='new-post'>
                                 <h2>New</h2>
                                 <CreatePostModal />
                             </div>
                         )}
                         {user.posts.map(post => (
-                            <div key={post.id} onClick={() => visitPost(post.id)} className='listing-container'>
-                                <div className='post-card-image-container'>
-                                    <img className='post-card-image' src={post.Images[0].imageUrl} alt='posting'></img>
+                            <div key={post.id} onClick={() => visitPost(post.id)} className='listing-container' id='listing'>
+                                <div className='post-card-image-container' id='image-container'>
+                                    <img className='post-card-image' id='image' src={post.Images[0].imageUrl} alt='posting'></img>
                                 </div>
-                                <div className='post-card-info'>
-                                    <div className='title'>
+                                <div className='post-card-info' id='info'>
+                                    <div className='title' id='title'>
                                         <h3>{post.title}</h3>
                                     </div>
                                     <div className='post-info'>
@@ -118,11 +118,11 @@ function ProfilePage() {
                                         </div>
                                         <p>{post.PostReviews.length} reviews</p>
                                     </div>
+                                </div>
                             </div>
-                        </div>
                         ))}
                     </div>
-                    <div className='reviews-container'>
+                    <div className='reviews-container' id='reviews-container'>
                         <h2>🌟 {user.userReviews.length} reviews</h2>
                         {user.userReviews.map(review => (
                             <div key={review.id}>
@@ -133,7 +133,7 @@ function ProfilePage() {
                                         <p>{new Date(review.createdAt).toDateString()}</p>
                                     </div>
                                 </div>
-                                <p>{review.review}</p>
+                                <p id='review'>{review.review}</p>
                             </div>
                          ))}
                     </div>

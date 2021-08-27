@@ -5,6 +5,7 @@
 
 #root {
     min-height: 100vh;
+    width: 100vw;
 }
 
 ::-webkit-scrollbar {
@@ -15,3 +16,4 @@
 * {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
+

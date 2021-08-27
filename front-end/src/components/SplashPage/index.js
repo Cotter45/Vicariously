@@ -43,7 +43,7 @@ function SplashPage() {
             <div className='splash'>
                 <div className='splash-memo'>
                     <h3>No place like home?</h3>
-                    <p>Vicariously was created for you to connect with <br></br> people wherever you are and experience what <br></br> home means for them.</p>
+                    <p>Vicariously was created for you to connect with people wherever you are and experience what home means for them.</p>
                     <button className='category-buttons' onClick={explore}>Explore</button>
                 </div>
             </div>

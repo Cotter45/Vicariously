@@ -39,7 +39,7 @@ function ExplorePage() {
         <div className='explore-page'>
             <div className='explore-left'>
                 <h1>Featured Posts</h1>
-                <h4>Hover to see location (most are in the ocean because of faker)</h4>
+                <h4 id='pc'>Hover to see location (most are in the ocean because of faker)</h4>
                 {posts && posts.map(post => (
                     <div key={post.id}
                             onMouseOver={() => timeout = setTimeout(() => showLocation(post), 100)}

@@ -28,6 +28,7 @@
     border-radius: 15px;
     gap: 25px;
     background-color: rgba(0, 0, 0, .3);
+    text-align: center;
 }
 
 .splash-memo > h3 {
@@ -91,3 +92,121 @@
     gap: 10px;
     padding-top: 50px;
 }
+
+/* mobile css */
+@media (max-width: 600px) {
+
+    .main {
+        width: 100vw;
+        height: 100% !important;
+        min-height: 100vh !important;
+        position: absolute;
+        z-index: 0;
+        top: 175px;
+    }
+
+    .splash {
+        background-image: url('https://static.stacker.com/s3fs-public/2021-05/Road%20Trip.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        height: 500px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .splash-memo {
+        color: lightgray;
+        font-size: 25px;
+        width: 100%;
+        position: relative;
+        top: 10%;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .splash-memo>h3 {
+        font-weight: normal;
+    }
+
+    .splash-memo>p {
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .splash-memo > button {
+        width: 200px;
+        font-size: 25px;
+    }
+
+    .featured-posts {
+        /* height: 500px; */
+        width: 100%;
+        position: relative;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .categories-container {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        /* padding-bottom: 100px; */
+    }
+
+    .categories {
+        width: 100%;
+        height: 100px;
+        border-bottom: 1px solid lightgray;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .selected {
+        height: 75px;
+        width: 100px;
+        box-shadow: 0px 5px 10px gray;
+        border: none;
+        border-radius: 15px;
+        font-size: 25px;
+    }
+
+    .category-buttons {
+        height: 50px;
+        width: 75px;
+        border: 1px solid gray;
+        border-radius: 15px;
+        box-shadow: 0px 5px 10px gray;
+        font-size: 15px;
+        color: white;
+        background-image: radial-gradient(circle at center center, rgb(255, 0, 0) 0%, rgb(206, 9, 9) 27.5%, rgb(167, 20, 20) 40%, rgb(136, 19, 19) 57.5%, rgb(94, 19, 19) 75%, rgb(68, 16, 16) 100%) !important;
+    }
+
+    .list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        /* gap: 10px; */
+        padding-bottom: 100px;
+    }
+
+    .list > button {
+        width: 75px;
+        height: 50px;
+        border: 1px solid gray;
+        border-radius: 15px;
+        box-shadow: 0px 5px 10px red;
+        font-size: 10px;
+    }
+}
+
+
+

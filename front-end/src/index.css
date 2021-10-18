@@ -3,9 +3,14 @@
     margin: 0;
 }
 
+html, body {
+    min-height: 100vh !important;
+    height: 100% !important;
+}
+
 #root {
-    min-height: 100vh;
-    width: 100vw;
+    min-height: 100vh !important;
+    width: 100vw !important;
 }
 
 ::-webkit-scrollbar {

@@ -105,11 +105,11 @@ button {
 .message-dropdown {
     position: fixed;
     z-index: 1;
-    top: 75px;
+    top: 12vh;
     right: 50px;
     width: 250px;
-    height: 30vh;
-    background-color: white;
+    height: fit-content;
+    background-color: lightgray;
     border: 1px solid white;
     border-radius: 15px;
     overflow: hidden;
@@ -150,7 +150,7 @@ button {
 .messenger-dropdown {
     position: fixed;
     z-index: 1;
-    top: 75px;
+    top: 12vh;
     right: 50px;
     width: 250px;
     height: 30vh;
@@ -237,7 +237,7 @@ button {
 
 #message {
     position: fixed;
-    top: 335px;
+    top: 360px;
     height: 25px;
     width: 225px;
     border-width: 0;
@@ -455,7 +455,7 @@ button {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        padding-bottom: 25px;
+        padding-bottom: 50px;
         justify-content: center;
         align-items: center;
     }
@@ -533,7 +533,7 @@ button {
     #message {
         position: fixed;
         top: 400px;
-        left: 25px;
+        right: 25px;
         height: 50px;
         width: 225px;
         border-width: 0;

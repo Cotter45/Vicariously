@@ -106,8 +106,8 @@
 }
 
 .modal-form {
-    height: 500px;
-    width: 500px;
+    height: 80vh;
+    width: 80vw;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -343,50 +343,63 @@
         width: 100%;
     }
 
-    .modal-form {
-        height: 500px;
-        width: 500px;
+    .modal-form#create-post {
+        height: fit-content;
+        /* width: 500px; */
         display: flex;
         flex-direction: column;
-        gap: 25px;
-        align-items: center;
+        gap: 5px;
+        /* align-items: center; */
+    }
+
+    .modal-form#create-post > ul {
+        font-size: 2vw;
     }
 
     .modal-form>label {
-        font-size: 20px;
+        font-size: 3vw;
+    } 
+    
+    #create-post > label {
+        font-size: 16px;
+        
     }
-
-    .modal-form>input {
+    
+    .modal-form#create-post>input {
+        font-size: 16px;
         border-width: 0;
         border-top: 1px solid gray;
         border-radius: 15px;
         box-shadow: 0px 5px 10px gray;
         width: 50%;
         height: 5%;
-        padding: 10px;
+        padding: 5px;
     }
-
-    .modal-form>textarea {
+    
+    .modal-form#create-post>textarea {
+        font-size: 16px;
         border-width: 0;
         border-top: 1px solid gray;
         border-radius: 15px;
         box-shadow: 0px 5px 10px gray;
         width: 50%;
         height: 10%;
-        padding: 10px;
+        padding: 5px;
     }
 
-    .modal-form>input:focus {
+    .modal-form#create-post>input:focus {
         outline-width: 0;
     }
 
-    .modal-form>textarea:focus {
+    .modal-form#create-post>textarea:focus {
         outline-width: 0;
     }
 
     .edit-profile-button {
-        height: 50px;
-        width: 200px;
+        margin-top: 10px;
+        /* height: 25%; */
+        min-height: 25px;
+        width: 50%;
         border: 1px solid gray;
         border-radius: 15px;
         box-shadow: 0px 5px 10px gray;

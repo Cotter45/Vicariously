@@ -18,7 +18,7 @@
     padding: 5px 10px;
     text-decoration: none;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 40px;
+    font-size: 2vw;
     box-shadow: 0px 5px 10px gray;
     border-radius: 15px;
     background-image: radial-gradient(circle at center center, rgb(255, 0, 0) 0%, rgb(206, 9, 9) 27.5%, rgb(167, 20, 20) 40%, rgb(136, 19, 19) 57.5%, rgb(94, 19, 19) 75%, rgb(68, 16, 16) 100%) !important;
@@ -26,10 +26,10 @@
 
 .nav-bar button {
     background-image: radial-gradient(circle at center center, rgb(255, 0, 0) 0%, rgb(206, 9, 9) 27.5%, rgb(167, 20, 20) 40%, rgb(136, 19, 19) 57.5%, rgb(94, 19, 19) 75%, rgb(68, 16, 16) 100%) !important;
-
 }
 
 .nav-bar > button > * {
+    font-size: 2vw;
     pointer-events: none;
 }
 
@@ -279,7 +279,7 @@ button {
     right: 25px;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 750px) {
     
     .logged-out {
        display: flex;
@@ -314,9 +314,11 @@ button {
     }
 
     .nav-bar button {
-          background-image: radial-gradient(circle at center center, rgb(255, 0, 0) 0%, rgb(206, 9, 9) 27.5%, rgb(167, 20, 20) 40%, rgb(136, 19, 19) 57.5%, rgb(94, 19, 19) 75%, rgb(68, 16, 16) 100%) !important;
+        background-image: radial-gradient(circle at center center, rgb(255, 0, 0) 0%, rgb(206, 9, 9) 27.5%, rgb(167, 20, 20) 40%, rgb(136, 19, 19) 57.5%, rgb(94, 19, 19) 75%, rgb(68, 16, 16) 100%) !important;
+        font-size: 2vw;
+        color: black;
     }
-
+    
     .nav-bar>button>* {
         pointer-events: none;
     }
@@ -334,7 +336,7 @@ button {
         gap: 10px;
         position: fixed;
         z-index: 1;
-        top: 25px;
+        /* top: 5px; */
         border: 1px solid gray;
         box-shadow: 0px 5px 10px gray;
     }

@@ -14,3 +14,60 @@
     gap: 25px;
     padding-top: 50px;
 }
+
+@media screen and (max-width: 750px) {
+    .post-page {
+        width: 80vw;
+        height: 100%;
+        min-height: 100vh;
+        position: relative;
+        z-index: 0;
+        top: 25vh;
+        left: 10vw;
+        height: fit-content;
+    }
+
+    .post-head {
+        display: flex;
+        flex-direction: column;
+        padding-top: 50px;
+    }
+
+    .image-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .primary-image {
+        width: 100%;
+    }
+
+    .primary-image > img {
+        width: 100%;
+        height: 25vh;
+    }
+    
+    .secondary-images {
+        width: 100%;
+        height: 25vh;
+    }
+
+    .post-page > .info {
+        width: 80vw;
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+    }
+
+    .left-side {
+        height: fit-content;
+        width: 80vw;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info > .calendar {
+        width: 100%;
+    }
+}

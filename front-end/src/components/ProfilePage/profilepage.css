@@ -1,7 +1,7 @@
 .profile-page-container {
     width: 80vw;
     height: fit-content;
-    min-height: 100vh !important;
+    /* min-height: 100vh !important; */
     position: relative;
     z-index: 0;
     top: 5vh;
@@ -9,6 +9,7 @@
     display: flex;
     gap: 25px;
     flex-direction: column;
+    padding-bottom: 100px;
 }
 
 .profile-container {
@@ -88,7 +89,7 @@
 
 .listings-container {
     height: fit-content;
-    width: 100vw;
+    width: 80%;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -178,6 +179,16 @@
 }
 
 @media screen and (max-width: 1000px) {
+
+    #listings-container.listings-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* padding: 0; */
+    }
+
     #listing.listing-container {
         display: flex;
         flex-direction: column;
@@ -185,137 +196,257 @@
         padding: 10px 0;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        position: relative;
+        left: 0;
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 750px) {
 
-    #mobile-profile-container {
-        width: 100%;
-        height: 100% !important;
-        min-height: 100vh !important;
+    .profile-page-container {
+        width: 80%;
+        height: fit-content;
+        /* min-height: 100vh !important; */
         position: relative;
         z-index: 0;
-        top: 30vh;
-        left: 0;
+        top: 20vh;
+        left: 10vw;
         display: flex;
+        gap: 25px;
         flex-direction: column;
-    }
-    .profile {
-        width: 100%;
-        height: 100%;
-        min-height: 100%;
-    }
-    #profile-container {
-        width: 100%;
-        height: 40%;
-        min-height: 100%;
-    }
-    #user-left {
-        width: 100%;
-        height: 100%;
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
+        padding-bottom: 100px;
+    }
+
+    .profile-container {
+        width: 100%;
+        height: fit-content;
+        padding: 0;
+    }
+
+    #profile-info {
+
+    }
+
+    #profile-info > * {
+    }
+    
+    #description {
+        font-size: 3vw;
+        height: fit-content;
+        word-wrap: break-all;
+        width: 100%;
+    }
+
+    #listings-container > h1 {
+        width: 80%;
+    }
+
+    .user-left {
+        width: 80%;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
         gap: 15px;
         border-bottom: 1px solid gray;
+        padding: 0;
     }
+
     #profile-image-container {
         width: 100%;
         height: 100%;
-        min-height: 100%;
-        display: flex;
-        justify-content: center;
     }
-    #profile-info {
-        width: 100%;
-        height: 100%;
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 15px;
-        padding: 10px 0;
-    }
-    #description {
-        width: 100%;
-        height: 100%;
-    }
-    .edit {
-        width: 100%;
-        height: 100%;
-    }
-    #listings-container {
-        width: 100%;
-        max-width: 480px;
-        height: fit-content;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 25px;
-        color: gray;
-    }
-    #listings-container > h1 {
-        width: 100%;
-    }
-    #new-post {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-    #listing {
-        width: 80%;
-        max-width: 400px;
-        height: 100%;
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        padding: 10px;
-        position: relative;
-        left: 0;
-    }
-    #image-container {
-        width: 250px;
-        height: 250px;
-        min-height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    #image {
-        width: 200px;
-        height: 200px;
-    }
-    #info {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .description {
-        word-wrap: break-word;
-        width: 100%;
-        height: 100%;
-    }
-    #reviews-container {
-        width: 100%;
-        height: 100%;
-        color: gray;
-    }
-    #review {
-        word-wrap: break-word;
-    }
-    
 
+    #profile-image-container > img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .listing-container {
+        width: 60vw;
+        /* min-width: 1000px; */
+        height: 300px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* gap: 15px; */
+        border: 1px solid gray;
+        border-radius: 15px;
+        box-shadow: 0px 5px 10px gray;
+        position: relative;
+        left: 10vw;
+    }
+
+    .listing-container:hover {
+        cursor: pointer;
+    }
+
+    .listing-container>* {
+        padding: 0 75px;
+    }
+
+    .edit {
+        padding: 10px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .edit-profile {
+        height: 25px;
+        width: 100px;
+        border: 1px solid gray;
+        border-radius: 15px;
+        box-shadow: 0px 5px 10px gray;
+        font-size: 15px;
+        color: white;
+        background-image: radial-gradient(circle at center center, rgb(255, 0, 0) 0%, rgb(206, 9, 9) 27.5%, rgb(167, 20, 20) 40%, rgb(136, 19, 19) 57.5%, rgb(94, 19, 19) 75%, rgb(68, 16, 16) 100%) !important;
+    }
+
+    .username {
+        width: 200px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .online {
+        height: 15px;
+        width: 15px;
+        background-color: green;
+        border-radius: 25px;
+    }
+
+    .offline {
+        height: 15px;
+        width: 15px;
+        background-color: red;
+        border-radius: 25px;
+    }
+
+    .listings-container {
+        height: fit-content;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding-top: 20px;
+    }
+
+    .description {
+        width: 400px;
+        border-bottom: 1px solid lightgray;
+    }
+
+    .post-info>.description {
+        width: 100%;
+    }
+
+    .modal-form {
+        height: 500px;
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+    }
+
+    .modal-form>label {
+        font-size: 20px;
+    }
+
+    .modal-form>input {
+        border-width: 0;
+        border-top: 1px solid gray;
+        border-radius: 15px;
+        box-shadow: 0px 5px 10px gray;
+        width: 50%;
+        height: 5%;
+        padding: 10px;
+    }
+
+    .modal-form>textarea {
+        border-width: 0;
+        border-top: 1px solid gray;
+        border-radius: 15px;
+        box-shadow: 0px 5px 10px gray;
+        width: 50%;
+        height: 10%;
+        padding: 10px;
+    }
+
+    .modal-form>input:focus {
+        outline-width: 0;
+    }
+
+    .modal-form>textarea:focus {
+        outline-width: 0;
+    }
+
+    .edit-profile-button {
+        height: 50px;
+        width: 200px;
+        border: 1px solid gray;
+        border-radius: 15px;
+        box-shadow: 0px 5px 10px gray;
+        font-size: 15px;
+        color: white;
+        background-image: radial-gradient(circle at center center, rgb(255, 0, 0) 0%, rgb(206, 9, 9) 27.5%, rgb(167, 20, 20) 40%, rgb(136, 19, 19) 57.5%, rgb(94, 19, 19) 75%, rgb(68, 16, 16) 100%) !important;
+    }
+
+    .new-post {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+    }
+
+    #info.post-card-info {
+        padding: 0;
+        padding-right: 10px;
+        width: 50%;
+    }
+
+    .new-post button {
+        background-image: radial-gradient(circle at center center, rgb(255, 0, 0) 0%, rgb(206, 9, 9) 27.5%, rgb(167, 20, 20) 40%, rgb(136, 19, 19) 57.5%, rgb(94, 19, 19) 75%, rgb(68, 16, 16) 100%) !important;
+    }
+
+    #review {
+        overflow: hidden;
+    }
+
+    #new-post {
+        width: 80%;
+    }
+
+    .profile {
+        width: 100%;
+        height: fit-content;
+    }
+
+    .profile > #listings-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+        /* padding: 0; */
+    }
+
+    /* #profile-container > #listings-container > #listing.listing-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    } */
+
+    #reviews-container.reviews-container {
+        /* padding: 0; */
+        margin: 0;
+    }
   
 }
 

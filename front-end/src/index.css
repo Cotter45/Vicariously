@@ -22,3 +22,6 @@ html, body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
+input {
+    font-size: 16px;
+}

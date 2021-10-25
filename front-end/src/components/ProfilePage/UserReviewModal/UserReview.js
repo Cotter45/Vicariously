@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { reviewUser } from "../../../store/users";
+import { getProfile, reviewUser } from "../../../store/users";
 
-function UserReview({userId, userReviews, setUserReviews, setShowModal}) {
+function UserReview({userId, userReviews, setUserReviews, setShowModal, update, setUpdate}) {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.session.user);
@@ -14,7 +14,7 @@ function UserReview({userId, userReviews, setUserReviews, setShowModal}) {
     const [stars, setStars] = useState('');
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         let newReview = {
@@ -24,10 +24,19 @@ function UserReview({userId, userReviews, setUserReviews, setShowModal}) {
             userId
         }
 
+        // const reviewTotal = document.getElementById('user-reviews-total');
+        // const current = reviewTotal.innerText.split(' ');
+        // const replace = parseInt(current[1], 10) + 1;
+        // reviewTotal.innerText = reviewTotal.innerText.replace(/\d/, replace)
+
+        // const reviews = document.getElementById('reviews-container');
+
         setErrors([]);
         setShowModal(false);
-        setUserReviews([...userReviews, newReview])
-        return dispatch(reviewUser(userId, newReview))
+        // setUserReviews([...userReviews, newReview])
+        await dispatch(reviewUser(userId, newReview))
+        await dispatch(getProfile(userId));
+        setUpdate(!update);
     }
 
     const displayStars = (value) => {

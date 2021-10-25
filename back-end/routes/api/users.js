@@ -148,6 +148,18 @@ router.post('/:userId/review', requireAuth, asyncHandler( async (req, res) => {
     userId
   })
 
+  // console.log(userReview.id)
+  // const id = userReview.id;
+
+  const user = await User.findOne({
+    where: {
+      id: +reviewerId
+    }
+  })
+
+  userReview.dataValues.User = user
+
+
   return res.json({ userReview })
 }))
 

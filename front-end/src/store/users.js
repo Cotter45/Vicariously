@@ -166,6 +166,8 @@ const userReducer = (state = initialState, action) => {
         case REVIEW_USER:
             const id = action.payload.id;
             newState.myReviews[id] = action.payload;
+            const user = newState.users.find(user => user.id === action.payload.userId);
+            user.userReviews.push(action.payload)
             return newState;
         case MY_POSTS:
             newState.myStays = action.payload;

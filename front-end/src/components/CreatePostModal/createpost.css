@@ -1,7 +1,13 @@
 #create-post {
-    height: 50vh;
+    height: fit-content;
     min-height: 650px;
-    width: 50vw;
+    width: 35vw;
+    padding: 40px;
+    overflow: scroll;
+}
+
+#create-post > * {
+    font-size: 1vw;
 }
 
 /* mobile phone */

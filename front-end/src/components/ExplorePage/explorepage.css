@@ -18,7 +18,7 @@ html, body, #root {
 
 .explore-left {
     width: 50%;
-    height: 100vh;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -39,14 +39,15 @@ html, body, #root {
 }
 
 .post-card {
-    width: 50vw;
+    width: 49vw;
     min-height: 270px;
-    height: 40vh;
+    height: fit-content;
     display: flex;
     gap: 15px;
     border: 1px solid gray;
     border-radius: 15px;
     box-shadow: 0px 5px 10px gray;
+    padding: 1vw;
 }
 
 .post-card:hover {
@@ -57,7 +58,7 @@ html, body, #root {
 .post-card-image-container {
     width: 40%;
     height: 80%;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .post-card-image {
@@ -67,18 +68,57 @@ html, body, #root {
     object-fit: cover;
 }
 
+#image-container.post-card-image-container {
+    padding: 0;
+}
+
+#listing.listing-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .post-card-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
     padding: 10px;
+    font-size: 1vw;
+    height: 100%;
+    width: 40%;
+}
+
+#info.post-card-info {
+    padding: 0;
+    padding-right: 10px;
+    width: 40%;
 }
 
 .post-info {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    height: fit-content;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.post-info > p {
+    height: fit-content;
+    word-wrap: break-word;
+}
+
+.post-info > * {
+    word-break: break-all;
+}
+
+@media screen and (max-width: 1000px) {
+    .post-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 /* mobile */

@@ -23,7 +23,9 @@ function ProfilePage() {
     const [birthday, setBirthday] = useState(user ? user.birthday : '');
     const [profilePicture, setProfilePicture] = useState(user ? user.profilePicture : '');
     const [description, setDescription] = useState(user ? user.description : '');
-    const [userReviews, setUserReviews] = useState(user ? user.UserReviews : '');
+    const [userReviews, setUserReviews] = useState(user ? user.userReviews : '');
+
+    const [update, setUpdate] = useState(false);
 
     useEffect(() => {
         if (user) return;
@@ -38,8 +40,16 @@ function ProfilePage() {
         setBirthday(user.birthday);
         setProfilePicture(user.profilePicture);
         setDescription(user.description);
-        setUserReviews(user.UserReviews);
+        setUserReviews(user.userReviews);
+        // setUpdate(!update);
     }, [user])
+
+    useEffect(() => {
+        if (!update || !user) return;
+        setUserReviews(user.userReviews);
+        setUpdate(!update);
+        console.log('update')
+    }, [dispatch, update, user, userId])
 
     const visitPost = (postId) => {
         history.push(`/posts/${postId}`)
@@ -60,7 +70,7 @@ function ProfilePage() {
                                     <h3>{username}</h3>
                                     <div className={user.online ? 'online' : 'offline' }></div>
                                 </div>
-                                <h3>{user.UserReviews.length} reviews {user.avgUserRating}</h3>
+                                <h3>{userReviews.length} reviews {user.avgUserRating}</h3>
                                 <p><b>Birthday</b> {new Date(birthday).toDateString()}</p>
                                 <h3>Bio</h3>
                                 <div className='description' id='description'>
@@ -86,7 +96,10 @@ function ProfilePage() {
                                         <UserReviewModal
                                             userId={user.id}
                                             userReviews={userReviews}
-                                            setUserReviews={setUserReviews} />
+                                            setUserReviews={setUserReviews} 
+                                            setUpdate={setUpdate}
+                                            update={update}
+                                            />
                                     </div>
                                 )}
                             </div>
@@ -123,8 +136,8 @@ function ProfilePage() {
                         ))}
                     </div>
                     <div className='reviews-container' id='reviews-container'>
-                        <h2>🌟 {user.userReviews.length} reviews</h2>
-                        {user.userReviews.map(review => (
+                        <h2 id='user-reviews-total'>🌟 {user.userReviews.length} reviews</h2>
+                        {userReviews.length && userReviews.map(review => (
                             <div key={review.id}>
                                 <div className='reviewer-info'>
                                     <img className='reviewer-picture' src={review.User.profilePicture} alt='user'></img>

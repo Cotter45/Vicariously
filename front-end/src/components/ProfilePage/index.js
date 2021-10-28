@@ -138,7 +138,7 @@ function ProfilePage() {
                     <div className='reviews-container' id='reviews-container'>
                         <h2 id='user-reviews-total'>🌟 {user.userReviews.length} reviews</h2>
                         {userReviews.length && userReviews.map(review => (
-                            <div key={review.id}>
+                            <div className='single-review' key={review.id}>
                                 <div className='reviewer-info'>
                                     <img className='reviewer-picture' src={review.User.profilePicture} alt='user'></img>
                                     <div>

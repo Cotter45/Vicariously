@@ -178,6 +178,18 @@
     overflow: hidden;
 }
 
+.single-review {
+    box-shadow: 0px 5px 5px gray;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+#user-reviews-total {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 1000px) {
 
     #listings-container.listings-container {
@@ -200,9 +212,21 @@
         position: relative;
         left: 0;
     }
+
+    .single-review {
+        box-shadow: 0px 5px 5px gray;
+        padding: 25px;
+        border-radius: 10px;
+    }
 }
 
 @media screen and (max-width: 750px) {
+
+    .single-review {
+        box-shadow: 0px 5px 5px gray;
+        padding: 25px;
+        border-radius: 10px;
+    }
 
     .profile-page-container {
         width: 80%;
@@ -223,13 +247,6 @@
         width: 100%;
         height: fit-content;
         padding: 0;
-    }
-
-    #profile-info {
-
-    }
-
-    #profile-info > * {
     }
     
     #description {

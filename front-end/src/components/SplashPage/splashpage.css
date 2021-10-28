@@ -17,9 +17,9 @@
 .splash-memo {
     color: lightgray;
     font-size: 50px;
-    width: 600px;
+    width: 40vw;
     position: relative;
-    top: 60%;
+    top: 25%;
     left: 50px;
     display: flex;
     flex-direction: column;
@@ -29,14 +29,16 @@
     gap: 25px;
     background-color: rgba(0, 0, 0, .3);
     text-align: center;
+    padding: 25px;
 }
 
 .splash-memo > h3 {
     font-weight: normal;
+    font-size: 3vw;
 }
 
 .splash-memo > p {
-    font-size: 25px;
+    font-size: 1.5vw;
 }
 
 .featured-posts {
@@ -94,7 +96,7 @@
 }
 
 /* mobile css */
-@media (max-width: 600px) {
+@media (max-width: 750px) {
 
     .main {
         width: 100vw;
@@ -117,10 +119,10 @@
     .splash-memo {
         color: lightgray;
         font-size: 25px;
-        width: 100%;
+        width: 75vw;
         position: relative;
-        top: 10%;
-        left: 0;
+        top: 5%;
+        left: 8%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -128,11 +130,12 @@
 
     .splash-memo>h3 {
         font-weight: normal;
+        font-size: 6vw;
     }
 
     .splash-memo>p {
-        font-size: 15px;
         text-align: center;
+        font-size: 4vw;
     }
 
     .splash-memo > button {

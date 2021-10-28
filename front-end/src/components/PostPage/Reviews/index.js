@@ -9,7 +9,7 @@ function Reviews({post}) {
         <div className='reviews-container'>
             <h2>🌟 {reviews.length} reviews</h2>
             {reviews.map(review => (
-                <div key={review.id}>
+                <div className='single-review' key={review.id}>
                     <div className='reviewer-info'>
                         <img className='reviewer-picture' src={review.User.profilePicture} alt='user'></img>
                         <div>

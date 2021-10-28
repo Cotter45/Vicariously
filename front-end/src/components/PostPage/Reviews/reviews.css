@@ -24,3 +24,9 @@
     width: 50px;
     border-radius: 50px;
 }
+
+.single-review {
+    box-shadow: 0px 5px 5px gray;
+    padding: 25px;
+    border-radius: 10px;
+}

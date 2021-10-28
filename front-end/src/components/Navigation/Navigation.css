@@ -6,7 +6,7 @@
 .logged-out > button {
     height: 50px;
     width: 100px;
-    box-shadow: 0px 5px 10px gray;
+    box-shadow: 0px 5px 5px gray;
     border: none;
     border-radius: 15px;
     font-size: 20px;
@@ -19,7 +19,7 @@
     text-decoration: none;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 2vw;
-    box-shadow: 0px 5px 10px gray;
+    box-shadow: 0px 5px 5px gray;
     border-radius: 15px;
     background-image: radial-gradient(circle at center center, rgb(255, 0, 0) 0%, rgb(206, 9, 9) 27.5%, rgb(167, 20, 20) 40%, rgb(136, 19, 19) 57.5%, rgb(94, 19, 19) 75%, rgb(68, 16, 16) 100%) !important;
 }
@@ -48,7 +48,7 @@ button {
     z-index: 1;
     top: 0;
     border: 1px solid gray;
-    box-shadow: 0px 5px 10px gray;
+    box-shadow: 0px 5px 5px gray;
 }
 
 .message-button > button {
@@ -56,7 +56,7 @@ button {
     width: 50px;
     border: 1px solid gray;
     border-radius: 15px;
-    box-shadow: 0px 5px 10px gray;
+    box-shadow: 0px 5px 5px gray;
 }
 
 .menu {
@@ -68,7 +68,7 @@ button {
     width: 50px;
     border: 1px solid gray;
     border-radius: 15px;
-    box-shadow: 0px 5px 10px gray;
+    box-shadow: 0px 5px 5px gray;
 }
 
 .menu-dropdown {
@@ -87,6 +87,11 @@ button {
     justify-content: center;
     align-items: center;
     z-index: 1;
+}
+
+.menu-dropdown > .post-card-info {
+    height: fit-content;
+    width: fit-content;
 }
 
 .menu-info {
@@ -184,7 +189,7 @@ button {
     height: 50px;
     border: 1px solid gray;
     border-radius: 15px;
-    box-shadow: 0px 5px 10px gray;
+    box-shadow: 0px 5px 5px gray;
     padding: 0 10px;
 }
 
@@ -290,7 +295,7 @@ button {
     .logged-out>button {
         height: 25px;
         width: 75px;
-        box-shadow: 0px 5px 10px gray;
+        box-shadow: 0px 5px 5px gray;
         border: none;
         border-radius: 15px;
         font-size: 20px;
@@ -308,7 +313,7 @@ button {
         Arial,
         sans-serif;
         font-size: 20px;
-        box-shadow: 0px 5px 10px gray;
+        box-shadow: 0px 5px 5px gray;
         border-radius: 15px;
         background-image: radial-gradient(circle at center center, rgb(255, 0, 0) 0%, rgb(206, 9, 9) 27.5%, rgb(167, 20, 20) 40%, rgb(136, 19, 19) 57.5%, rgb(94, 19, 19) 75%, rgb(68, 16, 16) 100%) !important;
     }
@@ -346,7 +351,7 @@ button {
         width: 40px;
         border: 1px solid gray;
         border-radius: 15px;
-        box-shadow: 0px 5px 10px gray;
+        box-shadow: 0px 5px 5px gray;
     }
     
     .menu {
@@ -358,7 +363,7 @@ button {
         width: 40px;
         border: 1px solid gray;
         border-radius: 15px;
-        box-shadow: 0px 5px 10px gray;
+        box-shadow: 0px 5px 5px gray;
     }
     
     .menu-dropdown {
@@ -375,6 +380,7 @@ button {
         flex-direction: column;
         justify-content: center;
         z-index: 1;
+        padding: 0 10px;
     }
     
     .menu-info {
@@ -479,7 +485,7 @@ button {
         height: 50px;
         border: 1px solid gray;
         border-radius: 15px;
-        box-shadow: 0px 5px 10px gray;
+        box-shadow: 0px 5px 5px gray;
         padding: 0 10px;
     }
     

@@ -1,0 +1,205 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id    String @id @default(cuid())
+  username String @unique
+  email String @unique
+  birthday DateTime? @default(now())
+  profilePicture String @default("https://media.istockphoto.com/vectors/simple-man-head-icon-set-vector-id1196083861?k=20&m=1196083861&s=612x612&w=0&h=XNRxC4ohwTlL7KBis1Dc_MZASQSKfC9IoBfe2Oq9eL0=")
+  bio String?
+  online Boolean 
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  password Password?
+  messages Message[]
+  interests UserInterest[]
+  posts Post[]
+  postReviews PostReview[]
+  reviews UserReview[] @relation("reviews")
+  reviewsReceived UserReview[] @relation("reviewsReceived")
+  bookings Booking[]
+  chats ChatUser[]
+}
+
+model Password {
+  hash String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String @unique
+}
+
+model Interest {
+  id    String @id @default(cuid())
+  name String 
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users UserInterest[]
+}
+
+model UserInterest {
+  id    String @id @default(cuid())
+  userId String
+  interestId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  interest Interest @relation(fields: [interestId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Post {
+  id    String @id @default(cuid())
+  title String
+  address String?
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId String
+
+  images Image[]
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  postReviews PostReview[]
+  bookings Booking[]
+  postCategory PostCategory[]
+  rules PostRule[]
+}
+
+model Rule {
+  id    String @id @default(cuid())
+  name String @unique
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  postRules PostRule[]
+}
+
+model PostRule {
+  id    String @id @default(cuid())
+  postId String
+  ruleId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  rule Rule @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Category {
+  id    String @id @default(cuid())
+  name String @unique
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  posts PostCategory[]
+}
+
+model PostCategory {
+  id    String @id @default(cuid())
+  postId String
+  categoryId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Image {
+  id    String @id @default(cuid())
+  url String
+  postId String?
+  messageId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post Post? @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  message Message? @relation(fields: [messageId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Booking {
+  id    String @id @default(cuid())
+  userId String
+  postId String
+  startDate DateTime
+  endDate DateTime
+  confirmed Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model UserReview {
+  id    String @id @default(cuid())
+  userId String
+  reviewerId String
+  rating Int
+  review String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation("reviews", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade) 
+  reviewer User @relation("reviewsReceived", fields: [reviewerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model PostReview {
+  id    String @id @default(cuid())
+  postId String
+  userId String
+  rating Int
+  review String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Chat {
+  id    String @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  messages Message[]
+  users ChatUser[]
+}
+
+model ChatUser {
+  id    String @id @default(cuid())
+  chatId String
+  userId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Message {
+  id    String @id @default(cuid())
+  chatId String
+  userId String
+  message String
+  imageId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  image Image?
+}
+

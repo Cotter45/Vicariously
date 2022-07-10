@@ -83,11 +83,19 @@ func Restore(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"status": "error", "message": "Error on login request", "data": err})
 	}
 
+	var sameSite string
+
+	if config.Config("ENVIRONMENT") == "production" {
+		sameSite = "Lax"
+	} else {
+		sameSite = "None"
+	}
+
 	c.Cookie(&fiber.Cookie{
 		Expires: expirationTime,
 		Path:    "/",
 		Secure:  config.Config("ENVIRONMENT") == "production",
-		SameSite: "Lax",
+		SameSite: sameSite,
 		HTTPOnly: true,
 		Value:  tokenString,
 		Name:    "token",
@@ -252,27 +260,34 @@ func Signup(c *fiber.Ctx) error {
 
 // Logout delete cookie
 func Logout(c *fiber.Ctx) error {
-	input := new(models.User)
+	cookie := c.Cookies("token")
+	claims := &Claims{}
 
-	if err := c.BodyParser(&input); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": "error", "message": "Error on signup request", "data": err})
-	}
-
-	user, err := GetUserByEmail(input.Email)
+	token, err := jwt.ParseWithClaims(cookie, claims, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
+	})
 
 	if err != nil {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"status": "error", "message": "Error on email", "data": err})
+		return c.Status(200).JSON(fiber.Map{"status": "error", "message": "Invalid token", "data": nil})
+	}
+	if !token.Valid {
+		return c.Status(401).JSON(fiber.Map{"status": "error", "message": "Invalid token", "data": nil})
+	}
+
+	user, err := GetUserByEmail(claims.Email)
+	if err != nil {
+		return c.Status(401).JSON(fiber.Map{"status": "error", "message": "Invalid token", "data": nil})
 	}
 
 	user.Online = false
 	config.DB.Save(&user)
 
-	cookie := new(fiber.Cookie)
-	cookie.Name = "token"
-	cookie.Expires = time.Now().AddDate(0, 0, -1)
-	cookie.Path = "/"
-	cookie.Secure = false
-	cookie.HTTPOnly = true
-	c.Cookie(cookie)
+	newCookie := new(fiber.Cookie)
+	newCookie.Name = "token"
+	newCookie.Expires = time.Now().AddDate(0, 0, -1)
+	newCookie.Path = "/"
+	newCookie.Secure = false
+	newCookie.HTTPOnly = true
+	c.Cookie(newCookie)
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{"status": "success", "message": "Success logout", "data": nil})
 }

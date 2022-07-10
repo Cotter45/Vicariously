@@ -2,7 +2,7 @@
 
 ## This app is meant to be a clone of couchsurfing.com with a twist.
 
-This was a 1 week solo project for App Academy made by Sean Cotter. The minimum requirements were to have 2 full CRUD features and documentation. The 'clone' I chose was couchsurfing.com/airbnb.com.
+V1 was a 1 week solo project for App Academy made by Sean Cotter. The minimum requirements were to have 2 full CRUD features and documentation. The 'clone' I chose was couchsurfing.com/airbnb.com.
 
 It was to have:
 - Spots
@@ -21,9 +21,7 @@ This site will allow users to post anything in their home to share with a new fr
 
 This site is meant for anyone, and any thing! Your new neighborhood is just a click away, whether you're on the road or even in the same town.
 
-## To set up locally
-
-* Google Maps API key is restricted to heroku!
+## To set up locally ( V1 )
 
 1. Download the zip file
 2. Open with preferred editor

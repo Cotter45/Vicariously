@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"vicariously/config"
-	// "vicariously/services"
+	"vicariously/services"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt"
@@ -16,7 +16,6 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-
 type SafeUser struct {
 	ID       uint   `json:"id"`
 	Username string `json:"username"`
@@ -26,8 +25,6 @@ type SafeUser struct {
 // Protected protect routes
 func Protected(c *fiber.Ctx) error {
 	cookie := c.Cookies("token")
-
-	// tokenStr := cookie.Value
 	claims := &Claims{}
 
 	token, err := jwt.ParseWithClaims(cookie, claims, func(token *jwt.Token) (interface{}, error) {
@@ -41,18 +38,15 @@ func Protected(c *fiber.Ctx) error {
 		jwtError(c, err)
 	}
 
-	// user, err := services.GetUserByEmail(claims.Email)
-	// if err != nil {
-	// 	jwtError(c, err)
-	// }
+	user, err := services.GetUserByEmail(claims.Email)
+	if err != nil {
+		jwtError(c, err)
+	}
 
-	// safeUser := SafeUser{
-	// 	ID:       user.ID,
-	// 	Username: user.Username,
-	// 	Email:    user.Email,
-	// }
+	if user.ID != claims.UserID {
+		jwtError(c, err)
+	}
 
-	// c.Locals("user", safeUser)
 	return c.Next()
 }
 

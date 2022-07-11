@@ -11,6 +11,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/gofiber/helmet/v2"
 )
 
 func main() {
@@ -21,6 +22,7 @@ func main() {
 		app.Use(logger.New())
 	}
 	app.Use(recover.New())
+	app.Use(helmet.New())
 
 	config.ConnectDB()
 	controllers.SetupRoutes(app)

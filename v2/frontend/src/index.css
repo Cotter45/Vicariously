@@ -13,6 +13,10 @@ body {
   line-height: inherit;
 }
 
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
 blockquote,
 dl,
 dd,
@@ -63,6 +67,10 @@ a {
   color: black;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .header {
   width: 100vw;
   display: flex;
@@ -73,6 +81,7 @@ a {
   position: fixed;
   top: 0;
   z-index: 10;
+  border-bottom: 1px solid white;
 }
 
 .nav {
@@ -151,7 +160,7 @@ a {
   top: 80px;
   right: 0;
   z-index: 10;
-  width: 25vw;
+  width: 40vw;
   height: 90vh;
   max-width: 400px;
   overflow-x: hidden;
@@ -181,15 +190,16 @@ a {
 }
 
 .main {
-  height: 90vh;
+  /* min-height: 90vh; */
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 1rem;
   position: relative;
   top: 80px;
-  overflow-y: hidden;
+  /* overflow-y: auto; */
+  overflow-x: hidden;
 }
 
 .link {

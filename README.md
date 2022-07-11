@@ -23,11 +23,12 @@ This site is meant for anyone, and any thing! Your new neighborhood is just a cl
 
 ## To set up locally ( V1 )
 
+### Create environment variables based of sample.env
+
 1. Download the zip file
 2. Open with preferred editor
 3. Use the command 'npm install' in a terminal for both the front-end and back-end sections, the back-end will run on port 5000 and the front-end will run on port 3000
 4. Use the command 'npm start' for each end, navigate to port 3000 to view the website, and port 5000 to make fetch calls to the api
-5. Keep in mind this app uses JWT tokens for verification as well as csurf to prevent cross-site request forgery. Enjoy!
 
 ## Technologies Used
 
@@ -48,20 +49,6 @@ This site is meant for anyone, and any thing! Your new neighborhood is just a cl
 Postgres/Sequelize
 
 ![Database Screenshot](./info/Database.png)
-
-### To do at time of submission:
-- Add flag for number of pending confirmations
-- Add button/flag for unconfirmed bookings
-- Create post reviews
-- Edit/Delete post reviews
-- Edit/Delete user reviews
-- User reviews don't dynamically add to page
-- Block users from making reservations on their own post, was necessary for development
-- Finish css on pages, mostly add padding to bottom, fix messages bar
-- Change edit delete buttons to look like edit/delete buttons
-- Combine signup/login buttons add css for transition
-- Combine menu buttons, was running out of time for state logic
-- Css for @media queries, next time do mobile first development
 
 ### Some Things I Learned:
 - The biggest flaw in my development was not setting myself up to handle the data correctly from the beginning. I split things off into different categories too quickly and ended up having to make too many requests to my server as well as deal with spread out or inaccessible data.

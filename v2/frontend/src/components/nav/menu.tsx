@@ -63,7 +63,7 @@ export default function NavMenu() {
                 Sign Up
               </div>
               <div
-                data-testid="login-button"
+                data-testid="login-demo-button"
                 onClick={() => {
                   dispatch(
                     login({

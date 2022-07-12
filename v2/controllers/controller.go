@@ -15,6 +15,9 @@ func SetupRoutes(app *fiber.App) {
 
 	// Auth
 	AuthRoutes(app, api)
+
+	// Maps
+	MapRoutes(app, api)
 	
 	// 404 for all other api routes
 	FourOhFourRoutes(app, api)

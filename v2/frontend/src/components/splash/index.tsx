@@ -11,6 +11,14 @@ function Splash() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const getLocations = async () => {
+    const response = await fetch('/api/mapbox/location?' + new URLSearchParams({
+      address: 'San Francisco, CA',
+    }));
+    const locations = await response.json();
+    console.log(locations)
+  }
+
   return (
     <main className="main">
       <div className="splash">
@@ -25,6 +33,12 @@ function Splash() {
             </button>
             <button
               onClick={() => navigate("/signup")}
+              className="splash-button"
+            >
+              Sign Up
+            </button>
+            <button
+              onClick={getLocations}
               className="splash-button"
             >
               Sign Up

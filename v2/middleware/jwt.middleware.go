@@ -20,6 +20,10 @@ type SafeUser struct {
 	ID       uint   `json:"id"`
 	Username string `json:"username"`
 	Email    string `json:"email"`
+	ProfilePicture string `json:"profile_picture"`
+	CoverPicture string `json:"cover_picture"`
+	Description string `json:"description"`
+	Online bool `json:"online"`
 }
 
 // Protected protect routes
@@ -32,29 +36,25 @@ func Protected(c *fiber.Ctx) error {
 	})
 
 	if err != nil {
-		jwtError(c, err)
+		return jwtError(c, err)
 	}
 	if !token.Valid {
-		jwtError(c, err)
+		return jwtError(c, err)
 	}
 
 	user, err := services.GetUserByEmail(claims.Email)
 	if err != nil {
-		jwtError(c, err)
+		return jwtError(c, err)
 	}
 
-	if user.ID != claims.UserID {
-		jwtError(c, err)
+	if user.Email != claims.Email {
+		return jwtError(c, err)
 	}
 
 	return c.Next()
 }
 
 func jwtError(c *fiber.Ctx, err error) error {
-	if err.Error() == "Missing or malformed JWT" {
-		return c.Status(fiber.StatusBadRequest).
-			JSON(fiber.Map{"status": "error", "message": "Missing or malformed JWT", "data": nil})
-	}
 	return c.Status(fiber.StatusUnauthorized).
-		JSON(fiber.Map{"status": "error", "message": "Invalid or expired JWT", "data": nil})
+		JSON(fiber.Map{"status": "error", "message": "Unauthorized", "data": err})
 }

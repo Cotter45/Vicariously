@@ -37,8 +37,6 @@ type SafeUser struct {
 // Parse JWT, find user and return user
 func Restore(c *fiber.Ctx) error {
 	cookie := c.Cookies("token")
-
-	// tokenStr := cookie.Value
 	claims := &Claims{}
 
 	token, err := jwt.ParseWithClaims(cookie, claims, func(token *jwt.Token) (interface{}, error) {

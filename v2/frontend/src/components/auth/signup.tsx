@@ -25,7 +25,11 @@ function SignUp({ user }: { user: User | undefined }) {
 
   return (
     <main className="main">
-      <form onSubmit={handleSubmit} className="login-form">
+      <form
+        style={{ height: "calc(100vh - 80px" }}
+        onSubmit={handleSubmit}
+        className="login-form"
+      >
         <label className="form-label" htmlFor="email">
           Email
           <input

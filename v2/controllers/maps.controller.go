@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"vicariously/services"
-	"vicariously/middleware"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -10,7 +9,6 @@ import (
 
 func MapRoutes(app *fiber.App, api fiber.Router) {
 	mapbox := api.Group("/mapbox")
-	mapbox.Use("*", middleware.Protected)
 	mapbox.Get("/", services.MapKey)
 	mapbox.Get("/location", services.MapBox)
 

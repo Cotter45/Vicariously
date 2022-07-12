@@ -46,6 +46,10 @@ function Splash() {
     map.on("move", () => {
       setZoom(+map.getZoom().toFixed(2));
     });
+    
+    map.on("resize", () => {
+      setZoom(+map.getZoom().toFixed(2));
+    });
 
     setMap(map);
     // Clean up on unmount
@@ -75,7 +79,7 @@ function Splash() {
   }
 
   return (
-    <main className="main">
+    <main className="">
       <div className="splash">
         <div className="splash-landing">
           <h1 className="splash-title">What are you waiting for?</h1>
@@ -101,7 +105,7 @@ function Splash() {
             <div className="splash-try-top">
               <div className="splash-try-text">
                 <h2 className="splash-try-title">Try it out!</h2>
-                <p>Your community is larger than you think.</p>
+                <p>Your community grows here.</p>
                 <button
                   data-testid="login-demo-button"
                   onClick={() => {

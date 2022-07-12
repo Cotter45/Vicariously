@@ -14,7 +14,7 @@ func MapRoutes(app *fiber.App, api fiber.Router) {
 	mapbox.Get("/", services.MapKey)
 	mapbox.Get("/location", services.MapBox)
 
-	// return 404 for all other api routes
+	// return 404 for all other mapbox routes
 	mapbox.Get("/*", func(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Not found", "data": nil})
 	});

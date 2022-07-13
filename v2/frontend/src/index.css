@@ -72,7 +72,6 @@ a {
 }
 
 .main {
-  /* min-height: 90vh; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -80,7 +79,6 @@ a {
   gap: 1rem;
   position: relative;
   top: 80px;
-  /* overflow-y: auto; */
   overflow-x: hidden;
 }
 

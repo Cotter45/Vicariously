@@ -1,9 +1,11 @@
 
 import { useNavigate } from 'react-router-dom';
-import mapboxgl from "mapbox-gl";
+//@ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import mapboxgl from "!mapbox-gl";
 
 import splashImage from './images/road_trip.png';
-import rentalImage from './/images/rental.png';
+import rentalImage from './images/rental.png';
 import './splash.css';
 import { useAppDispatch } from '../../redux/hooks';
 import { login } from '../../redux/authSlice';

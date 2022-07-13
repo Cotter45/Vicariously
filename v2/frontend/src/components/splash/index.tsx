@@ -14,7 +14,6 @@ function Splash() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const mapContainer = useRef<any>(null);
-  const mapRef = useRef<any>();
 
   const [location, setLocation] = useState('');
   const [mapToken, setMapToken] = useState('');
@@ -54,6 +53,7 @@ function Splash() {
     setMap(map);
     // Clean up on unmount
     return () => map.remove();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapToken]);
 
   useEffect(() => {

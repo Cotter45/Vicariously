@@ -18,10 +18,10 @@ function SignUp({ user }: { user: User | undefined }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await dispatch(signup({ username, email, password }));
-    navigate("/");
+    navigate("/posts/explore");
   };
 
-  if (user) return <Navigate to="/" />;
+  if (user) return <Navigate to="/posts/explore" />;
 
   return (
     <main className="main">

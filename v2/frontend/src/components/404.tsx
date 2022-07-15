@@ -4,7 +4,7 @@ function FourOhFour() {
   const navigate = useNavigate();
 
   return (
-    <main className="main_container">
+    <main className="main">
       <section className="section">
         <section className="list_column">
           <h2>This page doesn't exist yet!</h2>

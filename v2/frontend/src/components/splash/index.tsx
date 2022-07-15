@@ -7,7 +7,7 @@ import mapboxgl from "!mapbox-gl";
 import splashImage from './images/road_trip.png';
 import rentalImage from './images/rental.png';
 import './splash.css';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { login } from '../../redux/authSlice';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { authFetch } from '../../redux/authFetch';
@@ -16,6 +16,8 @@ function Splash() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const mapContainer = useRef<any>(null);
+
+  const { user } = useAppSelector(state => state.auth);
 
   const [location, setLocation] = useState('');
   const [mapToken, setMapToken] = useState('');
@@ -86,18 +88,37 @@ function Splash() {
         <div className="splash-landing">
           <h1 className="splash-title">What are you waiting for?</h1>
           <div className="splash-buttons">
-            <button
-              onClick={() => navigate("/login")}
-              className="splash-button"
-            >
-              Login
-            </button>
-            <button
-              onClick={() => navigate("/signup")}
-              className="splash-button"
-            >
-              Sign Up
-            </button>
+            {user ? (
+              <>
+                <button
+                  onClick={() => navigate('/posts/explore')}
+                  className="splash-button"
+                >
+                  Explore
+                </button>
+                <button
+                  onClick={() => navigate('/posts/new')}
+                  className="splash-button"
+                >
+                  Share
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => navigate("/login")}
+                  className="splash-button"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => navigate("/signup")}
+                  className="splash-button"
+                >
+                  Sign Up
+                </button>
+              </>
+            )}
           </div>
           <img className="splash-banner" src={splashImage} alt="logo" />
         </div>
@@ -116,7 +137,7 @@ function Splash() {
                         email: "demo@demo.com",
                         password: "password",
                       })
-                    ).then(() => navigate("/"));
+                    ).then(() => navigate("/posts/explore"));
                   }}
                   className="splash-button"
                 >

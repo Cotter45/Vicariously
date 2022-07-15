@@ -16,6 +16,9 @@ func SetupRoutes(app *fiber.App) {
 	// Auth
 	AuthRoutes(app, api)
 
+	// Posts
+	PostsRoutes(app, api)
+
 	// Maps
 	MapRoutes(app, api)
 	

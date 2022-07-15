@@ -17,10 +17,10 @@ function Login({ user }: { user: User | undefined }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await dispatch(login({ email, password }));
-    navigate("/");
+    navigate("/posts/explore");
   };
 
-  if (user) return <Navigate to="/" />;
+  if (user) return <Navigate to="/posts/explore" />;
   return (
     <main className="main">
       <form style={{ height: "calc(100vh - 80px" }} onSubmit={handleSubmit} className="login-form">

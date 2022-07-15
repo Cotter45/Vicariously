@@ -11,7 +11,10 @@ func PostsRoutes(app *fiber.App, api fiber.Router) {
 	posts := api.Group("/posts")
 	// posts.Use("*", middleware.Protected)
 	posts.Get("/:id", services.GetPostById)
+	posts.Get("/", services.GetPaginatedPosts)
 	posts.Post("/", services.CreatePost)
+	posts.Patch("/:id", services.UpdatePost)
+	posts.Delete("/:id", services.DeletePost)
 
 	// return 404 for all other api routes
 	posts.Get("/*", func(c *fiber.Ctx) error {

@@ -22,14 +22,14 @@ func SetupRoutes(app *fiber.App) {
 	// Maps
 	MapRoutes(app, api)
 	
-	// 404 for all other api routes
-	FourOhFourRoutes(app, api)
-
 	// serve Single Page application on "/"
-	// assume static file at dist folder
 	app.Static("/", "frontend/build")
 	
 	app.Get("/*", func(ctx *fiber.Ctx) error {
 		return ctx.SendFile("./frontend/build/index.html")
 	})
+
+	// 404 for all other api routes
+	FourOhFourRoutes(app, api)
+
 }

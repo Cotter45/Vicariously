@@ -6,17 +6,15 @@ function FourOhFour() {
   return (
     <main className="main">
       <section className="section">
-        <section className="list_column">
-          <h2>This page doesn't exist yet!</h2>
-          <button
-            name="Return Home"
-            type="button"
-            className="link"
-            onClick={() => navigate("/")}
-          >
-            Phone Home
-          </button>
-        </section>
+        <h2>This page doesn't exist yet!</h2>
+        <button
+          name="Return Home"
+          type="button"
+          className="splash-button"
+          onClick={() => navigate("/")}
+        >
+          Phone Home
+        </button>
       </section>
     </main>
   );

@@ -7,6 +7,7 @@ import { User } from "../redux/models";
 import Splash from "../components/splash";
 
 import '../index.css';
+import ExplorePage from "../components/explore";
 function Router({ user }: { user: User | undefined }) {
   return (
     <Routes>
@@ -16,7 +17,7 @@ function Router({ user }: { user: User | undefined }) {
       <Route path="*" element={<FourOhFour />} />
       <Route element={<AuthRoutes user={user} />}>
         <Route path="posts">
-          <Route path="explore" element={<div className="main">App</div>} />
+          <Route path="explore" element={<ExplorePage user={user} />} />
           <Route path="new" element={<main className="main">New Post</main>} />
           <Route path=":id" element={<main className="main">Post</main>} />
         </Route>

@@ -30,11 +30,11 @@ type SafeUser struct {
 func Protected(c *fiber.Ctx) error {
 	cookie := c.Cookies("token")
 	claims := &Claims{}
-
+	
 	token, err := jwt.ParseWithClaims(cookie, claims, func(token *jwt.Token) (interface{}, error) {
 		return jwtKey, nil
 	})
-
+	
 	if err != nil {
 		return jwtError(c, err)
 	}

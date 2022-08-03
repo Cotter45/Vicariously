@@ -20,8 +20,8 @@ export async function authFetch(url: any, options: any = {}) {
       options.headers['Keep-Alive'] =
         options.headers['Keep-Alive'] || 'timeout=60, max=100';
     }
-    options.headers['XSRF-TOKEN'] = Cookies.get('XSRF-TOKEN');
-    options.headers['token'] = Cookies.get('token');
+    options.headers['X-Csrf-Token'] = Cookies.get('csrf_');
+    options.headers['X-Bearer-Token'] = Cookies.get('token');
   }
   // call the default window's fetch with the url and the options passed in
   const res = await window.fetch(url, options);
